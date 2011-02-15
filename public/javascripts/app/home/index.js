@@ -19,10 +19,9 @@ YMaps.jQuery(function () {
   // toolBar.add(new GeolocatorButton());
   // map.addControl(toolBar);
 
-  YMaps.jQuery.getJSON('/', function (response) {
-    YMaps.jQuery.each(response, function (index, value) {
-      var market = value.market;
-      map.addOverlay(new YMaps.Placemark(new YMaps.GeoPoint(market.longitude, market.latitude)));
+  YMaps.jQuery.getJSON('/', function (markets) {
+    YMaps.jQuery.each(markets, function (index, market) {
+      map.addOverlay(new YMaps.Placemark(new YMaps.GeoPoint(market.longitude, market.latitude), { hideIcon: false }));
     })
   })
 })

@@ -4,18 +4,19 @@ namespace :parser do
     geocoder_url = "http://geocode-maps.yandex.ru/1.x/?key=#{YANDEX_MAPS_API_KEY}&results=1&geocode="
     filename     = 'assets/data.csv'
 
-    FasterCSV.foreach(filename) do |row|
-      geocoder = HTTParty.get(geocoder_url + URI.encode([row[0], row[14]].join('+')))
+    FasterCSV.foreach(filename) do |market|
+      query       = URI.encode([market[0], market[14]].join('+'))
+      geocoder    = HTTParty.get(geocoder_url + query)
       coordinates = geocoder['ymaps']['GeoObjectCollection']['featureMember']['GeoObject']['Point']['pos'].split
-      Market.create({ :subject     => row[2],
-                      :title       => row[4],
-                      :discount    => row[7],
-                      :address     => row[14],
-                      :phone       => row[15],
-                      :time        => row[16],
-                      :website     => row[17],
-                      :email       => row[18],
-                      :description => row[19],
+      Market.create({ :subject     => market[2],
+                      :title       => market[4],
+                      :discount    => market[7],
+                      :address     => market[14],
+                      :phone       => market[15],
+                      :time        => market[16],
+                      :website     => market[17],
+                      :email       => market[18],
+                      :description => market[19],
                       :longitude   => coordinates.first,
                       :latitude    => coordinates.last })
     end
