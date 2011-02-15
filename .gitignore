@@ -5,3 +5,4 @@ tmp/**/*
 .DS_Store
 config/database.yml
 .rvmrc
+db/schema.rb
