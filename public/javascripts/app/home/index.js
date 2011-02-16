@@ -4,7 +4,6 @@ YMaps.jQuery(function () {
                                                   { index: 13, value: 'Улица' },
                                                   { index: 16, value: 'Дом' }] });
   var typeControl   = new YMaps.TypeControl();
-  var searchControl = new YMaps.SearchControl();
   var geocoder      = new YMaps.Geocoder('Новосибирск');
   var style         = new YMaps.Style();
   var template      = "<div><b>$[title]</b> | $[category]</div> \
@@ -16,7 +15,6 @@ YMaps.jQuery(function () {
 
   map.addControl(zoomControl);
   map.addControl(typeControl);
-  map.addControl(searchControl);
 
   YMaps.Events.observe(geocoder, geocoder.Events.Load, function () {
     map.setCenter(this.get(0).getGeoPoint(), 10);
