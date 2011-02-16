@@ -3,8 +3,8 @@ class HomeController < ApplicationController
     respond_to do |format|
       format.html
       format.json do
-        render :json => Market.with_category.to_json(:only => [:longitude, :latitude],
-                                                     :include => { :category => { :only => :icon_style } })
+        render :json => Market.with_category.to_json(:except => [:id, :subject, :address, :description, :category_id],
+                                                     :include => { :category => { :except => :id } })
       end
     end
   end

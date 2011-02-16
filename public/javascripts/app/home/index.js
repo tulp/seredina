@@ -6,6 +6,13 @@ YMaps.jQuery(function () {
   var typeControl   = new YMaps.TypeControl();
   var searchControl = new YMaps.SearchControl();
   var geocoder      = new YMaps.Geocoder('Новосибирск');
+  var style         = new YMaps.Style();
+  var template      = "<div><b>$[title]</b> | $[category]</div> \
+                       <div>$[discount]</div> \
+                       <div>$[time]</div> \
+                       <div>$[phone] <a href='$[website]'>$[website]</a> <a href='mailto:$[email]'>$[email]</a></div>"
+
+  style.balloonContentStyle = new YMaps.BalloonContentStyle(new YMaps.Template(template));
 
   map.addControl(zoomControl);
   map.addControl(typeControl);
@@ -21,9 +28,20 @@ YMaps.jQuery(function () {
 
   YMaps.jQuery.getJSON('/', function (markets) {
     YMaps.jQuery.each(markets, function (index, market) {
+      style.iconStyle = YMaps.Styles.get(market.category.icon_style).iconStyle;
+
       var geoPoint  = new YMaps.GeoPoint(market.longitude, market.latitude);
       var placemark = new YMaps.Placemark(geoPoint, { hideIcon: false,
-                                                      style:    market.category.icon_style })
+                                                      style:    style })
+
+      placemark.title    = market.title;
+      placemark.category = market.category.title;
+      placemark.discount = market.discount;
+      placemark.time     = market.time;
+      placemark.phone    = market.phone;
+      placemark.website  = market.website;
+      placemark.email    = market.email;
+
       map.addOverlay(placemark);
     })
   })
