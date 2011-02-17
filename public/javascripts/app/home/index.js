@@ -1,5 +1,4 @@
 jQuery(function () {
-  var div_dialog  = jQuery('#dialog');
   var map         = new YMaps.Map(document.getElementById('yandex_maps'));
   var zoomControl = new YMaps.Zoom({ customTips: [{ index: 9,  value: 'Город' },
                                                   { index: 13, value: 'Улица' },
@@ -13,9 +12,6 @@ jQuery(function () {
                        <div>$[phone] <a href='$[website]'>$[website]</a> <a href='mailto:$[email]'>$[email]</a></div>"
 
   style.balloonContentStyle = new YMaps.BalloonContentStyle(new YMaps.Template(template));
-  div_dialog.dialog({ autoOpen: false, modal: true });
-
-  div_dialog.dialog('open');
 
   map.addControl(zoomControl);
   map.addControl(typeControl);
@@ -44,10 +40,16 @@ jQuery(function () {
     })
   })
 
-  jQuery('#create_user').submit(function () {
-    if (validate_email(jQuery(this).find('#user_email'))) {
+  jQuery('#dialog_form').submit(function () {
+    var email = jQuery(this).find('#user_email');
+
+    if (validate_email(email)) {
       jQuery.post(jQuery(this).attr('action'), jQuery(this).serialize());
-      div_dialog.dialog('close');
+      jQuery('#overlay, #dialog').hide();
+    } else {
+      var class_name = 'invalid';
+      email.addClass(class_name);
+      setTimeout(function () { email.removeClass(class_name) }, 1200);
     }
 
     return false;

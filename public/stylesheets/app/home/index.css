@@ -2,3 +2,31 @@
   width:  100%;
   height: 100%;
 }
+
+#overlay {
+  position: absolute;
+  top:      0px;
+  z-index:  1;
+
+  width:  100%;
+  height: 100%;
+
+  background-color: white;
+  opacity:          0.5;
+}
+
+#dialog {
+  position:    absolute;
+  left:        50%;
+  top:         50%;
+  margin-left: -150px;
+  z-index:     1;
+}
+
+#user_email {
+  border: 1px solid black;
+}
+
+#user_email.invalid {
+  border-color: red;
+}

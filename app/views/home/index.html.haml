@@ -1,21 +1,21 @@
 - content_for :head do
   = stylesheet_link_tag    'app/home/index'
-  = javascript_include_tag 'app/home/index', 'snippets/email_validation'
+  = javascript_include_tag 'app/home/index', 'snippets/email_validator'
 
 #yandex_maps
 
+#overlay
+
 #dialog
-  = form_for :user, :url => users_path, :html => { :id => 'create_user' } do |f|
-    = f.text_field :email
-    = f.submit 'Save'
-
-
-
-/ модальное окно (не спрашивать дважды)
+  = form_for :user, :url => users_path, :html => { :id => 'dialog_form' } do |f|
+    = f.label       :email, "Ваш email"
+    = f.email_field :email
+    = f.submit      'OK'
 
 / убирать div заголовка при наведении
 / текущее положение
 /  убрать из шаблона название категории, если будут у котигоризатора картинки
+/ подтверждение
 
 / var toolBar = new YMaps.ToolBar();
 / toolBar.add(new GeolocatorButton());
