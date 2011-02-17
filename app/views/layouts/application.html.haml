@@ -3,8 +3,9 @@
   %head
     %title 'CHANGE ME'
     = csrf_meta_tag
-    = stylesheet_link_tag 'app/application.css'
+    = stylesheet_link_tag 'app/application.css', 'lib/jquery-ui-1.8.9.custom'
     = javascript_include_tag "http://api-maps.yandex.ru/1.1/index.xml?key=#{YANDEX_MAPS_API_KEY}"
+    = javascript_include_tag 'initializer', 'lib/jquery-ui-1.8.9.custom.min'
     = yield :head
 
   %body= yield

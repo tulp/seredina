@@ -1,4 +1,5 @@
-YMaps.jQuery(function () {
+jQuery(function () {
+  var div_dialog  = jQuery('#dialog');
   var map         = new YMaps.Map(document.getElementById('yandex_maps'));
   var zoomControl = new YMaps.Zoom({ customTips: [{ index: 9,  value: 'Город' },
                                                   { index: 13, value: 'Улица' },
@@ -12,6 +13,9 @@ YMaps.jQuery(function () {
                        <div>$[phone] <a href='$[website]'>$[website]</a> <a href='mailto:$[email]'>$[email]</a></div>"
 
   style.balloonContentStyle = new YMaps.BalloonContentStyle(new YMaps.Template(template));
+  div_dialog.dialog({ autoOpen: false, modal: true });
+
+  div_dialog.dialog('open');
 
   map.addControl(zoomControl);
   map.addControl(typeControl);
@@ -20,12 +24,8 @@ YMaps.jQuery(function () {
     map.setCenter(this.get(0).getGeoPoint(), 10);
   })
 
-  // var toolBar = new YMaps.ToolBar();
-  // toolBar.add(new GeolocatorButton());
-  // map.addControl(toolBar);
-
-  YMaps.jQuery.getJSON('/', function (markets) {
-    YMaps.jQuery.each(markets, function (index, market) {
+  jQuery.getJSON('/', function (markets) {
+    jQuery.each(markets, function (index, market) {
       style.iconStyle = YMaps.Styles.get(market.category.icon_style).iconStyle;
 
       var geoPoint  = new YMaps.GeoPoint(market.longitude, market.latitude);
@@ -42,5 +42,12 @@ YMaps.jQuery(function () {
 
       map.addOverlay(placemark);
     })
+  })
+
+  jQuery('#create_user').submit(function () {
+    jQuery.post(jQuery(this).attr('action'), jQuery(this).serialize());
+    div_dialog.dialog('close');
+
+    return false;
   })
 })

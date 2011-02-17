@@ -3,6 +3,21 @@
   = javascript_include_tag 'app/home/index'
 
 #yandex_maps
+
+#dialog
+  = form_for :user, :url => users_path, :html => { :id => 'create_user' } do |f|
+    = f.text_field :email
+    = f.submit 'Save'
+
+
+
 / модальное окно (не спрашивать дважды)
 / убирать div заголовка при наведении
 / текущее положение
+
+/  убрать из шаблона название категории, если будут у котигоризатора картинки
+/  валидация на email(js) и уникальность на клиенте, просто сохранение
+
+/ var toolBar = new YMaps.ToolBar();
+/ toolBar.add(new GeolocatorButton());
+/ map.addControl(toolBar);
