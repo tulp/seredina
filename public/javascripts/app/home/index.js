@@ -1,4 +1,4 @@
-jQuery(function () {
+jQuery(function() {
   var map         = new YMaps.Map(document.getElementById('yandex_maps'));
   var zoomControl = new YMaps.Zoom({ customTips: [{ index: 9,  value: 'Город' },
                                                   { index: 13, value: 'Улица' },
@@ -16,12 +16,12 @@ jQuery(function () {
   map.addControl(zoomControl);
   map.addControl(typeControl);
 
-  YMaps.Events.observe(geocoder, geocoder.Events.Load, function () {
+  YMaps.Events.observe(geocoder, geocoder.Events.Load, function() {
     map.setCenter(this.get(0).getGeoPoint(), 10);
   })
 
-  jQuery.getJSON('/', function (markets) {
-    jQuery.each(markets, function (index, market) {
+  jQuery.getJSON('/', function(markets) {
+    jQuery.each(markets, function(index, market) {
       style.iconStyle = YMaps.Styles.get(market.category.icon_style).iconStyle;
 
       var geoPoint  = new YMaps.GeoPoint(market.longitude, market.latitude);
@@ -40,18 +40,26 @@ jQuery(function () {
     })
   })
 
-  jQuery('#dialog_form').submit(function () {
+  jQuery('#dialog_form').submit(function() {
     var email = jQuery(this).find('#user_email');
 
-    if (validate_email(email)) {
+    if (validateEmail(email)) {
       jQuery.post(jQuery(this).attr('action'), jQuery(this).serialize());
-      jQuery('#overlay, #dialog').hide();
+      disableDialogWindow();
+      setCookie('left_email', true);
     } else {
       var class_name = 'invalid';
+
       email.addClass(class_name);
-      setTimeout(function () { email.removeClass(class_name) }, 1200);
+      setTimeout(function() { email.removeClass(class_name) }, 1200);
     }
 
     return false;
   })
+
+  function disableDialog() {
+    jQuery('#overlay, #dialog').hide();
+  }
+
+  if (getCookie('left_email')) { disableDialog() };
 })
