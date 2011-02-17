@@ -45,8 +45,10 @@ jQuery(function () {
   })
 
   jQuery('#create_user').submit(function () {
-    jQuery.post(jQuery(this).attr('action'), jQuery(this).serialize());
-    div_dialog.dialog('close');
+    if (validate_email(jQuery(this).find('#user_email'))) {
+      jQuery.post(jQuery(this).attr('action'), jQuery(this).serialize());
+      div_dialog.dialog('close');
+    }
 
     return false;
   })

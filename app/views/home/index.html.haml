@@ -1,6 +1,6 @@
 - content_for :head do
   = stylesheet_link_tag    'app/home/index'
-  = javascript_include_tag 'app/home/index'
+  = javascript_include_tag 'app/home/index', 'snippets/email_validation'
 
 #yandex_maps
 
@@ -12,11 +12,10 @@
 
 
 / модальное окно (не спрашивать дважды)
+
 / убирать div заголовка при наведении
 / текущее положение
-
 /  убрать из шаблона название категории, если будут у котигоризатора картинки
-/  валидация на email(js) и уникальность на клиенте, просто сохранение
 
 / var toolBar = new YMaps.ToolBar();
 / toolBar.add(new GeolocatorButton());
