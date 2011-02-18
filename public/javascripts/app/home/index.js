@@ -1,4 +1,4 @@
-jQuery(function() {
+jQuery(document).ready(function() {
   var map         = new YMaps.Map(document.getElementById('yandex_maps'));
   var zoomControl = new YMaps.Zoom({ customTips: [{ index: 9,  value: 'Город' },
                                                   { index: 13, value: 'Улица' },
@@ -45,7 +45,7 @@ jQuery(function() {
 
     if (validateEmail(email)) {
       jQuery.post(jQuery(this).attr('action'), jQuery(this).serialize());
-      disableDialogWindow();
+      disableDialog();
       setCookie('left_email', true);
     } else {
       var class_name = 'invalid';
@@ -57,9 +57,9 @@ jQuery(function() {
     return false;
   })
 
-  function disableDialog() {
-    jQuery('#overlay, #dialog').hide();
-  }
-
   if (getCookie('left_email')) { disableDialog() };
 })
+
+function disableDialog() {
+  jQuery('#overlay, #dialog').hide();
+}

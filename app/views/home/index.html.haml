@@ -8,12 +8,10 @@
 
 #dialog
   = form_for :user, :url => users_path, :html => { :id => 'dialog_form' } do |f|
-    = f.label       :email, "Ваш email"
+    = f.label       :email, "Ваш email put into locale"
     = f.email_field :email
-    = f.submit      'OK'
-
-/ подтверждение
+    = f.submit      'OK put into locale'
 
 / убирать div заголовка при наведении
 / текущее положение
-/  убрать из шаблона название категории, если будут у котигоризатора картинки
+/ убрать из шаблона название категории, если будут у котигоризатора картинки
