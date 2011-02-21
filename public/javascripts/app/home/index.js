@@ -29,6 +29,8 @@ j(document).ready(function() {
   }
 
   function drawMarkets(categories, filter) {
+    var yandexMapsGeoCollectionBounds = new YMaps.GeoCollectionBounds();
+
     if (!(filter === undefined)) {
       categories = j.map(categories, function (category) {
         if (category.title === filter) { return category }
@@ -36,6 +38,7 @@ j(document).ready(function() {
     }
 
     yandexMaps.removeAllOverlays();
+
     j.each(categories, function(index) {
       yandexMapsStyle.iconStyle = YMaps.Styles.get(this.icon_style).iconStyle;
       var placemarkOptions      = { hideIcon: false, style: yandexMapsStyle };
@@ -43,6 +46,8 @@ j(document).ready(function() {
       j.each(this.markets, function(index) {
         var geoPoint  = new YMaps.GeoPoint(this.longitude, this.latitude);
         var placemark = new YMaps.Placemark(geoPoint, placemarkOptions);
+
+        yandexMapsGeoCollectionBounds.add(geoPoint);
 
         placemark.title    = this.title;
         placemark.discount = this.discount;
@@ -54,6 +59,8 @@ j(document).ready(function() {
         yandexMaps.addOverlay(placemark);
       })
     })
+
+    yandexMaps.setBounds(yandexMapsGeoCollectionBounds);
   }
 
   j.getJSON('/', function(categories) {
