@@ -1,5 +1,5 @@
-jQuery(document).ready(function() {
-  var flash = jQuery('#flash');
+j(document).ready(function() {
+  var flash = j('#flash');
 
-  setTimeout(function() { flash.hide() }, 1200);
+  if (flash.length > 0) { setTimeout(function() { flash.hide() }, 1200) }
 })

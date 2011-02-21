@@ -1,1 +1,1 @@
-var jQuery = YMaps.jQuery;
+var j = YMaps.jQuery;

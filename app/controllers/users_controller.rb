@@ -8,9 +8,9 @@ class UsersController < ApplicationController
     if user = User.find_by_confirmation_token(params[:id])
       user.confirm
       user.save
-      flash[:notice] = "удача"
+      flash[:notice] = t :confirmed
     else
-      flash[:notice] = "неудача"
+      flash[:notice] = t :unconfirmed
     end
     redirect_to root_path
   end

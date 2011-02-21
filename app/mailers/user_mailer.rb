@@ -1,8 +1,8 @@
 class UserMailer < ActionMailer::Base
-  default :from => "from@example.com put into config"
+  default :from => 'user_mailer@app_mailers.com'
 
   def confirmation(user)
     @user = user
-    mail  :to => @user.email, :subject => 'CHANGE ME and put into locale'
+    mail  :to => @user.email, :subject => t(:confirmation_subject)
   end
 end

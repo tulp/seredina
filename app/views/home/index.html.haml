@@ -1,17 +1,20 @@
 - content_for :head do
   = stylesheet_link_tag    'app/home/index'
-  = javascript_include_tag 'app/home/index', 'snippets/email_validator', 'snippets/cookies'
+  = javascript_include_tag 'app/home/index', 'snippets/yandex_maps', 'snippets/email_validator', 'snippets/cookies'
 
 #yandex_maps
 
-#overlay
+#category_selector_overlay
+
+#category_selector
+  %ul
+    %li
+      %a.category_link{ :href => '#' }<
+        %div= t :all_categories
+
+#dialog_overlay
 
 #dialog
   = form_for :user, :url => users_path, :html => { :id => 'dialog_form' } do |f|
-    = f.label       :email, "Ваш email put into locale"
     = f.email_field :email
-    = f.submit      'OK put into locale'
-
-/ убирать div заголовка при наведении
-/ текущее положение
-/ убрать из шаблона название категории, если будут у котигоризатора картинки
+    = f.submit      'CHANGE ME'

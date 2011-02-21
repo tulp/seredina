@@ -1,52 +1,73 @@
-jQuery(document).ready(function() {
-  var map         = new YMaps.Map(document.getElementById('yandex_maps'));
-  var zoomControl = new YMaps.Zoom({ customTips: [{ index: 9,  value: 'Город' },
-                                                  { index: 13, value: 'Улица' },
-                                                  { index: 16, value: 'Дом' }] });
-  var typeControl   = new YMaps.TypeControl();
-  var geocoder      = new YMaps.Geocoder('Новосибирск');
-  var style         = new YMaps.Style();
-  var template      = "<div><b>$[title]</b> | $[category]</div> \
-                       <div>$[discount]</div> \
-                       <div>$[time]</div> \
-                       <div>$[phone] <a href='$[website]'>$[website]</a> <a href='mailto:$[email]'>$[email]</a></div>"
+j(document).ready(function() {
+  var leftEmailCookie = 'left_email';
 
-  style.balloonContentStyle = new YMaps.BalloonContentStyle(new YMaps.Template(template));
+  function disableDialog() {
+    j('#dialog_overlay, #dialog').hide();
+  }
 
-  map.addControl(zoomControl);
-  map.addControl(typeControl);
+  function drawCategoriesLinks(categories) {
+    var categorySelector   = j('#category_selector');
+    var categorySelectorUl = categorySelector.find('ul');
 
-  YMaps.Events.observe(geocoder, geocoder.Events.Load, function() {
-    map.setCenter(this.get(0).getGeoPoint(), 10);
-  })
+    j.each(categories, function(index) {
+      var image_url = YMaps.Styles.get(this.icon_style).iconStyle.href;
+      var title     = this.title;
+      var html      = "<li><a href='#' class='category_link'><div><img src='" + image_url + "'/>" + title + "</div></a></li>";
 
-  jQuery.getJSON('/', function(markets) {
-    jQuery.each(markets, function(index, market) {
-      style.iconStyle = YMaps.Styles.get(market.category.icon_style).iconStyle;
+      categorySelectorUl.append(html);
+    });
 
-      var geoPoint  = new YMaps.GeoPoint(market.longitude, market.latitude);
-      var placemark = new YMaps.Placemark(geoPoint, { hideIcon: false,
-                                                      style:    style })
+    categorySelector.show();
 
-      placemark.title    = market.title;
-      placemark.category = market.category.title;
-      placemark.discount = market.discount;
-      placemark.time     = market.time;
-      placemark.phone    = market.phone;
-      placemark.website  = market.website;
-      placemark.email    = market.email;
+    j('.category_link').click(function() {
+      var filter = j(this).text();
 
-      map.addOverlay(placemark);
+      if (filter === 'Все') { drawMarkets(categories) } else { drawMarkets(categories, filter) }
+
+      return false;
     })
+  }
+
+  function drawMarkets(categories, filter) {
+    if (!(filter === undefined)) {
+      categories = j.map(categories, function (category) {
+        if (category.title === filter) { return category }
+      })
+    }
+
+    yandexMaps.removeAllOverlays();
+    j.each(categories, function(index) {
+      yandexMapsStyle.iconStyle = YMaps.Styles.get(this.icon_style).iconStyle;
+      var placemarkOptions      = { hideIcon: false, style: yandexMapsStyle };
+
+      j.each(this.markets, function(index) {
+        var geoPoint  = new YMaps.GeoPoint(this.longitude, this.latitude);
+        var placemark = new YMaps.Placemark(geoPoint, placemarkOptions);
+
+        placemark.title    = this.title;
+        placemark.discount = this.discount;
+        placemark.time     = this.time;
+        placemark.phone    = this.phone;
+        placemark.website  = this.website;
+        placemark.email    = this.email;
+
+        yandexMaps.addOverlay(placemark);
+      })
+    })
+  }
+
+  j.getJSON('/', function(categories) {
+    drawCategoriesLinks(categories);
+    drawMarkets(categories);
   })
 
-  jQuery('#dialog_form').submit(function() {
-    var email = jQuery(this).find('#user_email');
+  j('#dialog_form').submit(function() {
+    var email = j(this).find('#user_email');
 
     if (validateEmail(email)) {
-      jQuery.post(jQuery(this).attr('action'), jQuery(this).serialize());
+      j.post(j(this).attr('action'), j(this).serialize());
+      setCookie(leftEmailCookie, true);
       disableDialog();
-      setCookie('left_email', true);
     } else {
       var class_name = 'invalid';
 
@@ -57,9 +78,5 @@ jQuery(document).ready(function() {
     return false;
   })
 
-  if (getCookie('left_email')) { disableDialog() };
+  if (getCookie(leftEmailCookie)) { disableDialog() }
 })
-
-function disableDialog() {
-  jQuery('#overlay, #dialog').hide();
-}
