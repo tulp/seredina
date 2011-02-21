@@ -5,21 +5,6 @@
   height: 100%;
 }
 
-#category_selector_overlay {
-  position: absolute;
-  top:      15%;
-  right:    1%;
-
-  width:   244px;
-  height:  288px;
-
-  background-color: white;
-  opacity:          0.8;
-
-  border-radius:      5px;
-  -moz-border-radius: 5px;
-}
-
 #category_selector {
   position: absolute;
   top:      15%;
@@ -28,7 +13,10 @@
 
   padding: 5px;
 
-  display: none;
+  background: url('/images/background.png') repeat;
+
+  -moz-border-radius: 5px;
+  border-radius:      5px;
 }
 
 #category_selector ul {

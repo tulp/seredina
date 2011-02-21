@@ -17,8 +17,6 @@ j(document).ready(function() {
       categorySelectorUl.append(html);
     });
 
-    categorySelector.show();
-
     j('.category_link').click(function() {
       var filter = j(this).text();
 
