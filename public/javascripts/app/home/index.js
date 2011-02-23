@@ -63,13 +63,20 @@ j(document).ready(function() {
     yandexMaps.setBounds(yandexMapsGeoCollectionBounds);
   }
 
+  function highlightEmail(email) {
+    if ((email.attr('placeholder') !== email.val()) && (email.val() !== '')) {
+      email.css('color', 'red');
+      setTimeout(function() { email.css('color', '') }, 600);
+    }
+  }
+
   j.getJSON('/', function(categories) {
     drawCategoriesLinks(categories);
     drawMarkets(categories);
   })
 
   j('#dialog_form').submit(function() {
-    var email = j(this).find('#user_email');
+    var email = j('#user_email');
 
     if (validateEmail(email)) {
       j.post(j(this).attr('action'), j(this).serialize());
@@ -77,6 +84,7 @@ j(document).ready(function() {
       disableDialog();
     } else {
       j('#dialog').vibrate({ frequency: 5000, spread: 5, duration: 600 });
+      highlightEmail(email);
     }
 
     return false;
