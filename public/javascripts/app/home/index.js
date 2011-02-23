@@ -17,6 +17,8 @@ j(document).ready(function() {
       categorySelectorUl.append(html);
     });
 
+    categorySelector.show();
+
     j('.category_link').click(function() {
       var filter = j(this).text();
 
@@ -74,7 +76,7 @@ j(document).ready(function() {
       setCookie(leftEmailCookie, true);
       disableDialog();
     } else {
-      j('#form').effect('bounce', 400);
+      j('#dialog').vibrate({ frequency: 5000, spread: 5, duration: 600 });
     }
 
     return false;

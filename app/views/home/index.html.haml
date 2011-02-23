@@ -1,7 +1,7 @@
 - content_for :head do
   = stylesheet_link_tag    'app/home/index', 'lib/jquery-placeholder-plugin'
   = javascript_include_tag 'app/home/index', 'snippets/yandex_maps', 'snippets/email_validator', 'snippets/cookies',
-                           'lib/jquery-placeholder-plugin', 'lib/jquery-ui-1.8.9.custom.min'
+                           'lib/jquery-placeholder-plugin', 'lib/vibrate'
 
 #yandex_maps
 
@@ -12,14 +12,19 @@
         %div= t :all_categories
 
 #overlay
-  #dialog
-    #title
-      = t :dialog_title
-      = image_tag 'gold.png'
-    #description
-      = t :dialog_description
-    #form
-      = t :dialog_form
-      = form_for :user, :url => users_path, :html => { :id => 'dialog_form' } do |f|
-        = f.email_field :email, :placeholder => t(:dialog_placeholder)
-        = image_submit_tag 'button.png', :id => 'dialog_submit_button'
+  #buzz
+    #dialog
+      #window_top
+      #window_middle
+        #title
+          %h2= t :dialog_title
+          = image_tag 'gold.png'
+        #description
+          = t :dialog_description
+        #form
+          = t :dialog_form
+          = form_for :user, :url => users_path, :html => { :id => 'dialog_form' } do |f|
+            = f.email_field :email, :placeholder => t(:dialog_placeholder)
+            = image_submit_tag 'button.png', :id => 'dialog_submit_button'
+      #window_bottom
+  #arrow

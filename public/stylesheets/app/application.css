@@ -4,7 +4,12 @@ html, body {
   width:   100%;
   height:  100%;
 
-  font: 13px Arial, Helvetica, sans-serif;
+  font-family: Helvetica, Arial, sans-serif !important;
+  font-size: 13px;
+}
+
+p h1, h2 {
+  font-family: Helvetica, Arial, sans-serif;
 }
 
 #flash {
@@ -15,4 +20,24 @@ html, body {
   width: 100%;
 
   text-align: center;
+}
+
+.YMaps-logo {
+  bottom: 19px;
+  height: 20px;
+  margin: 0px;
+  width:  51px;
+
+  overflow: hidden;
+  position: absolute;
+
+  left: 5px;
+}
+
+.YMaps-copyrights {
+  bottom: 5px;
+  color: #333;
+  position: absolute;
+  left: 5px;
+  white-space: nowrap;
 }
