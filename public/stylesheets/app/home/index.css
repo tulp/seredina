@@ -48,7 +48,7 @@
   vertical-align: middle;
 }
 
-#dialog_overlay {
+#overlay {
   position: absolute;
   top:      0px;
   z-index:  2;
@@ -56,22 +56,34 @@
   width:  100%;
   height: 100%;
 
-  background-color: white;
-  opacity:          0.5;
+  background: url('/images/background.png') repeat;
 }
 
 #dialog {
-  position:    absolute;
-  left:        50%;
-  top:         50%;
-  margin-left: -150px;
-  z-index:     3;
+  margin:  120px auto 0px auto;
+  padding: 50px;
+  width:   400px;
+  height:  300px;
+
+  background-color: #FAFAEE;
+
+  -moz-border-radius: 10px;
+  border-radius:      10px;
+
+  -moz-box-shadow:    5px 5px 50px #000;
+  -webkit-box-shadow: 5px 5px 100px #000;
 }
 
 #user_email {
-  border: 1px solid black;
+  width:   260px;
+  height:  33px;
+  padding: 5px;
+
+  font-size: 145%;
 }
 
-#user_email.invalid {
-  border-color: red;
+#dialog_submit_button {
+  vertical-align: top;
+
+  float: right;
 }

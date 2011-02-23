@@ -2,7 +2,7 @@ j(document).ready(function() {
   var leftEmailCookie = 'left_email';
 
   function disableDialog() {
-    j('#dialog_overlay, #dialog').hide();
+    j('#overlay').hide();
   }
 
   function drawCategoriesLinks(categories) {
@@ -73,15 +73,12 @@ j(document).ready(function() {
       j.post(j(this).attr('action'), j(this).serialize());
       setCookie(leftEmailCookie, true);
       disableDialog();
-    } else {
-      var class_name = 'invalid';
-
-      email.addClass(class_name);
-      setTimeout(function() { email.removeClass(class_name) }, 1200);
     }
 
     return false;
   })
+
+  j('#user_email').placeholder();
 
   if (getCookie(leftEmailCookie)) { disableDialog() }
 })
