@@ -73,6 +73,8 @@ j(document).ready(function() {
       j.post(j(this).attr('action'), j(this).serialize());
       setCookie(leftEmailCookie, true);
       disableDialog();
+    } else {
+      j('#form').effect('bounce', 400);
     }
 
     return false;
