@@ -21,23 +21,3 @@ p h1, h2 {
 
   text-align: center;
 }
-
-.YMaps-logo {
-  bottom: 19px;
-  height: 20px;
-  margin: 0px;
-  width:  51px;
-
-  overflow: hidden;
-  position: absolute;
-
-  left: 5px;
-}
-
-.YMaps-copyrights {
-  bottom: 5px;
-  color: #333;
-  position: absolute;
-  left: 5px;
-  white-space: nowrap;
-}
