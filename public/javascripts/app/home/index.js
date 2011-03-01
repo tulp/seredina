@@ -10,12 +10,12 @@ j(document).ready(function() {
     var categorySelectorUl = categorySelector.find('ul');
 
     j.each(categories, function(index) {
-      var image_url = YMaps.Styles.get(this.icon_style).iconStyle.href;
-      var title     = this.title;
-      var html      = "<li><a href='#' class='category_link'><div><img src='" + image_url + "'/>" + title + "</div></a></li>";
+      var imageUrl = YMaps.Styles.get(this.icon_style).iconStyle.href;
+      var title    = this.title;
+      var template = "<li><a href='#' class='category_link'><div><img src='${imageUrl}'/>${title}</div></a></li>"
 
-      categorySelectorUl.append(html);
-    });
+      j.tmpl(template, { 'imageUrl': imageUrl, 'title': title }).appendTo(categorySelectorUl);
+    })
 
     categorySelector.show();
 
@@ -44,13 +44,21 @@ j(document).ready(function() {
       yandexMapsStyle.iconStyle = YMaps.Styles.get(this.icon_style).iconStyle;
       var placemarkOptions      = { hideIcon: false, hasBalloon: false, style: yandexMapsStyle };
 
-      j.each(this.markets, function(index) {
+      j.each(this.markets, function(index, market) {
         var geoPoint  = new YMaps.GeoPoint(this.longitude, this.latitude);
         var placemark = new YMaps.Placemark(geoPoint, placemarkOptions);
 
         yandexMapsGeoCollectionBounds.add(geoPoint);
 
         yandexMaps.addOverlay(placemark);
+
+        YMaps.Events.observe(placemark, placemark.Events.Click, function() {
+          var marketInformation         = j('#market_information');
+          var marketInformationTemplate = j('#market_information_template').html();
+
+          marketInformation.html(j.tmpl(marketInformationTemplate, market));
+          marketInformation.show();
+        })
       })
     })
 

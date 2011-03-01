@@ -5,6 +5,21 @@
   height: 100%;
 }
 
+#market_information {
+  background-color: white;
+  width:  300px;
+  z-index: 10;
+  position: absolute;
+  top: 10px;
+  left: 10px;
+
+  display: none;
+}
+
+#market_information_template {
+  display: none;
+}
+
 #category_selector {
   position: absolute;
   top:      15%;

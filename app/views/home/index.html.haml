@@ -1,9 +1,31 @@
 - content_for :head do
-  = stylesheet_link_tag    'app/home/index', 'lib/jquery-placeholder-plugin', 'yandex_maps'
+  = stylesheet_link_tag    'app/home/index', 'lib/jquery-placeholder-plugin', 'app/yandex_maps'
   = javascript_include_tag 'app/home/index', 'snippets/yandex_maps', 'snippets/email_validator', 'snippets/cookies',
-                           'lib/jquery-placeholder-plugin', 'lib/vibrate'
+                           'lib/jquery-placeholder-plugin', 'lib/vibrate', 'lib/jquery.tmpl.min'
 
 #yandex_maps
+
+#market_information
+
+#market_information_template
+  %p
+    %h1 ==Title
+    ${title}
+  %p
+    %h1 ==Discount
+    ${discount}
+  %p
+    %h1 ==Time
+    ${time}
+  %p
+    %h1 ==Phone
+    ${phone}
+  %p
+    %h1 ==Website
+    ${website}
+  %p
+    %h1 ==Email
+    ${email}
 
 #category_selector
   %ul
