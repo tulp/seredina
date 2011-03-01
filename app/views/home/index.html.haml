@@ -26,6 +26,17 @@
   %p
     %h1 ==Email
     ${email}
+  %p
+    %h1 ==ОТЗЫВЫ
+    {{each(i, review) reviews}}
+    %p
+      Текст
+      ${review.text}
+    %p
+      Рейтинг
+      ${review.rating}
+    {{/each }}
+
 
 #category_selector
   %ul
