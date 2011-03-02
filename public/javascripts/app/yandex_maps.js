@@ -1,6 +1,4 @@
-var yandexMaps;
-
-j(document).ready(function() {
+$(document).ready(function() {
   var zoomControlOptions  = { customTips: [{ index: 9, value: 'Город' }, { index: 13, value: 'Улица' }, { index: 16, value: 'Дом' }] };
   var zoomControl         = new YMaps.Zoom(zoomControlOptions);
   var zoomControlPosition = new YMaps.ControlPosition(YMaps.ControlPosition.TOP_RIGHT, new YMaps.Point(5, 50));

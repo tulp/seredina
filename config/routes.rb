@@ -5,5 +5,7 @@ Gold::Application.routes.draw do
     end
   end
 
+  resources :reviews, :only => :create
+
   root :to => 'home#index'
 end

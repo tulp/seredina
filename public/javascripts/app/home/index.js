@@ -1,26 +1,27 @@
-j(document).ready(function() {
+$(document).ready(function() {
   var leftEmailCookie = 'left_email';
+  var userEmail       = $('#user_email');
 
   function disableDialog() {
-    j('#overlay').hide();
+    $('#overlay').hide();
   }
 
   function drawCategoriesLinks(categories) {
-    var categorySelector   = j('#category_selector');
+    var categorySelector   = $('#category_selector');
     var categorySelectorUl = categorySelector.find('ul');
 
-    j.each(categories, function(index) {
+    $.each(categories, function(index) {
       var imageUrl = YMaps.Styles.get(this.icon_style).iconStyle.href;
       var title    = this.title;
       var template = "<li><a href='#' class='category_link'><div><img src='${imageUrl}'/>${title}</div></a></li>"
 
-      j.tmpl(template, { 'imageUrl': imageUrl, 'title': title }).appendTo(categorySelectorUl);
+      $.tmpl(template, { 'imageUrl': imageUrl, 'title': title }).appendTo(categorySelectorUl);
     })
 
     categorySelector.show();
 
-    j('.category_link').click(function() {
-      var filter = j(this).text();
+    $('.category_link').click(function() {
+      var filter = $(this).text();
 
       if (filter === 'Все') { drawMarkets(categories) } else { drawMarkets(categories, filter) }
 
@@ -33,18 +34,18 @@ j(document).ready(function() {
     var yandexMapsGeoCollectionBounds = new YMaps.GeoCollectionBounds();
 
     if (!(filter === undefined)) {
-      categories = j.map(categories, function (category) {
+      categories = $.map(categories, function (category) {
         if (category.title === filter) { return category }
       })
     }
 
     yandexMaps.removeAllOverlays();
 
-    j.each(categories, function(index) {
+    $.each(categories, function(index) {
       yandexMapsStyle.iconStyle = YMaps.Styles.get(this.icon_style).iconStyle;
       var placemarkOptions      = { hideIcon: false, hasBalloon: false, style: yandexMapsStyle };
 
-      j.each(this.markets, function(index, market) {
+      $.each(this.markets, function(index, market) {
         var geoPoint  = new YMaps.GeoPoint(this.longitude, this.latitude);
         var placemark = new YMaps.Placemark(geoPoint, placemarkOptions);
 
@@ -53,10 +54,9 @@ j(document).ready(function() {
         yandexMaps.addOverlay(placemark);
 
         YMaps.Events.observe(placemark, placemark.Events.Click, function() {
-          var marketInformation         = j('#market_information');
-          var marketInformationTemplate = j('#market_information_template').html();
+          var marketInformation = $('#market_information');
 
-          marketInformation.html(j.tmpl(marketInformationTemplate, market));
+          marketInformation.html($('#market_information_template').tmpl(market));
           marketInformation.show();
         })
       })
@@ -72,27 +72,33 @@ j(document).ready(function() {
     }
   }
 
-  j.getJSON('/', function(categories) {
+  $.getJSON('/', function(categories) {
     drawCategoriesLinks(categories);
     drawMarkets(categories);
   })
 
-  j('#dialog_form').submit(function() {
-    var email = j('#user_email');
-
-    if (validateEmail(email)) {
-      j.post(j(this).attr('action'), j(this).serialize());
+  $('#dialog_form').live('ajax:beforeSend', function() {
+    if (validateEmail(userEmail)) {
+      $.post($(this).attr('action'), $(this).serialize());
       setCookie(leftEmailCookie, true);
       disableDialog();
     } else {
-      j('#dialog').vibrate({ frequency: 5000, spread: 5, duration: 600 });
-      highlightEmail(email);
+      $('#dialog').vibrate({ frequency: 5000, spread: 5, duration: 600 });
+      highlightEmail(userEmail);
     }
 
     return false;
   })
 
-  j('#user_email').placeholder();
+  $('.review_form').live('ajax:beforeSend', function() {
+    if ($('#review_text').val()) {
+      $.post($(this).attr('action'), $(this).serialize());
+    }
+
+    return false;
+  })
+
+  userEmail.placeholder();
 
   if (getCookie(leftEmailCookie)) { disableDialog() }
 })

@@ -1,42 +1,40 @@
-- content_for :head do
-  = stylesheet_link_tag    'app/home/index', 'lib/jquery-placeholder-plugin', 'app/yandex_maps'
-  = javascript_include_tag 'app/home/index', 'snippets/yandex_maps', 'snippets/email_validator', 'snippets/cookies',
-                           'lib/jquery-placeholder-plugin', 'lib/vibrate', 'lib/jquery.tmpl.min'
-
 #yandex_maps
 
 #market_information
 
-#market_information_template
-  %p
-    %h1 ==Title
-    ${title}
-  %p
-    %h1 ==Discount
-    ${discount}
-  %p
-    %h1 ==Time
-    ${time}
-  %p
-    %h1 ==Phone
-    ${phone}
-  %p
-    %h1 ==Website
-    ${website}
-  %p
-    %h1 ==Email
-    ${email}
-  %p
-    %h1 ==ОТЗЫВЫ
-    {{each(i, review) reviews}}
-    %p
-      Текст
-      ${review.text}
-    %p
-      Рейтинг
-      ${review.rating}
-    {{/each }}
-
+%script#market_information_template{ :type => 'text/x-jquery-tmpl' }
+  %div
+    %dl
+      %dt Title
+      %dd ${title}
+      %dt Discount
+      %dd ${discount}
+      %dt Time
+      %dd ${time}
+      %dt Phone
+      %dd ${phone}
+      %dt Website
+      %dd ${website}
+      %dt Email
+      %dd ${email}
+  %div
+    %dl
+      %dt Add review
+      %dd
+        = form_for :review, :remote => true, :url => reviews_path, :html => { :class => 'review_form' } do |f|
+          = f.hidden_field :market_id, :value => '${id}'
+          = f.text_area    :text
+          = f.submit 'Put into locale'
+  %div
+    %ul
+      {{each(i, review) reviews}}
+      %li
+        Text
+        ${review.text}
+      %li
+        Rating
+        ${review.rating}
+      {{/each }}
 
 #category_selector
   %ul
@@ -56,7 +54,7 @@
           = t :dialog_description
         #form
           = t :dialog_form
-          = form_for :user, :url => users_path, :html => { :id => 'dialog_form' } do |f|
+          = form_for :user, :remote => true, :url => users_path, :html => { :id => 'dialog_form' } do |f|
             = f.email_field :email, :placeholder => t(:dialog_placeholder)
             = image_submit_tag 'button.png', :id => 'dialog_submit_button'
       #window_bottom
