@@ -1,0 +1,56 @@
+/*reset*/
+	* {
+		margin: 0;
+		padding: 0;
+	}
+/* clearfix */
+	.clearfix:after{
+		content:".";
+		display: block;
+		clear: both;
+		visibility: hidden;
+		line-height: 0;
+		height: 0;
+	}
+
+	.clearfix {
+		display: inline-block;
+	}
+
+	html[xmlns] .clearfix {
+		display: block;
+	}
+
+	* html .clearfix {
+		height: 1%;
+	}
+
+/* end of clearfix */
+
+h1 {
+    font-size:13px;
+    font-weight:700;
+    margin-top: 20px;
+}
+
+h2 {
+    margin:23px 0 0 35px;
+    display:block;
+    font-size:14px;
+}
+
+h3 {
+    font-size: 10px;
+    display:block;
+    margin-top:15px;
+    padding-bottom:10px;
+    font-weight:bold;
+}
+
+p {
+    font-size:11px;
+}
+
+a {
+    color:#000000;
+}

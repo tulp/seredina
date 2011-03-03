@@ -1,0 +1,76 @@
+!!! 5
+%html
+  %head
+    %title= t :title
+    = csrf_meta_tag
+    = stylesheet_link_tag    'golden_middle/master.css', 'golden_middle/global.css', 'golden_middle/forms.css'
+%body
+  .b-sb-wrap
+    .b-sb-content
+      .b-sb-top
+      .b-sb-middle
+        .b-sb-middle-wrap2
+          %img.b-sb-middle-wrap2-logo{ :src => 'images/golden.png' }
+          %h1 Показывать
+          .b-sb-middle-wrap2-list
+            %ul
+              %li
+                %img.b-sb-middle-wrap2-list-icon{ :src => 'images/icon_infinity.png' }
+                %span.b-sb-middle-wrap2-list-span Все категории
+                %img.b-sb-middle-wrap2-list-arrow{ :src => 'images/list_arrow.png' }
+              %li
+              %li
+          .b-sb-middle-wrap2-menu
+            .b-tabs
+              %ul.b-tabs-menu
+                %li
+                  %a{ :href => 'href' } Информация
+                %li 
+                  %a{ :href => 'href' } Отзывы
+                %li
+                  %a{ :href => 'href' } Добавить отзыв
+            .b-sb-middle-wrap2-description
+              %img.b-sb-middle-wrap2-icon{ :src => 'images/icon_infinity.png' }
+              %h2 7 ключей
+              %p.b-sb-middle-wrap2-adress ул.Кирова, 116
+          %h3 Режим работы
+          %p 09.00&nbsp;-&nbsp;21.00&nbsp;ежедневно
+          %h3 Скидка
+          %p
+            %strong 10%
+            &nbsp;на все услуги и товары, скидка на услуги кузовного цеха и заказ  запчастей по договоренности.
+            %strong 20%
+            &nbsp;на мойку.
+          .b-sb-middle-wrap2-info
+            .b-sb-middle-wrap2-info-left
+            .b-sb-middle-wrap2-info-right
+              %span.b-sb-middle-wrap2-info-right-text Информация
+              .b-sb-middle-wrap2-info-right-arrow-open
+          %p.b-sb-middle-wrap2-phone
+            Тел.:
+            %ul.b-sb-middle-wrap2-phone-number
+              %li (383) 266-29-46,
+              %li 266-34-84
+          %p.b-sb-middle-wrap2-fax
+            Факс:
+            %ul.b-sb-middle-wrap2-fax-number
+              %li (383) 266-29-46,
+              %li 266-34-84
+          %p.b-sb-middle-wrap2-site
+            Сайт:
+            %ul.b-sb-middle-wrap2-phone-number
+              %li 
+                %a{ :href => 'http://www.7keys.biz' } http://www.7keys.biz
+          .b-sb-middle-wrap2-about
+            .b-sb-middle-wrap2-about-left
+            .b-sb-middle-wrap2-about-right
+              %span.b-sb-middle-wrap2-about-right-text Описание
+              .b-sb-middle-wrap2-about-right-arrow-closed
+      .b-sb-bottom
+          
+          
+          
+          
+          
+          
+          
