@@ -1,0 +1,14 @@
+javascripts:
+  lib:
+    - public/javascripts/lib/*.js
+  global:
+    - public/javascripts/global/*.js
+  app:
+    - public/javascripts/app/**/*.js
+
+stylesheets:
+  lib:
+    - public/stylesheets/lib/*.css
+  app:
+    - public/stylesheets/app/reset.css
+    - public/stylesheets/app/**/*.css
