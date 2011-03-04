@@ -3,6 +3,8 @@ class User < ActiveRecord::Base
 
   attr_accessible :email, :password, :password_confirmation
 
+  has_many :reviews
+
   attr_accessor :temporary_password_accessor
 
   def set_password

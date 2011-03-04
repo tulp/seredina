@@ -1,5 +1,7 @@
 $(document).ready(function() {
-  var userEmail = $('#user_email');
+  var userEmail                 = $('#user_email');
+  var marketInformation         = $('#market_information');
+  var marketInformationTemplate = $('#market_information_template');
 
   function disableDialog() {
     $('#overlay').hide();
@@ -53,9 +55,7 @@ $(document).ready(function() {
         yandexMaps.addOverlay(placemark);
 
         YMaps.Events.observe(placemark, placemark.Events.Click, function() {
-          var marketInformation = $('#market_information');
-
-          marketInformation.html($('#market_information_template').tmpl(market));
+          marketInformation.html(marketInformationTemplate.tmpl(market));
           marketInformation.show();
         })
       })
@@ -98,12 +98,10 @@ $(document).ready(function() {
     }
   })
 
-  $('.review_form').live('ajax:beforeSend', function() {
-    if ($('#review_text').val()) {
-      $.post($(this).attr('action'), $(this).serialize());
+  $('#review_form').live('ajax:success', function(data, market, xhr) {
+    if (market) {
+      marketInformation.html(marketInformationTemplate.tmpl(market));
     }
-
-    return false;
   })
 
   userEmail.placeholder();
