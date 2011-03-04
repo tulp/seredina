@@ -1,18 +1,12 @@
 class User < ActiveRecord::Base
-  attr_accessible :email
+  devise :database_authenticatable, :registerable, :confirmable, :validatable
 
-  validates :email, :uniqueness => true, :presence => true, :email => true
+  attr_accessible :email, :password, :password_confirmation
 
-  before_create :generate_confirmation_token
+  attr_accessor :temporary_password_accessor
 
-  def confirm
-    self.confirmation_token = nil
-    self.confirmed_at       = Time.now
-  end
-
-  private
-
-  def generate_confirmation_token
-    self.confirmation_token = (Digest::SHA1.new << self.email).to_s
+  def set_password
+    hash = (Digest::SHA1.new << rand.to_s).to_s
+    self.password = self.temporary_password_accessor = hash[0..9]
   end
 end

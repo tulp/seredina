@@ -1,8 +1,10 @@
 Gold::Application.routes.draw do
-  resources :users, :only => :create do
-    member do
-      get :confirm
-    end
+  devise_for :users, :skip => [:registrations, :confirmations] do
+    #registrations
+    post '/users', :to => 'devise/registrations#create', :as => 'user_registration'
+
+    #confirmations
+    get '/users/confirmation', :to => 'devise/confirmations#show', :as => 'user_confirmation'
   end
 
   resources :reviews, :only => :create

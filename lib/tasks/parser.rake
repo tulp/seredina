@@ -40,6 +40,8 @@ namespace :parser do
                       :description => market[19],
                       :longitude   => coordinates.first,
                       :latitude    => coordinates.last })
+      print '.'
     end
+    puts
   end
 end

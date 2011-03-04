@@ -16,10 +16,6 @@
   display: none;
 }
 
-#market_information_template {
-  display: none;
-}
-
 #category_selector {
   position: absolute;
   top:      15%;
@@ -119,7 +115,7 @@
   padding-bottom: 35px;
 }
 
-#form {
+#sign_up_form {
   position: absolute;
   font-size: 14px;
 }

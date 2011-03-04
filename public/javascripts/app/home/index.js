@@ -1,6 +1,5 @@
 $(document).ready(function() {
-  var leftEmailCookie = 'left_email';
-  var userEmail       = $('#user_email');
+  var userEmail = $('#user_email');
 
   function disableDialog() {
     $('#overlay').hide();
@@ -65,10 +64,10 @@ $(document).ready(function() {
     yandexMaps.setBounds(yandexMapsGeoCollectionBounds);
   }
 
-  function highlightEmail(email) {
-    if ((email.attr('placeholder') !== email.val()) && (email.val() !== '')) {
-      email.css('color', 'red');
-      setTimeout(function() { email.css('color', '') }, 600);
+  function highlight(field) {
+    if ((field.attr('placeholder') !== field.val()) && (field.val() !== '')) {
+      field.css('color', 'red');
+      setTimeout(function() { field.css('color', '') }, 600);
     }
   }
 
@@ -77,17 +76,26 @@ $(document).ready(function() {
     drawMarkets(categories);
   })
 
-  $('#dialog_form').live('ajax:beforeSend', function() {
-    if (validateEmail(userEmail)) {
-      $.post($(this).attr('action'), $(this).serialize());
-      setCookie(leftEmailCookie, true);
+  $('#dialog_form').live('ajax:success', function(data, status, xhr) {
+    if (status) {
       disableDialog();
     } else {
       $('#dialog').vibrate({ frequency: 5000, spread: 5, duration: 600 });
-      highlightEmail(userEmail);
+      highlight(userEmail);
     }
+  })
 
-    return false;
+  $('#sign_in_form').live('ajax:success', function(data, status, xhr) {
+    if (status[0]) {
+      disableDialog();
+    } else {
+      if (status[1]) {
+        highlight($('#user_password'));
+      } else {
+        highlight($('#sign_in_user_email'));
+      }
+      $('#dialog').vibrate({ frequency: 5000, spread: 5, duration: 600 });
+    }
   })
 
   $('.review_form').live('ajax:beforeSend', function() {
@@ -99,6 +107,4 @@ $(document).ready(function() {
   })
 
   userEmail.placeholder();
-
-  if (getCookie(leftEmailCookie)) { disableDialog() }
 })

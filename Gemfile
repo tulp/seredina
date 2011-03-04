@@ -6,6 +6,7 @@ gem 'haml',      '3.0.25'
 gem 'fastercsv', '1.5.3'
 gem 'httparty',  '0.7.4'
 gem 'jammit',    '0.6.0'
+gem 'devise',    '1.1.7'
 
 group :development do
   gem 'mongrel',       '1.1.5'
