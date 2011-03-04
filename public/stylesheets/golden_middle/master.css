@@ -1,15 +1,16 @@
-.b-sb-wrap {
+.b-sidebar {
     width:auto;
     height:auto;
     margin: 20px;
+    width:300px;
 }
 
-.b-sb-content {
+.b-sidebar-content {
     width:300px;
 }
 
 /*круглые углы сверху*/
-.b-sb-top {
+.b-sidebar-top {
     width:100%;
     height:12px;
     background-image:url('/images/left_panel_top.png');
@@ -18,37 +19,37 @@
 }
 
 
-.b-sb-middle {
+.b-sidebar-middle {
     width:100%;
     height:auto;
     background-image: url('/images/left_panel_middle.png');
     float:left;
-    position:relative;
+    position:relative;    
 }
 
-/*обертка для padding'a слева*/
-.b-sb-middle-wrap2 {
-    padding:0 20px;
-    margin-bottom: -125px;
-    width:260px;
+/*обертка контента*/
+.b-sidebar-middle- {  
+  
 }
 
 /*лого Золотая середина*/
-.b-sb-middle-wrap2-logo {
+.b-sidebar-middle-logo {
     display:block;
     margin:0 0 0 10px;
-    position: relative;   
+    position: relative;
+    padding-left:20px;
 }
 
 /*список категорий*/
-.b-sb-middle-wrap2-list {
-    width: 260px;
+.b-categories {
+    width: 220px;
     height: 40px;
     position: relative;
+    padding:0 20px 20px;
 }
 
 /*выпадающее меню*/
-.b-sb-middle-wrap2-list ul {
+.b-categories ul {
     position:absolute;
     list-style-type: none;
     width:100%;
@@ -59,58 +60,62 @@
     font-weight:600;
 }
 
-.b-sb-middle-wrap2-list li {
+.b-categories li {
     margin:5px 8px;
     display:hidden;
 }
 
-.b-sb-middle-wrap2-list li:first-child {
+.b-categories li:first-child {
     display: block;
 }
 
 /*иконка в выпадающем меню*/
-.b-sb-middle-wrap2-list-icon {
+.b-categories-icon {
     margin-top:-2px;
     display:block;
     float:left;
 }
 
 /*стрелка в выпадающем меню*/
-.b-sb-middle-wrap2-list-arrow {
+.b-categories-arrow {
     float:right;
     margin-top: 8px;
 }
 
 /*текст в выпадающем меню*/
-.b-sb-middle-wrap2-list-span {
+.b-categories-span {
     margin:6px 0 0 10px;
     line-height:21px;
 }
 
 /*адрес*/
-.b-sb-middle-wrap2-adress {
+.b-sidebar-middle-adress {
     font-size: 11px;
     color:#737373;
-    margin:3px 0 0 35px;
+    margin:3px 0 0 2px;
+    padding:0;
+    float:left;
 }
 
 /*иконка заведения*/
-.b-sb-middle-wrap2-icon {
-    margin-top:25px;
+.b-sidebar-middle-description-text img {
+    display:block;
+    padding-left:20px;
     float:left;
 }
 
 
 /*Информация о заведении*/
-.b-sb-middle-wrap2-info {
+.b-details {
     width:auto;
     height:auto;
     margin-top:15px;
     float:left;
     margin-left: -4px;
+    padding-left:20px;
 }
 
-.b-sb-middle-wrap2-info-left {
+.b-details-left {
     width:5px;
     height:15px;
     background-image: url('/images/more_text_sprite.png');
@@ -118,7 +123,7 @@
     float:left;
 }
 
-.b-sb-middle-wrap2-info-right {
+.b-details-right {
     height:15px;
     background-image: url('/images/more_text_sprite.png');
     background-position: right top;
@@ -126,7 +131,7 @@
     width:auto;
 }
 
-.b-sb-middle-wrap2-info-right-text {
+.b-details-text {
     color:#ffffff;
     font-size:10px;
     display:block;
@@ -136,7 +141,7 @@
 }
 
 /*иконка открытой вкладки*/
-.b-sb-middle-wrap2-info-right-arrow-open {
+.b-details-arrow-open {
     dispay:block;
     position: absolute;
     background-image: url('/images/more_text_dropdown_icons.png');
@@ -147,42 +152,8 @@
     margin-top:4px;
 }
 
-/*Описание заведения*/
-.b-sb-middle-wrap2-about {
-    width:auto;
-    height:auto;
-    margin-top:20px;
-    float:left;
-    margin-left: -4px;
-}
-
-.b-sb-middle-wrap2-about-left {
-    width:5px;
-    height:15px;
-    background-image: url('/images/more_text_sprite.png');
-    background-position: left top;
-    float:left;
-}
-
-.b-sb-middle-wrap2-about-right {
-    height:15px;
-    background-image: url('/images/more_text_sprite.png');
-    background-position: right top;
-    float:right;
-    width:auto;
-}
-
-.b-sb-middle-wrap2-about-right-text {
-    color:#ffffff;
-    font-size:10px;
-    display:block;
-    padding:1px 10px 0px 5px;
-    float: left;
-    width:240px;
-}
-
 /*иконка закрытой вкладки*/
-.b-sb-middle-wrap2-about-right-arrow-closed {
+.b-details-arrow-closed {
     dispay:block;
     position: absolute;
     background-image: url('/images/more_text_dropdown_icons.png');
@@ -194,14 +165,13 @@
 }
 
 /*контакты заведения*/
-.b-sb-middle-wrap2-phone {
+.b-details-phone {
     font-size:10px;
     margin:10px 0 0 10px;
-    float:left;
-    
+    float:left;    
 }
 
-.b-sb-middle-wrap2-phone-number {
+.b-details-phone-number {
     list-style-type: none;
     font-size: 10px;
     margin:10px 0 0 5px;
@@ -209,7 +179,7 @@
     float:left;
 }
 
-.b-sb-middle-wrap2-fax {
+.b-details-fax {
     font-size:10px;
     margin:10px 0 0 10px;
     float:left;
@@ -218,7 +188,7 @@
 
 }
 
-.b-sb-middle-wrap2-fax-number {
+.b-details-fax-number {
     list-style-type: none;
     font-size: 10px;
     margin:10px 0 0 5px;
@@ -226,16 +196,15 @@
     float:left;
 }
 
-.b-sb-middle-wrap2-site {
+.b-details-site {
     font-size:10px;
     margin:10px 0 0 10px;
     float:left;
     display: inline;
     clear:both;
-
 }
 
-.b-sb-middle-wrap2-site-adress {
+.b-details-site-adress {
     list-style-type: none;
     font-size: 10px;
     margin:10px 0 0 5px;
@@ -244,7 +213,7 @@
 }
 
 /*нижняя часть сайдбара*/
-.b-sb-bottom {
+.b-sidebar-bottom {
     width:100%;
     height:125px;
     background-image: url('/images/left_panel_bottom.png');
@@ -252,19 +221,229 @@
     float:left;
 }
 
+.b-sidebar-middle-menu {
+  margin-top:20px;
+}
+
+/*вкладки меню*/
 .b-tabs {
-  
+  width:267px;
+  position:relative;
+  float:left; 
+  padding-left:20px;
 }
 
 .b-tabs-menu {
   list-style-type:none;
 }
 
+.b-tabs-menu li {
+  display:block;
+  float:left;
+  padding-right:8px;
+}
+
+.b-tabs-menu-right {
+  height:22px;
+  width:3px;
+  background-image: url('/images/tab_background.png');
+  background-position:left top;
+  background-repeat:no-repeat;
+  display:block;
+  float:left;
+}
+
+.b-tabs-menu-left {
+  height:22px;
+  display:block;
+  float:left;
+  background-image: url('/images/tab_background.png');
+  background-position:right top;
+  background-repeat:no-repeat;
+  padding:0px 6px 0 3px;
+}
+
+.b-tabs-active {
+  text-decoration:none;
+  font-size:11px;
+  float:left;
+  display:block;
+}
+
+.b-tabs-inactive {  
+  float:left;
+  display:block;
+  font-size:11px;  
+}
+
+.b-tabs-inactive span {
+  background:none;
+}
+
+.b-tabs-icon {
+  padding:0;
+  display:block;
+  float:left;
+  padding:5px 5px 0 0px;
+  margin
+}
+  
+.b-tabs-menu-text {
+    margin-top:4px;
+    display:block;
+}
+
+.b-tabs-menu li:last-child .b-tabs-menu-text {
+  background-image:url('/images/icon_add_review.png');
+  background-repeat:no-repeat;
+  padding-left:14px;
+}
+
+.b-sidebar-middle-description {
+  background-image:url('/images/tabs_background.png');
+  background-repeat:repeat-x;
+  background-position:top;
+  clear:both;
+  height:60px;
+  padding-top:25px;
+}
+
+.b-sidebar-middle-description img {
+  padding-left:20px;
+  float:left;
+}
 
 
+.b-stars {
+  background:url('/images/stars_small.png') top repeat-x;
+  width:80px;
+  height:15px;
+  display:block;
+  margin:-15px 0 0 200px;
+  float:left;
+  position:absolute;
+}
 
+.b-stars-full {
+  background:url('/images/stars_small.png') bottom repeat-x;
+  width:48px;
+  height:15px;
+  display:block;  
+  float:left;
+  position:absolute;
+}
 
+.m-stars {
+  background:url('/images/stars_medium.png') top repeat-x;
+  width:100px;
+  height:17px;
+  display:block;  
+  float:left;   
+}
 
+.m-stars-full {
+  background:url('/images/stars_medium.png') bottom repeat-x;
+  width:60px;
+  height:17px;
+  display:block;  
+  float:left;   
+}
 
+.sidebar-middle-add_review-headers {
+  display:block;
+  float:left;
+}
 
+/*ИНФОРМАЦИЯ*/
+.b-sidebar-middle-info {
+  display:none;
+}
 
+/*ОТЗЫВЫ*/
+.b-sidebar-middle-reviews {
+  display:none;  
+}
+
+/*ДОБАВИТЬ ОТЗЫВ*/
+.b-sidebar-middle-add_review {
+  display:block;  
+}
+
+.b-review {
+  padding-bottom:20px;
+}
+
+.b-review-email {
+  color:#808080;
+  padding-left:20px;  
+}
+
+.b-review-text {
+  font-size:11px;
+  padding-top:10px;
+}
+
+.b-button {  
+  height: 23px;
+  display:block;
+  float:left;  
+  position:absolute;
+}
+
+.b-button-left {
+  background-image: url('/images/green_button.png');
+  background-position:left;
+  background-repeat:no-repeat;
+  height:23px;
+  width:12px;
+  display:block;
+  float:left;
+}
+
+.b-button-right{
+  display:inline-block;  
+  background-image: url('/images/green_button.png');
+  background-position:right;
+  background-repeat:no-repeat;
+  height:23px;  
+  padding-right:15px;
+}
+
+.b-button-text {
+  display: inline-block;
+  padding: 4px 0 0 4px;
+  color:#ffffff;
+}
+
+.b-sidebar-add_review span {
+  font-size:13px;
+  font-weight:700;
+  margin-top:10px;
+}
+
+.b-sidebar-add_review label {
+  display:block;
+  padding-top:10px;
+}
+
+.b-sidebar-middle-add_review-headers {
+  display:block;
+  float:left;
+  padding-left:20px;
+  font-size:13px;
+  font-weight:700;  
+}
+
+.b-sidebar-middle-add_review .b-button {
+  margin:45px 0 0 20px;
+}
+
+.b-sidebar-add_review {
+  padding-left:20px; 
+  padding-top:50px;
+  display:block;
+}
+
+.b-sidebar-middle-reviews .b-button {
+  margin:45px 0 0 20px;
+}
