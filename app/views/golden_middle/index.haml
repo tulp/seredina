@@ -1,0 +1,118 @@
+!!! 5
+%html
+  %head
+    %title= t :title
+    = csrf_meta_tag
+    = stylesheet_link_tag    'golden_middle/master.css', 'golden_middle/global.css', 'golden_middle/forms.css', 'golden_middle/typo.css'
+%body
+  .b-sidebar
+    .b-sidebar-top
+    .b-sidebar-middle
+      %img.b-sidebar-middle-logo{ :src => 'images/golden.png' }
+      %h1 Показывать:
+      .b-categories
+        %ul
+          %li
+            %img.b-categories-icon{ :src => 'images/icon_infinity.png' }
+            %span.b-categories-span Все категории
+            %img.b-categories-arrow{ :src => 'images/list_arrow.png' }
+          %li
+          %li
+      .b-tabs
+        %ul.b-tabs-menu
+          %li
+            %a.b-tabs-active{ :href => 'href' }
+              %span.b-tabs-menu-right
+              %span.b-tabs-menu-left 
+                %span.b-tabs-menu-text 
+                  Информация
+          %li 
+            %a.b-tabs-inactive{ :href => 'href' } 
+              %span.b-tabs-menu-right
+              %span.b-tabs-menu-left 
+                %span.b-tabs-menu-text Отзывы
+          %li
+            %a.b-tabs-inactive{ :href => 'href' } 
+              %span.b-tabs-menu-right
+              %span.b-tabs-menu-left
+                %span.b-tabs-menu-text Добавить отзыв
+      .b-sidebar-middle-description
+        %img{ :src => 'images/icon_infinity.png' }
+        %h2 7 ключей
+        %p.b-sidebar-middle-adress ул.Кирова, 116
+        %span.b-stars
+          %span.b-stars-full
+      .b-sidebar-middle-info
+        %h3 Режим работы
+        %p 09.00&nbsp;-&nbsp;21.00&nbsp;ежедневно
+        %h3 Скидка
+        %p
+          %strong 10%
+          на все услуги и товары, скидка на услуги кузовного цеха и заказ  запчастей по договоренности.
+          %strong 20%
+          на мойку.
+        .b-details
+          .b-details-left
+          .b-details-right
+            %span.b-details-text Информация
+            .b-details-arrow-open
+        %p.b-details-phone
+          Тел.:
+          %ul.b-details-phone-number
+            %li (383) 266-29-46,
+            %li 266-34-84
+        %p.b-details-fax
+          Факс:
+          %ul.b-details-fax-number
+            %li (383) 266-29-46,
+            %li 266-34-84
+        %p.b-details-site
+          Сайт:
+          %ul.b-details-phone-number
+            %li 
+              %a{ :href => 'http://www.7keys.biz' } http://www.7keys.biz
+        .b-details
+          .b-details-left
+          .b-details-right
+            %span.b-details-text Описание
+            .b-details-arrow-closed
+      .b-sidebar-middle-reviews
+        .b-review
+          %span.b-review-email kossnocorp@gmail.com
+          .b-stars
+            .b-stars-full
+          %p.b-review-text Мне не понравилось! :-(
+        .b-review
+          %span.b-review-email edtsech@gmail.com
+          .b-stars
+            .b-stars-full
+          %p.b-review-text Великолепное заведение с вкусными плюшками и кукушками, бла бла, шикарная атмосфера.
+        .b-review
+          %span.b-review-email mr.aibeck@gmail.com
+          .b-stars
+            .b-stars-full
+          %p.b-review-text Отличный сервис, рекомендую!
+        .b-button
+          %span.b-button-left
+          %span.b-button-right
+            %span.b-button-text Добавить отзыв
+      .b-sidebar-middle-add_review 
+        %span.b-sidebar-middle-add_review-headers Дайте оценку заведению:
+        .m-stars
+          .m-stars-full
+        %form.b-sidebar-add_review{ :name => 'review', :method => 'post'}
+          %span Что вы думаете:
+          %label
+            %textarea{ :name => 'comment', :cols => '30', :rows=>'5' }
+        .b-button
+          %span.b-button-left
+          %span.b-button-right
+            %span.b-button-text Сохранить
+    .b-sidebar-bottom
+      
+          
+          
+          
+          
+          
+          

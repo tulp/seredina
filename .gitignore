@@ -6,3 +6,5 @@ tmp/**/*
 config/database.yml
 .rvmrc
 db/schema.rb
+.redcar
+.redcar/*
