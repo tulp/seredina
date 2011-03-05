@@ -9,5 +9,8 @@ Gold::Application.routes.draw do
 
   resources :reviews, :only => :create
 
+  # Временно
+  match '/gm' => 'home#gm'
+
   root :to => 'home#index'
 end
