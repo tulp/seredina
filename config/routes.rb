@@ -9,6 +9,8 @@ Gold::Application.routes.draw do
 
   resources :reviews, :only => :create
 
+  resources :gifts, :only => :create
+
   # Временно
   match '/gm' => 'home#gm'
 

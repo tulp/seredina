@@ -66,3 +66,8 @@
             = f.password_field :password
             = f.submit "Put into locale"
     #arrow
+
+.gift
+  = form_for :gift, :url => gifts_path, :remote => true, :html => { :id => 'gift_form' } do |f|
+    = f.email_field :recipient
+    = f.submit "Put into locale"

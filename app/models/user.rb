@@ -4,11 +4,25 @@ class User < ActiveRecord::Base
   attr_accessible :email, :password, :password_confirmation
 
   has_many :reviews
+  has_many :gifts
 
   attr_accessor :temporary_password_accessor
 
   def set_password
-    hash = (Digest::SHA1.new << rand.to_s).to_s
-    self.password = self.temporary_password_accessor = hash[0..9]
+    self.password = self.temporary_password_accessor = KeyGenerator.generate
+  end
+
+  def get_gift!
+    self.available_gifts += 1
+    self.save
+  end
+
+  def give_gift!
+    self.available_gifts -= 1
+    self.save
+  end
+
+  def can_give_gifts?
+    self.available_gifts > 0
   end
 end

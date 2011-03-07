@@ -2,6 +2,9 @@ $(document).ready(function() {
   var userEmail                 = $('#user_email');
   var marketInformation         = $('#market_information');
   var marketInformationTemplate = $('#market_information_template');
+  var review_form               = $('#review_form');
+  var gift                      = $('.gift');
+  var gift_form                 = $('#gift_form');
 
   function disableDialog() {
     $('#overlay').hide();
@@ -98,10 +101,27 @@ $(document).ready(function() {
     }
   })
 
-  $('#review_form').live('ajax:success', function(data, market, xhr) {
-    if (market) {
+  review_form.live('ajax:beforeSend', function(xhr, settings) {
+    if (!$('#review_text').val()) { return false };
+  })
+
+  review_form.live('ajax:success', function(data, status, xhr) {
+    if (status[0]) {
+      var market = $.parseJSON(status[1]);
       marketInformation.html(marketInformationTemplate.tmpl(market));
+      if (status[2]) { gift.show() }
     }
+  })
+
+  gift_form.live('ajax:beforeSend', function(xhr, settings) {
+    var recipient = $('#gift_recipient').val();
+    var regexp    = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+
+    if (!regexp.test(recipient)) { return false };
+  })
+
+  gift_form.live('ajax:success', function(data, status, xhr) {
+    if (status) { gift.hide() }
   })
 
   userEmail.placeholder();
