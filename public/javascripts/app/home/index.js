@@ -1,7 +1,7 @@
 $(document).ready(function() {
   var userEmail                 = $('#user_email');
-  var marketInformation         = $('#market_information');
-  var marketInformationTemplate = $('#market_information_template');
+  // var marketInformation         = $('#market_information');
+  // var marketInformationTemplate = $('#market_information_template');
   var review_form               = $('#review_form');
   var gift                      = $('.gift');
   var gift_form                 = $('#gift_form');
@@ -10,62 +10,82 @@ $(document).ready(function() {
     $('#overlay').hide();
   }
 
-  function drawCategoriesLinks(categories) {
-    var categorySelector   = $('#category_selector');
-    var categorySelectorUl = categorySelector.find('ul');
-
-    $.each(categories, function(index) {
-      var imageUrl = YMaps.Styles.get(this.icon_style).iconStyle.href;
-      var title    = this.title;
-      var template = "<li><a href='#' class='category_link'><div><img src='${imageUrl}'/>${title}</div></a></li>"
-
-      $.tmpl(template, { 'imageUrl': imageUrl, 'title': title }).appendTo(categorySelectorUl);
-    })
-
-    categorySelector.show();
-
-    $('.category_link').click(function() {
-      var filter = $(this).text();
-
-      if (filter === 'Все') { drawMarkets(categories) } else { drawMarkets(categories, filter) }
-
-      return false;
-    })
+  function yandexMapsIconStyle(market) {
+    return YMaps.Styles.get(market.category.icon_style).iconStyle;
   }
 
-  function drawMarkets(categories, filter) {
+  function drawDescription(market) {
+    var descriptionTemplate = $('.b-sidebar-middle-description-template');
+
+    $('.b-sidebar-middle-description').html(descriptionTemplate.tmpl(market, { imgSrc: yandexMapsIconStyle(market).href }));
+  }
+
+  function drawInfo(market) {
+    var infoTemplate = $('.b-sidebar-middle-info-template');
+
+    $('.b-sidebar-middle-info').html(infoTemplate.tmpl(market));
+  }
+
+  function drawReviews(market) {
+    var reviewsTemplate = $('.b-sidebar-middle-reviews-template');
+
+    $('.b-reviews').html(reviewsTemplate.tmpl(market));
+  }
+
+  function drawMarkets(markets) {
     var yandexMapsStyle               = new YMaps.Style();
     var yandexMapsGeoCollectionBounds = new YMaps.GeoCollectionBounds();
-
-    if (!(filter === undefined)) {
-      categories = $.map(categories, function (category) {
-        if (category.title === filter) { return category }
-      })
-    }
+    var placemarkOptions              = { hideIcon: false, hasBalloon: false };
 
     yandexMaps.removeAllOverlays();
 
-    $.each(categories, function(index) {
-      yandexMapsStyle.iconStyle = YMaps.Styles.get(this.icon_style).iconStyle;
-      var placemarkOptions      = { hideIcon: false, hasBalloon: false, style: yandexMapsStyle };
+    $.each(markets, function(index, market) {
+      var geoPoint, placemark;
 
-      $.each(this.markets, function(index, market) {
-        var geoPoint  = new YMaps.GeoPoint(this.longitude, this.latitude);
-        var placemark = new YMaps.Placemark(geoPoint, placemarkOptions);
+      yandexMapsStyle.iconStyle = yandexMapsIconStyle(market);
+      placemarkOptions['style'] = yandexMapsStyle;
 
-        yandexMapsGeoCollectionBounds.add(geoPoint);
+      geoPoint  = new YMaps.GeoPoint(market.longitude, market.latitude);
+      placemark = new YMaps.Placemark(geoPoint, placemarkOptions);
 
-        yandexMaps.addOverlay(placemark);
+      yandexMapsGeoCollectionBounds.add(geoPoint);
+      yandexMaps.addOverlay(placemark);
 
-        YMaps.Events.observe(placemark, placemark.Events.Click, function() {
-          marketInformation.html(marketInformationTemplate.tmpl(market));
-          marketInformation.show();
-        })
+      YMaps.Events.observe(placemark, placemark.Events.Click, function() {
+        drawDescription(market);
+        drawInfo(market);
+        drawReviews(market);
+        $('.b-market').show();
       })
     })
 
     yandexMaps.setBounds(yandexMapsGeoCollectionBounds);
   }
+
+  $.getJSON('/', function(markets) { drawMarkets(markets) });
+
+  // function drawCategoriesLinks(categories) {
+  //   var categorySelector   = $('#category_selector');
+  //   var categorySelectorUl = categorySelector.find('ul');
+  //
+  //   $.each(categories, function(index) {
+  //     var imageUrl = YMaps.Styles.get(this.icon_style).iconStyle.href;
+  //     var title    = this.title;
+  //     var template = "<li><a href='#' class='category_link'><div><img src='${imageUrl}'/>${title}</div></a></li>"
+  //
+  //     $.tmpl(template, { 'imageUrl': imageUrl, 'title': title }).appendTo(categorySelectorUl);
+  //   })
+  //
+  //   categorySelector.show();
+  //
+  //   $('.category_link').click(function() {
+  //     var filter = $(this).text();
+  //
+  //     if (filter === 'Все') { drawMarkets(categories) } else { drawMarkets(categories, filter) }
+  //
+  //     return false;
+  //   })
+  // }
 
   function highlight(field) {
     if ((field.attr('placeholder') !== field.val()) && (field.val() !== '')) {
@@ -74,10 +94,7 @@ $(document).ready(function() {
     }
   }
 
-  $.getJSON('/', function(categories) {
-    drawCategoriesLinks(categories);
-    drawMarkets(categories);
-  })
+
 
   $('#dialog_form').live('ajax:success', function(data, status, xhr) {
     if (status) {
@@ -124,5 +141,42 @@ $(document).ready(function() {
     if (status) { gift.hide() }
   })
 
+  function toggleTab(tab) {
+    $('.b-tabs-active').attr('class', 'b-tabs-inactive');
+    tab.attr('class', 'b-tabs-active');
+
+    $('.b-sidebar-middle-description').nextAll(':visible').hide();
+    switch(tab.attr('id')) {
+      case 'info_tab':
+        $('.b-sidebar-middle-info').show();
+        break;
+      case 'reviews_tab':
+        $('.b-sidebar-middle-reviews').show();
+        break;
+      case 'add_review_tab':
+        $('.b-sidebar-middle-add_review').show();
+        break;
+    }
+  }
+
+  $('.b-tabs a').click(function() {
+    toggleTab($(this));
+
+    return false;
+  })
+
+  $('#add_review').click(function() {
+    toggleTab($('#add_review_tab'));
+
+    return false;
+  })
+
   userEmail.placeholder();
 })
+
+// drawCategoriesLinks(categories);
+// if (!(filter === undefined)) {
+//   categories = $.map(categories, function (category) {
+//     if (category.title === filter) { return category }
+//   })
+// }

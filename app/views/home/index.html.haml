@@ -1,75 +1,119 @@
 #yandex_maps
 
-#market_information
+.b-sidebar
+  .b-sidebar-top
+  .b-sidebar-middle
+    %img.b-sidebar-middle-logo{ :src => image_path('golden.png') }
+    %h1 Показывать:
+    .b-categories
+      %ul
+        %li
+          %img.b-categories-icon{ :src => 'images/icon_infinity.png' }
+          %span.b-categories-span Все категории
+          %img.b-categories-arrow{ :src => image_path('list_arrow.png') }
+        %li
+        %li
+    .b-market
+      .b-tabs
+        %ul.b-tabs-menu
+          %li
+            %a.b-tabs-active{ :href => '#', :id => 'info_tab' }
+              %span.b-tabs-menu-right
+              %span.b-tabs-menu-left
+                %span.b-tabs-menu-text
+                  Информация
+          %li
+            %a.b-tabs-inactive{ :href => '#', :id => 'reviews_tab' }
+              %span.b-tabs-menu-right
+              %span.b-tabs-menu-left
+                %span.b-tabs-menu-text Отзывы
+          %li
+            %a.b-tabs-inactive{ :href => '#', :id => 'add_review_tab' }
+              %span.b-tabs-menu-right
+              %span.b-tabs-menu-left
+                %span.b-tabs-menu-text Добавить отзыв
+      .b-sidebar-middle-description
+      .b-sidebar-middle-info
+      .b-sidebar-middle-reviews
+        .b-reviews
+        .b-button{ :id => 'add_review' }
+          %span.b-button-left
+          %span.b-button-right
+            %span.b-button-text Добавить отзыв
+      .b-sidebar-middle-add_review
+        %span.b-sidebar-middle-add_review-headers Дайте оценку заведению:
+        .m-stars
+          .m-stars-full
+        %form.b-sidebar-add_review{ :name => 'review', :method => 'post' }
+          %span Что вы думаете:
+          %label
+            %textarea{ :name => 'comment', :cols => '35', :rows => '5' }
+        .b-button
+          %span.b-button-left
+          %span.b-button-right
+            %span.b-button-text Сохранить
+  .b-sidebar-bottom
 
-%script#market_information_template{ :type => 'text/x-jquery-tmpl' }
-  %div
-    %dl
-      %dt Title
-      %dd ${title}
-      %dt Classic
-      %dd ${classic}
-      %dt Vip
-      %dd ${vip}
-      %dt Time
-      %dd ${time}
-      %dt Phone
-      %dd ${phone}
-      %dt Website
-      %dd ${website}
-      %dt Email
-      %dd ${email}
-  %div
-    %dl
-      %dt Add review
-      %dd
-        = form_for :review, :remote => true, :url => reviews_path, :html => { :id => 'review_form' } do |f|
-          = f.hidden_field :market_id, :value => '${id}'
-          = f.text_area    :text
-          = f.submit 'Put into locale'
-  %div
-    %ul
-      {{each(i, review) reviews}}
+/ Templates
+%script.b-sidebar-middle-info-template{ :type => 'text/x-jquery-tmpl' }
+  {{if time}}
+  %h3 Режим работы
+  %p ${time}
+  {{/if}}
+  %h3 Скидка
+  %p
+    %strong 10%
+    на все услуги и товары, скидка на услуги кузовного цеха и заказ  запчастей по договоренности.
+    %strong 20%
+    на мойку.
+  {{if phone || emails || website}}
+  .b-details
+    .b-details-left
+    .b-details-right
+      %span.b-details-text Информация
+      .b-details-arrow-open
+  %p.b-details-phone
+    Тел.:
+    %ul.b-details-phone-number
+      %li (383) 266-29-46,
+      %li 266-34-84
+  {{if emails}}
+  %p.b-details-emails
+    Email:
+    %ul.b-details-email-addresses
+      {{each emails}}
       %li
-        Text
-        ${review.text}
+        %a{ :href => 'mailto:${$value}' } ${$value}
+      {{/each}}
+  {{/if}}
+  {{if website}}
+  %p.b-details-site
+    Сайт:
+    %ul.b-details-phone-number
       %li
-        Rating
-        ${review.rating}
-      {{/each }}
+        %a{ :href => '${website}' } ${website}
+  {{/if}}
+  {{/if}}
+  {{if description}}
+  .b-details
+    .b-details-left
+    .b-details-right
+      %span.b-details-text Описание
+      .b-details-arrow-closed
+  {{/if}}
 
-#category_selector
-  %ul
-    %li
-      %a.category_link{ :href => '#' }<
-        %div= t :all_categories
+%script.b-sidebar-middle-description-template{ :type => 'text/x-jquery-tmpl' }
+  %img{ :src => '${$item.imgSrc}' }
+  %h2 ${title}
+  %p.b-sidebar-middle-adress ${address}
+  %span.b-stars
+    %span.b-stars-full
 
-- unless user_signed_in?
-  #overlay
-    #buzz
-      #dialog
-        #window_top
-        #window_middle
-          #title
-            %h2= t :dialog_title
-            = image_tag 'gold.png'
-          #description
-            = t :dialog_description
-          #sign_up_form
-            = t :dialog_form
-            = form_for :user, :url => user_registration_path, :remote => true, :html => { :id => 'dialog_form' } do |f|
-              = f.email_field :email, :placeholder => t(:dialog_placeholder)
-              = image_submit_tag 'button.png', :id => 'dialog_submit_button'
-        #window_bottom
-
-        %div
-          = form_for :user, :url => user_session_path, :remote => true, :html => { :id => 'sign_in_form' } do |f|
-            = f.email_field :email, :id => 'sign_in_user_email'
-            = f.password_field :password
-            = f.submit "Put into locale"
-    #arrow
-
-.gift
-  = form_for :gift, :url => gifts_path, :remote => true, :html => { :id => 'gift_form' } do |f|
-    = f.email_field :recipient
-    = f.submit "Put into locale"
+%script.b-sidebar-middle-reviews-template{ :type => 'text/x-jquery-tmpl' }
+  {{each reviews}}
+  .b-review
+    %span.b-review-email ${$value.user.email}
+    .b-stars
+      .b-stars-full
+    %p.b-review-text ${$value.text}
+  {{/each }}

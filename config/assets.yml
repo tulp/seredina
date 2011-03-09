@@ -11,4 +11,4 @@ stylesheets:
     - public/stylesheets/lib/*.css
   app:
     - public/stylesheets/app/reset.css
-    - public/stylesheets/app/**/*.css
+    - public/stylesheets/app/*.css
