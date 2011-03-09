@@ -75,8 +75,9 @@
 #buzz {
   position: absolute;
   left: 50%;
-  bottom: 160px;
+  /*bottom: 160px;*/
   margin-left: -310px;
+  margin-top:60px;
 }
 
 #window_top {
@@ -112,7 +113,7 @@
 #description {
   font-size: 13px;
   line-height: 22px;
-  padding-bottom: 35px;
+  padding-bottom: 20px;
 }
 
 #sign_up_form {
@@ -152,8 +153,8 @@
 #arrow {
   position: absolute;
   bottom: 175px;
-  right:  250px;
-
+  right:  290px;
+  top:    455px;
   width:  119px;
   height: 70px;
 

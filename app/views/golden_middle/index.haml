@@ -38,10 +38,11 @@
                 %span.b-tabs-menu-text Добавить отзыв
       .b-sidebar-middle-description
         %img{ :src => 'images/icon_infinity.png' }
-        %h2 7 ключей
-        %p.b-sidebar-middle-adress ул.Кирова, 116
-        %span.b-stars
-          %span.b-stars-full
+        .b-sidebat-middle-description-wrap
+          %h2 7 ключей
+          %p.b-sidebar-middle-adress ул.Кирова, 116
+      %span.b-stars
+        %span.b-stars-full
       .b-sidebar-middle-info
         %h3 Режим работы
         %p 09.00&nbsp;-&nbsp;21.00&nbsp;ежедневно
@@ -76,21 +77,23 @@
           .b-details-right
             %span.b-details-text Описание
             .b-details-arrow-closed
+        %p.b-details-description
+          Техническое обслуживание и ремонт легковых автомобилей, микроавтобусов и легких грузовиков. Экспресс замены масла, спец.жидкостей, эксплутационных и расходных материалов. Развал-схождение на ПК. Техническое обслуживание и ремонт легковых автомобилей, микроавтобусов и легких грузовиков. Экспресс замены масла, спец.жидкостей, эксплутационных и расходных материалов. Развал-схождение на ПК. 
       .b-sidebar-middle-reviews
         .b-review
           %span.b-review-email kossnocorp@gmail.com
-          .b-stars
-            .b-stars-full
+          .b-stars-review
+            .b-stars-review-full
           %p.b-review-text Мне не понравилось! :-(
         .b-review
           %span.b-review-email edtsech@gmail.com
-          .b-stars
-            .b-stars-full
+          .b-stars-review
+            .b-stars-review-full
           %p.b-review-text Великолепное заведение с вкусными плюшками и кукушками, бла бла, шикарная атмосфера.
         .b-review
           %span.b-review-email mr.aibeck@gmail.com
-          .b-stars
-            .b-stars-full
+          .b-stars-review
+            .b-stars-review-full
           %p.b-review-text Отличный сервис, рекомендую!
         .b-button
           %span.b-button-left
@@ -109,6 +112,32 @@
           %span.b-button-right
             %span.b-button-text Сохранить
     .b-sidebar-bottom
+      %img{ :src => 'images/tulp_logo_small.png' }
+      
+  .b-form_discount
+    .b-form_discount_wrap
+      .b-form_discount_top
+      .b-form_discount_middle
+        %h1.b-form_discount_middle_title Поздравляем, вы разместили 3 отзыва!
+        %img.b-form_discount_middle_logo{ :src => 'images/gm_logo_discount.png' }
+        %span.b-form_discount_middle_msg Укажите email вашего друга - и он сможет приобрести карту "Золотая середина" всего за 50 рублей!
+        .b-discount_form
+          %span
+            Введите адрес, на который будет отправлена скидка:
+          %form{ :method => 'post' }
+            %input{ :type => 'email', :size => '30'}
+        .b-discount_form
+          %span
+            Имя друга:
+          %form{ :method => 'post' }
+            %input{ :type => 'text', :size => '30'}
+        .b-discount_form
+          %span
+            Ваше имя:
+          %form{ :method => 'post' }
+            %input{ :type => 'email', :size => '30'}
+            %input.b-discount_form_send{ :type => 'image', :src => '/images/send_dicount_button.png' }
+      .b-form_discount_bottom
       
           
           
