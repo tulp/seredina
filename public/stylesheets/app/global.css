@@ -1,0 +1,63 @@
+html, body {
+  width:100%;
+  height:100%;
+}
+
+/* clearfix */
+.clearfix:after{
+  content:".";
+  display: block;
+  clear: both;
+  visibility: hidden;
+  line-height: 0;
+  height: 0;
+}
+
+.clearfix {
+  display: inline-block;
+}
+
+html[xmlns] .clearfix {
+  display: block;
+}
+
+* html .clearfix {
+  height: 1%;
+}
+
+/* end of clearfix */
+
+h1 {
+  font-size:13px;
+  font-weight:700;
+  margin-top: 20px;
+  padding:0 20px;
+}
+
+h2 {
+  display:block;
+  font-size:14px;
+}
+
+h3 {
+  font-size: 10px;
+  display:block;
+  margin-top:10px;
+  padding-bottom:10px;
+  font-weight:bold;
+  padding-left:20px;
+  }
+
+p {
+  font-size:11px;
+  padding:0 20px;
+  line-height:16px;
+}
+
+a {
+  color:#000000;
+}
+
+strong {
+  font-weight:600;
+}

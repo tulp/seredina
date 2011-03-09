@@ -1,10 +1,4 @@
-#yandex_maps {
-  z-index: 0;
-
-  width:  100%;
-  height: 100%;
-}
-
+/*
 #market_information {
   background-color: white;
   width:  300px;
@@ -61,6 +55,7 @@
   vertical-align: middle;
 }
 
+*/
 #overlay {
   position: absolute;
   top:      0px;

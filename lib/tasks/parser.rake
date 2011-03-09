@@ -24,19 +24,23 @@ namespace :parser do
         website  = "#{protocol}#{website}" unless website.include? protocol
       end
 
+      if emails = market[18]
+        emails = emails.split(', ')
+      end
+
       query            = URI.encode([market[0], address].join('+'))
       geocoder         = HTTParty.get(geocoder_url + query)
       coordinates      = geocoder['ymaps']['GeoObjectCollection']['featureMember']['GeoObject']['Point']['pos'].split
 
       Market.create({ :category_id => category.id,
-                      :subject     => market[2],
                       :title       => market[4],
-                      :discount    => market[7],
+                      :classic     => market[7],
+                      :vip         => market[10],
                       :address     => address,
                       :phone       => market[15],
                       :time        => market[16],
                       :website     => website,
-                      :email       => market[18],
+                      :emails      => emails,
                       :description => market[19],
                       :longitude   => coordinates.first,
                       :latitude    => coordinates.last })

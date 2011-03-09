@@ -1,8 +1,10 @@
 .b-sidebar {
     width:auto;
     height:auto;
-    margin: 20px;
+    margin:20px;
     width:300px;
+    position:absolute;
+    top:0px;
 }
 
 .b-sidebar-content {
@@ -23,7 +25,7 @@
     height:auto;
     background-image: url('/images/left_panel_middle.png');
     float:left;
-    position:relative;    
+    position:relative;
 }
 
 /*обертка контента*/
@@ -86,6 +88,11 @@
     line-height:21px;
 }
 
+/*блок магазина*/
+.b-market {
+  display: none;
+}
+
 /*адрес*/
 .b-sidebar-middle-adress {
     font-size: 11px;
@@ -101,7 +108,6 @@
     padding-left:20px;
     float:left;
 }
-
 
 /*Информация о заведении*/
 .b-details {
@@ -174,7 +180,7 @@
 .b-details-phone {
     font-size:10px;
     margin:10px 0 0 10px;
-    float:left;    
+    float:left;
 }
 
 .b-details-phone-number {
@@ -185,16 +191,15 @@
     float:left;
 }
 
-.b-details-fax {
+.b-details-emails {
     font-size:10px;
     margin:10px 0 0 10px;
     float:left;
     display: inline;
     clear:both;
-
 }
 
-.b-details-fax-number {
+.b-details-email-addresses {
     list-style-type: none;
     font-size: 10px;
     margin:10px 0 0 5px;
@@ -242,7 +247,7 @@
 .b-tabs {
   width:267px;
   position:relative;
-  float:left; 
+  float:left;
   padding-left:20px;
 }
 
@@ -283,10 +288,10 @@
   display:block;
 }
 
-.b-tabs-inactive {  
+.b-tabs-inactive {
   float:left;
   display:block;
-  font-size:11px;  
+  font-size:11px;
 }
 
 .b-tabs-inactive span {
@@ -300,7 +305,7 @@
   padding:5px 5px 0 0px;
   margin
 }
-  
+
 .b-tabs-menu-text {
     margin-top:4px;
     display:block;
@@ -352,7 +357,7 @@
   background:url('/images/stars_small.png') bottom repeat-x;
   width:48px;
   height:15px;
-  display:block;  
+  display:block;
   float:left;
   position:absolute;
 }
@@ -380,16 +385,16 @@
   background:url('/images/stars_medium.png') top repeat-x;
   width:100px;
   height:17px;
-  display:block;  
-  float:left;   
+  display:block;
+  float:left;
 }
 
 .m-stars-full {
   background:url('/images/stars_medium.png') bottom repeat-x;
   width:60px;
   height:17px;
-  display:block;  
-  float:left;   
+  display:block;
+  float:left;
 }
 
 .sidebar-middle-add_review-headers {
@@ -403,13 +408,13 @@
 }
 
 /*ОТЗЫВЫ*/
-.b-sidebar-middle-reviews {
-  display:block;  
+.b-sidebar-middle-reviews {    
+  display:none;  
 }
 
 /*ДОБАВИТЬ ОТЗЫВ*/
-.b-sidebar-middle-add_review {
-  display:none;  
+.b-sidebar-middle-add_review {  
+  display:block;  
 }
 
 .b-review {
@@ -418,7 +423,7 @@
 
 .b-review-email {
   color:#808080;
-  padding-left:20px;  
+  padding-left:20px;
 }
 
 .b-review-text {
@@ -426,10 +431,11 @@
   padding-top:10px;
 }
 
-.b-button {  
+.b-button {
   height: 23px;
-  display:block;
-  float:left;  
+  display:block;  
+  float:left;
+  position:absolute;  
 }
 
 .b-button-left {
@@ -443,11 +449,11 @@
 }
 
 .b-button-right{
-  display:inline-block;  
+  display:inline-block;
   background-image: url('/images/green_button.png');
   background-position:right;
   background-repeat:no-repeat;
-  height:23px;  
+  height:23px;
   padding-right:15px;
 }
 
@@ -473,7 +479,7 @@
   float:left;
   padding-left:20px;
   font-size:13px;
-  font-weight:700;  
+  font-weight:700;
 }
 
 .b-sidebar-middle-add_review .b-button {
@@ -481,7 +487,7 @@
 }
 
 .b-sidebar-add_review {  
-  padding:50px 0 0 20px;
+  padding:50px 0 0 20px;  
   display:block;
 }
 
@@ -496,7 +502,7 @@
   position:absolute;
   width:100%;
   height:100%;
-  /*  display:none;*/
+  display:none;
 }
 
 .b-form_discount_wrap {
@@ -675,4 +681,10 @@ input.b-discount_form_send {
   display: inline-block;
   outline: 0 none;
   vertical-align: top;
+}
+  
+#yandex_maps {
+  z-index: 0;
+  width: 100%;
+  height: 100%;  
 }
