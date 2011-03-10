@@ -4,8 +4,6 @@
   #overlay
     #buzz
       .action
-        %h3 Акция
-        %span Карта другу за 50 рублей
       #dialog
         #window_top
         #window_middle
@@ -35,7 +33,7 @@
               %input.password_field{ :type => 'password', :size => '30'}
               %input.to_map{ :type => 'image', :src => '/images/button.png'}
         #window_bottom
-    #arrow
+          #arrow
 
 .gift
   = form_for :gift, :url => gifts_path, :remote => true, :html => { :id => 'gift_form' } do |f|

@@ -72,7 +72,7 @@
   left: 50%;
   /*bottom: 160px;*/
   margin-left: -310px;
-  margin-top:60px;
+  margin-top:45px;
 }
 
 #window_top {
@@ -148,8 +148,8 @@
 #arrow {
   position: absolute;
   bottom: 175px;
-  right:  290px;
-  top:    535px;
+  right:  -70px;
+  top:    485px;
   width:  119px;
   height: 70px;
 
