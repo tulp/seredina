@@ -409,7 +409,7 @@
 
 /*ОТЗЫВЫ*/
 .b-sidebar-middle-reviews {    
-  display:none;  
+  /*  display:none;  */
 }
 
 /*ДОБАВИТЬ ОТЗЫВ*/
@@ -435,7 +435,6 @@
   height: 23px;
   display:block;  
   float:left;
-  position:absolute;  
 }
 
 .b-button-left {
@@ -507,7 +506,7 @@
 
 .b-form_discount_wrap {
   width:620px;
-  margin:50px auto;
+  margin:20px auto;
 }
 
 .b-form_discount_top {
@@ -687,4 +686,82 @@ input.b-discount_form_send {
   z-index: 0;
   width: 100%;
   height: 100%;  
+}
+
+.notifications {
+  position:absolute;
+  margin:50px 0 0 330px;
+}
+
+.b-notifications-yellow-left {
+  float:left;
+  background:url('/images/notification_yellow_left.png') no-repeat;
+  width:37px;
+  height:72px;
+}
+
+.b-notifications-yellow-middle {
+  background:url('/images/notification_yellow.png') repeat-x;
+  height:72px;
+  float:left;
+}
+
+.b-notifications-yellow-right {
+  float:right;
+  background:url('/images/notification_yellow_right.png') no-repeat;
+  width:27px;
+  height:72px;
+}
+
+.b-notifications-pink {
+  margin-top:150px;
+}
+
+.b-notifications-pink-left {
+  float:left;
+  background:url('/images/notification_pink_left.png') no-repeat;
+  width:35px;
+  height:72px;
+}
+
+.b-notifications-pink-middle {
+  background:url('/images/notification_pink.png') repeat-x;
+  height:72px;
+  float:left;
+}
+
+.b-notifications-pink-right {
+  float:left;
+  background:url('/images/notification_pink_right.png') no-repeat;
+  width:23px;
+  height:72px;
+}
+
+.b-notification-text{
+  display:block;
+  max-width:350px;
+  font-size:12px;
+  line-height:15px;
+}
+
+.b-notification-text-pink{
+  display:block;
+  max-width:250px;
+  font-size:12px;
+  line-height:15px;
+}
+
+.b-notification-title{
+  font-weight:600;
+  font-size:13px;
+  padding:10px 0 5px 0;
+}
+
+.b-notification-label{
+  width:39px;
+  height:39px;
+  position:fixed;
+  right:10px;
+  bottom:10px;
+  background:url('/images/notification_label.png') no-repeat;
 }
