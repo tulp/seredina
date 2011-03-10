@@ -1,13 +1,16 @@
 $(document).ready(function() {
-  var userEmail                 = $('#user_email');
-  // var marketInformation         = $('#market_information');
-  // var marketInformationTemplate = $('#market_information_template');
-  var review_form               = $('#review_form');
-  var gift                      = $('.gift');
-  var gift_form                 = $('#gift_form');
+  // var userEmail                 = $('#user_email');
+  var reviewForm = $('#review_form');
+  var reviewText = $('#review_text');
+  // var gift                      = $('.gift');
+  // var gift_form                 = $('#gift_form');
 
-  function disableDialog() {
-    $('#overlay').hide();
+  // function disableDialog() {
+  //   $('#overlay').hide();
+  // }
+
+  function fillReviewForm(market) {
+    $('#review_market_id').val(market.id);
   }
 
   function drawRating(object) {
@@ -63,6 +66,7 @@ $(document).ready(function() {
         drawDescription(market);
         drawInfo(market);
         drawReviews(market);
+        fillReviewForm(market);
         $('.b-market').show();
       })
     })
@@ -70,7 +74,9 @@ $(document).ready(function() {
     yandexMaps.setBounds(yandexMapsGeoCollectionBounds);
   }
 
-  $.getJSON('/', function(markets) { drawMarkets(markets) });
+  $.getJSON('/', function(markets) {
+    drawMarkets(markets);
+  })
 
   // function drawCategoriesLinks(categories) {
   //   var categorySelector   = $('#category_selector');
@@ -95,57 +101,65 @@ $(document).ready(function() {
   //   })
   // }
 
-  function highlight(field) {
-    if ((field.attr('placeholder') !== field.val()) && (field.val() !== '')) {
-      field.css('color', 'red');
-      setTimeout(function() { field.css('color', '') }, 600);
-    }
-  }
+  // function highlight(field) {
+  //   if ((field.attr('placeholder') !== field.val()) && (field.val() !== '')) {
+  //     field.css('color', 'red');
+  //     setTimeout(function() { field.css('color', '') }, 600);
+  //   }
+  // }
+  //
+  // $('#dialog_form').live('ajax:success', function(data, status, xhr) {
+  //   if (status) {
+  //     disableDialog();
+  //   } else {
+  //     $('#dialog').vibrate({ frequency: 5000, spread: 5, duration: 600 });
+  //     highlight(userEmail);
+  //   }
+  // })
+  //
+  // $('#sign_in_form').live('ajax:success', function(data, status, xhr) {
+  //   if (status[0]) {
+  //     disableDialog();
+  //   } else {
+  //     if (status[1]) {
+  //       highlight($('#user_password'));
+  //     } else {
+  //       highlight($('#sign_in_user_email'));
+  //     }
+  //     $('#dialog').vibrate({ frequency: 5000, spread: 5, duration: 600 });
+  //   }
+  // })
 
-  $('#dialog_form').live('ajax:success', function(data, status, xhr) {
-    if (status) {
-      disableDialog();
-    } else {
-      $('#dialog').vibrate({ frequency: 5000, spread: 5, duration: 600 });
-      highlight(userEmail);
-    }
+
+  $('#add_review_submit').click(function() {
+    if (reviewText.val()) { reviewForm.submit() }
+
+    return false;
   })
 
-  $('#sign_in_form').live('ajax:success', function(data, status, xhr) {
-    if (status[0]) {
-      disableDialog();
-    } else {
-      if (status[1]) {
-        highlight($('#user_password'));
-      } else {
-        highlight($('#sign_in_user_email'));
-      }
-      $('#dialog').vibrate({ frequency: 5000, spread: 5, duration: 600 });
-    }
-  })
-
-  review_form.live('ajax:beforeSend', function(xhr, settings) {
-    if (!$('#review_text').val()) { return false };
-  })
-
-  review_form.live('ajax:success', function(data, status, xhr) {
+  reviewForm.live('ajax:success', function(data, status, xhr) {
     if (status[0]) {
       var market = $.parseJSON(status[1]);
-      marketInformation.html(marketInformationTemplate.tmpl(market));
-      if (status[2]) { gift.show() }
+
+      drawDescription(market);
+      drawReviews(market);
+      toggleTab($('#reviews_tab'));
+      reviewText.val('');
     }
   })
 
-  gift_form.live('ajax:beforeSend', function(xhr, settings) {
-    var recipient = $('#gift_recipient').val();
-    var regexp    = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+  // if (status[2]) { gift.show() }
 
-    if (!regexp.test(recipient)) { return false };
-  })
-
-  gift_form.live('ajax:success', function(data, status, xhr) {
-    if (status) { gift.hide() }
-  })
+  // gift_form.live('ajax:beforeSend', function(xhr, settings) {
+  //    var recipient = $('#gift_recipient').val();
+  //    var regexp    = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+  //
+  //    if (!regexp.test(recipient)) { return false };
+  //  })
+  //
+  //  gift_form.live('ajax:success', function(data, status, xhr) {
+  //    if (status) { gift.hide() }
+  //  })
 
   function toggleTab(tab) {
     $('.b-tabs-active').attr('class', 'b-tabs-inactive');
@@ -177,7 +191,7 @@ $(document).ready(function() {
     return false;
   })
 
-  userEmail.placeholder();
+  // userEmail.placeholder();
 })
 // drawCategoriesLinks(categories);
 // if (!(filter === undefined)) {

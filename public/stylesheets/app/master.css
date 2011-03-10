@@ -766,3 +766,8 @@ input.b-discount_form_send {
   bottom:10px;
   background:url('/images/notification_label.png') no-repeat;
 }
+
+#review_text {
+  width:260px;
+  height: 85px;
+}

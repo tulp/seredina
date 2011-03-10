@@ -44,11 +44,13 @@
         %span.b-sidebar-middle-add_review-headers Дайте оценку заведению:
         .m-stars
           .m-stars-full
-        %form.b-sidebar-add_review{ :name => 'review', :method => 'post' }
+        = form_for :review, :remote => true, :url => reviews_path, :html => { :id => 'review_form', :class => 'b-sidebar-add_review' } do |f|
+          = f.hidden_field :market_id
+          = f.hidden_field :rating, :value => 3
           %span Что вы думаете:
           %label
-            %textarea{ :name => 'comment', :cols => '35', :rows => '5' }
-        .b-button
+            = f.text_area :text
+        .b-button{ :id => 'add_review_submit' }
           %span.b-button-left
           %span.b-button-right
             %span.b-button-text Сохранить
