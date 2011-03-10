@@ -234,8 +234,7 @@
 
 .b-sidebar-bottom img {
   position:absolute;
-  padding:20px 0 0 80px;
-  margin:0 auto;
+  margin:20px 0 0 80px;
 }
 
 
@@ -483,6 +482,7 @@
 
 .b-sidebar-middle-add_review .b-button {
   margin:15px 0 0 20px;
+  cursor: pointer;
 }
 
 .b-sidebar-add_review {  
@@ -492,6 +492,7 @@
 
 .b-sidebar-middle-reviews .b-button {
   margin:5px 0 0 20px;
+  cursor: pointer;
 }
 
 /*ОТПРАВКА СКИДКИ ДРУГУ*/
