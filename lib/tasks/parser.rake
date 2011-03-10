@@ -18,7 +18,12 @@ namespace :parser do
       category_title   = market[1]
       category         = Category.find_or_create_by_title(category_title, :icon_style => yandex_icon_styles[category_title])
 
-      address    = market[14]
+      address = market[14]
+
+      if phones = market[15]
+        phones = phones.split(',')
+      end
+
       if website = market[17]
         protocol = 'http://'
         website  = "#{protocol}#{website}" unless website.include? protocol
@@ -37,7 +42,7 @@ namespace :parser do
                       :classic     => market[7],
                       :vip         => market[10],
                       :address     => address,
-                      :phone       => market[15],
+                      :phones      => phones,
                       :time        => market[16],
                       :website     => website,
                       :emails      => emails,

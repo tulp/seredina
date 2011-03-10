@@ -1,4 +1,5 @@
 class Market < ActiveRecord::Base
+  serialize :phones
   serialize :emails
 
   belongs_to :category
