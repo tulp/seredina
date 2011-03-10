@@ -10,8 +10,8 @@ $(document).ready(function() {
     $('#overlay').hide();
   }
 
-  function rating(width, rating) {
-    var spanWidth = width * rating;
+  function drawRating(object) {
+    var spanWidth = 16 * object.rating;
 
     return "<span class='b-stars-full' style='width:" + spanWidth + "px;'></span>";
   }
@@ -23,8 +23,7 @@ $(document).ready(function() {
   function drawDescription(market) {
     var descriptionTemplate = $('.b-sidebar-middle-description-template');
 
-    $('.b-sidebar-middle-description').html(descriptionTemplate.tmpl(market, { imgSrc: yandexMapsIconStyle(market).href,
-                                                                               rating: rating(16, market.rating) }));
+    $('.b-sidebar-middle-description').html(descriptionTemplate.tmpl(market, { imgSrc: yandexMapsIconStyle(market).href, rating: drawRating(market) }));
   }
 
   function drawInfo(market) {
@@ -35,6 +34,8 @@ $(document).ready(function() {
 
   function drawReviews(market) {
     var reviewsTemplate = $('.b-sidebar-middle-reviews-template');
+
+    $.each(market.reviews, function(index, review) { review.rating = drawRating(review) });
 
     $('.b-reviews').html(reviewsTemplate.tmpl(market));
   }
@@ -100,8 +101,6 @@ $(document).ready(function() {
       setTimeout(function() { field.css('color', '') }, 600);
     }
   }
-
-
 
   $('#dialog_form').live('ajax:success', function(data, status, xhr) {
     if (status) {
@@ -180,7 +179,6 @@ $(document).ready(function() {
 
   userEmail.placeholder();
 })
-
 // drawCategoriesLinks(categories);
 // if (!(filter === undefined)) {
 //   categories = $.map(categories, function (category) {

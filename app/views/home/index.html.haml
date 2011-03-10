@@ -116,7 +116,7 @@
   {{each reviews}}
   .b-review
     %span.b-review-email ${$value.user.email}
-    .b-stars
-      .b-stars-full
+    %span.b-stars
+      {{html $value.rating}}
     %p.b-review-text ${$value.text}
   {{/each }}
