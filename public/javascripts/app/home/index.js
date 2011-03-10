@@ -10,6 +10,12 @@ $(document).ready(function() {
     $('#overlay').hide();
   }
 
+  function rating(width, rating) {
+    var spanWidth = width * rating;
+
+    return "<span class='b-stars-full' style='width:" + spanWidth + "px;'></span>";
+  }
+
   function yandexMapsIconStyle(market) {
     return YMaps.Styles.get(market.category.icon_style).iconStyle;
   }
@@ -17,7 +23,8 @@ $(document).ready(function() {
   function drawDescription(market) {
     var descriptionTemplate = $('.b-sidebar-middle-description-template');
 
-    $('.b-sidebar-middle-description').html(descriptionTemplate.tmpl(market, { imgSrc: yandexMapsIconStyle(market).href }));
+    $('.b-sidebar-middle-description').html(descriptionTemplate.tmpl(market, { imgSrc: yandexMapsIconStyle(market).href,
+                                                                               rating: rating(16, market.rating) }));
   }
 
   function drawInfo(market) {

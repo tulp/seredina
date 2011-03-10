@@ -348,13 +348,13 @@
   width:80px;
   height:15px;
   display:block;
-  margin:-55px 0 0 200px;
+  margin:-15px 0 0 200px;
   float:left;
   position:absolute;
 }
 
 .b-stars-full {
-  background:url('/images/stars_small.png') bottom repeat-x;
+  background:url('/images/stars_small.png') bottom left repeat-x;
   width:48px;
   height:15px;
   display:block;
@@ -404,7 +404,7 @@
 
 /*ИНФОРМАЦИЯ*/
 .b-sidebar-middle-info {
-  display:none;
+  display:block;
 }
 
 /*ОТЗЫВЫ*/
@@ -414,7 +414,7 @@
 
 /*ДОБАВИТЬ ОТЗЫВ*/
 .b-sidebar-middle-add_review {  
-  display:block;  
+  display:none;
 }
 
 .b-review {

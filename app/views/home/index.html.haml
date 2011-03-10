@@ -60,7 +60,7 @@
   %h2 ${title}
   %p.b-sidebar-middle-adress ${address}
   %span.b-stars
-    %span.b-stars-full
+    {{html $item.rating}}
 
 %script.b-sidebar-middle-info-template{ :type => 'text/x-jquery-tmpl' }
   {{if time}}
