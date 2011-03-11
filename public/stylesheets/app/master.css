@@ -226,7 +226,7 @@
 /*нижняя часть сайдбара*/
 .b-sidebar-bottom {
     width:100%;
-    height:125px;
+    height:75px;
     background-image: url('/images/left_panel_bottom.png');
     background-repeat: no-repeat;
     float:left;
@@ -404,6 +404,7 @@
 /*ИНФОРМАЦИЯ*/
 .b-sidebar-middle-info {
   display:block;
+  overflow-y: auto;
 }
 
 /*ОТЗЫВЫ*/

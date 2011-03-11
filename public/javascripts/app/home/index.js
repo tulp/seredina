@@ -33,6 +33,8 @@ $(document).ready(function() {
     var infoTemplate = $('.b-sidebar-middle-info-template');
 
     $('.b-sidebar-middle-info').html(infoTemplate.tmpl(market));
+	$('.b-sidebar-middle').css('max-height', $('body').height() - 100);
+	$('.b-sidebar-middle-info').css('height', $('body').height() - 380);
   }
 
   function drawReviews(market) {
