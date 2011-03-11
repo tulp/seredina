@@ -130,7 +130,6 @@ $(document).ready(function() {
   //   }
   // })
 
-
   $('#add_review_submit').click(function() {
     if (reviewText.val()) { reviewForm.submit() }
 

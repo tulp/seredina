@@ -464,18 +464,18 @@
 .b-sidebar-add_review span {
   font-size:13px;
   font-weight:700;
-  margin-top:10px;
+  float: left;
+  margin-top: 5px;
 }
 
 .b-sidebar-add_review label {
   display:block;
-  padding-top:10px;
+  padding-top:25px;
 }
 
 .b-sidebar-middle-add_review-headers {
   display:block;
   float:left;
-  padding-left:20px;
   font-size:13px;
   font-weight:700;
 }
@@ -486,7 +486,7 @@
 }
 
 .b-sidebar-add_review {  
-  padding:50px 0 0 20px;  
+  padding:10px 0 0 20px;
   display:block;
 }
 
@@ -770,4 +770,9 @@ input.b-discount_form_send {
 #review_text {
   width:260px;
   height: 85px;
+}
+
+#review_rating {
+  margin-left: 10px;
+  vertical-align: sub;
 }
