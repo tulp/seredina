@@ -1,5 +1,40 @@
 #yandex_maps
 
+- unless user_signed_in?
+  #overlay
+    #buzz
+      .action
+      #dialog
+        #window_top
+        #window_middle
+          #title
+            %h2= t :dialog_title
+            = image_tag 'gold.png'
+          #description
+            = t :dialog_description
+          .select_cart
+            %form{ :name => 'select', :method => 'post'}
+              %h3
+                Выберите ваш вид карты:
+              .classic
+                %input{ :type => 'radio', :name => 'cart', :value => 'Classic'}Классическая
+              .vip
+                %input{ :type => 'radio', :name => 'cart', :value => 'Vip'}VIP
+          .sign_up_form
+            %span
+              = t :sign_up_form
+            = form_for :user, :url => user_registration_path, :remote => true, :html => { :id => 'sign_up_form' } do |f|
+              = f.text_field :email, :placeholder => t(:sign_up_form_placeholder)
+              = image_submit_tag 'button.png', :class => 'sign_up_submit_button'
+          .password_form
+            %span
+              Введите ваш код доступа (присланный вам на email):
+            %form{ :method => 'post' }
+              %input.password_field{ :type => 'password', :size => '30'}
+              %input.to_map{ :type => 'image', :src => '/images/button.png'}
+        #window_bottom
+          #arrow
+
 .b-sidebar
   .b-sidebar-top
   .b-sidebar-middle
@@ -58,8 +93,9 @@
 / Templates
 %script.b-sidebar-middle-description-template{ :type => 'text/x-jquery-tmpl' }
   %img{ :src => '${$item.imgSrc}' }
-  %h2 ${title}
-  %p.b-sidebar-middle-adress ${address}
+  .b-sidebat-middle-description-wrap
+    %h2 ${title}
+    %p.b-sidebar-middle-adress ${address}
   %span.b-stars
     {{html $item.rating}}
 

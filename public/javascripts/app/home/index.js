@@ -1,13 +1,10 @@
 $(document).ready(function() {
-  // var userEmail                 = $('#user_email');
+  var dialog     = $('#dialog');
+  var userEmail  = $('#user_email');
   var reviewForm = $('#review_form');
   var reviewText = $('#review_text');
   // var gift                      = $('.gift');
   // var gift_form                 = $('#gift_form');
-
-  // function disableDialog() {
-  //   $('#overlay').hide();
-  // }
 
   function fillReviewForm(market) {
     $('#review_market_id').val(market.id);
@@ -101,21 +98,26 @@ $(document).ready(function() {
   //   })
   // }
 
-  // function highlight(field) {
-  //   if ((field.attr('placeholder') !== field.val()) && (field.val() !== '')) {
-  //     field.css('color', 'red');
-  //     setTimeout(function() { field.css('color', '') }, 600);
-  //   }
-  // }
-  //
-  // $('#dialog_form').live('ajax:success', function(data, status, xhr) {
-  //   if (status) {
-  //     disableDialog();
-  //   } else {
-  //     $('#dialog').vibrate({ frequency: 5000, spread: 5, duration: 600 });
-  //     highlight(userEmail);
-  //   }
-  // })
+  function disableDialog() {
+    $('#overlay').hide();
+  }
+
+  function highlight(field) {
+    if ((field.attr('placeholder') !== field.val()) && (field.val() !== '')) {
+      field.css('color', 'red');
+      setTimeout(function() { field.css('color', '') }, 600);
+    }
+  }
+
+  $('#sign_up_form').live('ajax:success', function(data, status, xhr) {
+    if (status) {
+      disableDialog();
+    } else {
+      dialog.vibrate({ frequency: 5000, spread: 5, duration: 600 });
+      highlight(userEmail);
+    }
+  })
+
   //
   // $('#sign_in_form').live('ajax:success', function(data, status, xhr) {
   //   if (status[0]) {
@@ -190,7 +192,7 @@ $(document).ready(function() {
     return false;
   })
 
-  // userEmail.placeholder();
+  userEmail.placeholder();
 })
 // drawCategoriesLinks(categories);
 // if (!(filter === undefined)) {
