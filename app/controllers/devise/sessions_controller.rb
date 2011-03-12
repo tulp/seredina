@@ -1,28 +1,14 @@
 class Devise::SessionsController < ApplicationController
   include Devise::Controllers::InternalHelpers
 
-  def new
-    results = [false]
-    alert   = flash[:alert]
-
-    if alert.present?
-      case alert
-      when 'invalid'
-        email = params[:user][:email]
-        results << (email.blank? ? false : User.exists?(:email => email))
-      when 'unconfirmed'
-        results << false
-      end
-      render :json => results
-    else
-      redirect_to root_path
-    end
-  end
-
   def create
-    resource = warden.authenticate!(:scope => resource_name, :recall => 'new')
-    sign_in resource
-    render :json => [true]
+    result = if resource = warden.authenticate(:scope => resource_name)
+      sign_in resource
+      true
+    else
+      false
+    end
+    render :json => result
   end
 
   def destroy

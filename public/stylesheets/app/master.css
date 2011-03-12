@@ -617,11 +617,11 @@ input.b-discount_form_send {
   width:200px;
 }
 
-#sign_up_form {
+.sign_up_form {
   display:block;
 }
 
-#sign_up_form span {
+.sign_up_form span {
   font-size:16px;
   font-weight:600;
   padding-bottom:5px;
@@ -653,22 +653,22 @@ input.b-discount_form_send {
   line-height:17px;
 }
 
-.password_form {
+.sign_in_form {
   font-size:14px;
   position:absolute;
-  display: none;
+  display:none;
 }
 
-.password_form span {
+.sign_in_form span {
   display: block;
   font-size: 16px;
   font-weight: 600;
   padding-bottom: 5px;
-  width:220px;
+  width:500px;
   line-height:19px;
 }
 
-.password_form form {
+.sign_in_form form {
   padding-top:5px;
 }
 
@@ -909,7 +909,7 @@ input.b-discount_form_send {
   background: url(/images/landing_window_bottom.png) no-repeat;
 }
 
-#user_email {
+#sign_up_user_email {
   width:   355px;
   height:  33px;
   padding: 5px;
@@ -919,10 +919,9 @@ input.b-discount_form_send {
   font-size: 18px;
 }
 
-.sign_up_submit_button {
+.sign_up_form_submit_button {
   vertical-align: top;
   outline: 0;
-
   display: inline-block;
 }
 

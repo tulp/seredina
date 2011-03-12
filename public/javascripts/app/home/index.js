@@ -1,8 +1,18 @@
 $(document).ready(function() {
-  var dialog     = $('#dialog');
-  var userEmail  = $('#user_email');
+  var users;
+
+  var signUpForm      = $('#sign_up_form');
+  var signUpUserEmail = $('#sign_up_user_email');
+
+
+
+
+
   var reviewForm = $('#review_form');
   var reviewText = $('#review_text');
+
+
+
   // var gift                      = $('.gift');
   // var gift_form                 = $('#gift_form');
 
@@ -71,9 +81,9 @@ $(document).ready(function() {
     yandexMaps.setBounds(yandexMapsGeoCollectionBounds);
   }
 
-  $.getJSON('/', function(markets) {
-    drawMarkets(markets);
-  })
+  // $.getJSON('/', function(markets) {
+  //   drawMarkets(markets);
+  // })
 
   // function drawCategoriesLinks(categories) {
   //   var categorySelector   = $('#category_selector');
@@ -98,39 +108,76 @@ $(document).ready(function() {
   //   })
   // }
 
-  function disableDialog() {
-    $('#overlay').hide();
-  }
 
-  function highlight(field) {
+  // sign up and sign in forms
+  function disableDialog() { $('#overlay').hide() };
+
+  function vibrateDialog() { $('#dialog').vibrate({ frequency: 5000, spread: 5, duration: 600 }) };
+
+  function highlightField(field) {
     if ((field.attr('placeholder') !== field.val()) && (field.val() !== '')) {
       field.css('color', 'red');
       setTimeout(function() { field.css('color', '') }, 600);
     }
   }
 
-  $('#sign_up_form').live('ajax:success', function(data, status, xhr) {
-    if (status) {
-      disableDialog();
+  // sign up form
+  signUpForm.live('ajax:beforeSend', function(xhr, settings) {
+    var emailRegexp  = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+    var invalidEmail = false;
+    var user;
+
+    if (emailRegexp.test(signUpUserEmail.val())) {
+      for (var i = 0; i < users.length; i++) {
+        if (users[i].email === signUpUserEmail.val()) {
+          user = users[i];
+          break;
+        }
+      }
+      if (user) {
+        if (user['confirmed?']) {
+          $('.sign_up_form').hide();
+          $('.sign_in_form').show();
+          $('#sign_in_user_email').val(signUpUserEmail.val());
+
+          return false;
+        } else {
+          invalidEmail = true;
+        }
+      }
     } else {
-      dialog.vibrate({ frequency: 5000, spread: 5, duration: 600 });
-      highlight(userEmail);
+      invalidEmail = true;
+    }
+
+    if (invalidEmail) {
+      vibrateDialog();
+      highlightField(signUpUserEmail);
+
+      return false;
     }
   })
 
-  //
-  // $('#sign_in_form').live('ajax:success', function(data, status, xhr) {
-  //   if (status[0]) {
-  //     disableDialog();
-  //   } else {
-  //     if (status[1]) {
-  //       highlight($('#user_password'));
-  //     } else {
-  //       highlight($('#sign_in_user_email'));
-  //     }
-  //     $('#dialog').vibrate({ frequency: 5000, spread: 5, duration: 600 });
-  //   }
-  // })
+  signUpForm.live('ajax:success', function(data, status, xhr) {
+    if (status) {
+      disableDialog();
+    } else {
+      vibrateDialog();
+      highlightField(signUpUserEmail);
+    }
+  })
+
+  signUpUserEmail.placeholder();
+
+  // sign in form
+  $('#sign_in_form').live('ajax:success', function(data, status, xhr) {
+    if (status) {
+      disableDialog();
+    } else {
+      vibrateDialog();
+      highlightField($('#user_password'));
+    }
+  })
+  // ====================
 
   $('#add_review_submit').click(function() {
     if (reviewText.val()) { reviewForm.submit() }
@@ -192,7 +239,7 @@ $(document).ready(function() {
     return false;
   })
 
-  userEmail.placeholder();
+  $.getJSON(jsonUsersPath, function(collection) { users = collection });
 })
 // drawCategoriesLinks(categories);
 // if (!(filter === undefined)) {
