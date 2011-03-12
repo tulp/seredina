@@ -21,16 +21,20 @@ namespace :parser do
       address = market[14]
 
       if phones = market[15]
+        phones = phones.gsub('(383)', '')
         phones = phones.split(',')
+        phones.map! { |phone| phone.strip }
       end
 
-      if website = market[17]
-        protocol = 'http://'
-        website  = "#{protocol}#{website}" unless website.include? protocol
+      if websites = market[17]
+        websites = websites.gsub('http://', '')
+        websites = websites.split(',')
+        websites.map! { |website| website.strip }
       end
 
       if emails = market[18]
-        emails = emails.split(', ')
+        emails = emails.split(',')
+        emails.map! { |email| email.strip }
       end
 
       query            = URI.encode([market[0], address].join('+'))
@@ -44,7 +48,7 @@ namespace :parser do
                       :address     => address,
                       :phones      => phones,
                       :time        => market[16],
-                      :website     => website,
+                      :websites    => websites,
                       :emails      => emails,
                       :description => market[19],
                       :longitude   => coordinates.first,

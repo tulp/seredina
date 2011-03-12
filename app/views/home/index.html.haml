@@ -1,5 +1,6 @@
 :javascript
-  var jsonUsersPath = "#{json_users_path}";
+  var jsonMarketsPath = "#{json_markets_path}";
+  var jsonUsersPath   = "#{json_users_path}";
 
 #yandex_maps
 
@@ -85,7 +86,7 @@
           %span Что вы думаете:
           %label
             = f.text_area :text
-        .b-button{ :id => 'add_review_submit' }
+        .b-button{ :id => 'review_form_submit_button' }
           %span.b-button-left
           %span.b-button-right
             %span.b-button-text Сохранить
@@ -112,16 +113,16 @@
     на все услуги и товары, скидка на услуги кузовного цеха и заказ  запчастей по договоренности.
     %strong 20%
     на мойку.
-  {{if phones || emails || website}}
+  {{if phones || emails || websites}}
   .b-details
     .b-details-left
     .b-details-right
       %span.b-details-text Информация
       .b-details-arrow-open
   {{if phones}}
-  %p.b-details-phone
+  %p.b-details-phones
     Тел.:
-    %ul.b-details-phone-number
+    %ul.b-details-phone-numbers
       {{each phones}}
       %li ${$value}
       {{/each}}
@@ -135,12 +136,14 @@
         %a{ :href => 'mailto:${$value}' } ${$value}
       {{/each}}
   {{/if}}
-  {{if website}}
-  %p.b-details-site
+  {{if websites}}
+  %p.b-details-websites
     Сайт:
-    %ul.b-details-phone-number
+    %ul.b-details-website-addresses
+      {{each websites}}
       %li
-        %a{ :href => '${website}' } ${website}
+        %a{ :href => 'http://${$value}' } ${$value}
+      {{/each}}
   {{/if}}
   {{/if}}
   {{if description}}

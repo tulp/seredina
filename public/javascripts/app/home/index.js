@@ -16,40 +16,7 @@ $(document).ready(function() {
   // var gift                      = $('.gift');
   // var gift_form                 = $('#gift_form');
 
-  function fillReviewForm(market) {
-    $('#review_market_id').val(market.id);
-  }
-
-  function drawRating(object) {
-    var spanWidth = 16 * object.rating;
-
-    return "<span class='b-stars-full' style='width:" + spanWidth + "px;'></span>";
-  }
-
-  function yandexMapsIconStyle(market) {
-    return YMaps.Styles.get(market.category.icon_style).iconStyle;
-  }
-
-  function drawDescription(market) {
-    var descriptionTemplate = $('.b-sidebar-middle-description-template');
-
-    $('.b-sidebar-middle-description').html(descriptionTemplate.tmpl(market, { imgSrc: yandexMapsIconStyle(market).href, rating: drawRating(market) }));
-  }
-
-  function drawInfo(market) {
-    var infoTemplate = $('.b-sidebar-middle-info-template');
-
-    $('.b-sidebar-middle-info').html(infoTemplate.tmpl(market));
-  }
-
-  function drawReviews(market) {
-    var reviewsTemplate = $('.b-sidebar-middle-reviews-template');
-
-    $.each(market.reviews, function(index, review) { review.rating = drawRating(review) });
-
-    $('.b-reviews').html(reviewsTemplate.tmpl(market));
-  }
-
+  // markets
   function drawMarkets(markets) {
     var yandexMapsStyle               = new YMaps.Style();
     var yandexMapsGeoCollectionBounds = new YMaps.GeoCollectionBounds();
@@ -81,9 +48,38 @@ $(document).ready(function() {
     yandexMaps.setBounds(yandexMapsGeoCollectionBounds);
   }
 
-  // $.getJSON('/', function(markets) {
-  //   drawMarkets(markets);
-  // })
+  function yandexMapsIconStyle(market) { return YMaps.Styles.get(market.category.icon_style).iconStyle };
+
+  function drawDescription(market) {
+    var descriptionTemplate = $('.b-sidebar-middle-description-template');
+
+    $('.b-sidebar-middle-description').html(descriptionTemplate.tmpl(market, { imgSrc: yandexMapsIconStyle(market).href, rating: drawRating(market) }));
+  }
+
+  function drawRating(object) {
+    var spanWidth = 16 * object.rating;
+
+    return "<span class='b-stars-full' style='width:" + spanWidth + "px;'></span>";
+  }
+
+  function drawInfo(market) {
+    var infoTemplate = $('.b-sidebar-middle-info-template');
+
+    $('.b-sidebar-middle-info').html(infoTemplate.tmpl(market));
+  }
+
+  function drawReviews(market) {
+    var reviewsTemplate = $('.b-sidebar-middle-reviews-template');
+
+    $.each(market.reviews, function(index, review) { review.rating = drawRating(review) });
+
+    $('.b-reviews').html(reviewsTemplate.tmpl(market));
+  }
+
+  function fillReviewForm(market) { $('#review_market_id').val(market.id) };
+
+  $.getJSON(jsonMarketsPath, function(markets) { drawMarkets(markets) });
+  // ====================
 
   // function drawCategoriesLinks(categories) {
   //   var categorySelector   = $('#category_selector');
@@ -177,9 +173,11 @@ $(document).ready(function() {
       highlightField($('#user_password'));
     }
   })
+
+  $.getJSON(jsonUsersPath, function(collection) { users = collection });
   // ====================
 
-  $('#add_review_submit').click(function() {
+  $('#review_form_submit_button').click(function() {
     if (reviewText.val()) { reviewForm.submit() }
 
     return false;
@@ -238,8 +236,6 @@ $(document).ready(function() {
 
     return false;
   })
-
-  $.getJSON(jsonUsersPath, function(collection) { users = collection });
 })
 // drawCategoriesLinks(categories);
 // if (!(filter === undefined)) {

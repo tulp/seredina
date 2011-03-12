@@ -177,13 +177,14 @@
 }
 
 /*контакты заведения*/
-.b-details-phone {
+.b-details-phones {
   font-size:10px;
   margin:10px 0 0 10px;
   float:left;
+  width:28px;
 }
 
-.b-details-phone-number {
+.b-details-phone-numbers {
   list-style-type: none;
   font-size: 10px;
   margin:10px 0 0 5px;
@@ -197,6 +198,7 @@
   float:left;
   display: inline;
   clear:both;
+  width:28px;
 }
 
 .b-details-email-addresses {
@@ -205,9 +207,10 @@
   margin:10px 0 0 5px;
   display: block;
   float:left;
+  width:28px;
 }
 
-.b-details-site {
+.b-details-websites {
   font-size:10px;
   margin:10px 0 0 10px;
   float:left;
@@ -215,7 +218,7 @@
   clear:both;
 }
 
-.b-details-site-adress {
+.b-details-website-addresses {
   list-style-type: none;
   font-size: 10px;
   margin:10px 0 0 5px;
