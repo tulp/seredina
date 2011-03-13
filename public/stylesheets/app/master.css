@@ -46,13 +46,14 @@
   height: 40px;
   position: relative;
   padding:0 20px 20px;
+  z-index: 1;
 }
 
 /*выпадающее меню*/
 .b-categories ul {
   position:absolute;
   list-style-type: none;
-  width:100%;
+  width:102%;
   margin-top:10px;
   font-size:14px;
   border:1px solid;
@@ -61,12 +62,18 @@
 }
 
 .b-categories li {
-  margin:5px 8px;
-  display:hidden;
+  padding:5px 8px;
+  display:none;
+}
+
+.b-categories li:hover {
+  cursor: pointer;
+  background-color: #FCDD9D;
 }
 
 .b-categories li:first-child {
   display: block;
+  background-color: transparent;
 }
 
 /*иконка в выпадающем меню*/
@@ -240,7 +247,6 @@
   margin:20px 0 0 80px;
 }
 
-
 .b-sidebar-middle-menu {
   margin-top:20px;
 }
@@ -343,7 +349,6 @@
   max-width:200px;
   padding-left:40px
 }
-
 
 .b-stars {
   background:url('/images/stars_small.png') top repeat-x;
@@ -583,7 +588,6 @@ input.b-discount_form_send {
   position:absolute;  
 }
 
-
 /* landing page */
 
 .select_cart {
@@ -783,64 +787,6 @@ input.b-discount_form_send {
   vertical-align: sub;
 }
 
-/*
-#market_information {
-  background-color: white;
-  width:  300px;
-  z-index: 1;
-  position: absolute;
-  top: 10px;
-  left: 10px;
-
-  display: none;
-}
-
-#category_selector {
-  position: absolute;
-  top:      15%;
-  right:    1%;
-  z-index:  1;
-
-  padding: 5px;
-
-  background: url(/images/background.png) repeat;
-
-  -moz-border-radius: 5px;
-  border-radius:      5px;
-
-  display: none;
-}
-
-#category_selector ul {
-  padding: 0px;
-  margin:  0px;
-
-  list-style-type: none;
-}
-
-#category_selector ul li a {
-  text-decoration: none;
-  color:           black;
-
-  outline: none;
-}
-
-#category_selector ul li div {
-  border-radius:      5px;
-  -moz-border-radius: 5px;
-}
-
-#category_selector ul li a:hover div {
-  background-color: #F5DEB3;
-}
-
-#category_selector ul li a div img {
-  border: none;
-
-  vertical-align: middle;
-}
-
-*/
 #overlay {
   position: absolute;
   top:      0px;

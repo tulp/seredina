@@ -1,5 +1,5 @@
 $(document).ready(function() {
-  var users;
+  var markets, users, categories;
 
   var signUpForm      = $('#sign_up_form');
   var signUpUserEmail = $('#sign_up_user_email');
@@ -80,32 +80,11 @@ $(document).ready(function() {
 
   function fillReviewForm(market) { $('#review_market_id').val(market.id) };
 
-  $.getJSON(jsonMarketsPath, function(collection) { drawMarkets(collection) });
+  $.getJSON(jsonMarketsPath, function(collection) {
+    markets = collection;
+    drawMarkets(markets);
+  });
   // ====================
-
-  // function drawCategoriesLinks(categories) {
-  //   var categorySelector   = $('#category_selector');
-  //   var categorySelectorUl = categorySelector.find('ul');
-  //
-  //   $.each(categories, function(index) {
-  //     var imageUrl = YMaps.Styles.get(this.icon_style).iconStyle.href;
-  //     var title    = this.title;
-  //     var template = "<li><a href='#' class='category_link'><div><img src='${imageUrl}'/>${title}</div></a></li>"
-  //
-  //     $.tmpl(template, { 'imageUrl': imageUrl, 'title': title }).appendTo(categorySelectorUl);
-  //   })
-  //
-  //   categorySelector.show();
-  //
-  //   $('.category_link').click(function() {
-  //     var filter = $(this).text();
-  //
-  //     if (filter === 'Все') { drawMarkets(categories) } else { drawMarkets(categories, filter) }
-  //
-  //     return false;
-  //   })
-  // }
-
 
   // sign up and sign in forms
   function disableDialog() { $('#overlay').hide() };
@@ -179,6 +158,52 @@ $(document).ready(function() {
   $.getJSON(jsonUsersPath, function(collection) { users = collection });
   // ====================
 
+  // categories
+  $.getJSON(jsonCategoriesPath, function(collection) {
+    var activeCategory, inactiveCategories, indexLastElement;
+
+    categories         = collection;
+    indexLastElement   = categories.length - 1
+    activeCategory     = categories[indexLastElement];
+    inactiveCategories = categories.slice(0, indexLastElement);
+
+    drawCategories(activeCategory, inactiveCategories);
+  })
+
+  function drawCategories(activeCategory, inactiveCategories) {
+    var activeItem, inactiveItems;
+    var categoriesTemplate = $('.b-categories-template');
+
+    $('.b-categories').html(categoriesTemplate.tmpl({ activeCategory: activeCategory, inactiveCategories: inactiveCategories }));
+
+    activeItem    = $('.b-categories ul li:first');
+    inactiveItems = $('.b-categories ul li:not(:first)');
+
+    activeItem.click(function() { inactiveItems.toggle() });
+    inactiveItems.click(function() {
+      var filteredMarkets, selectedCategory, filteredCategories = [];
+      var categoryTitle = $(this).find('span').text();
+
+      if (categoryTitle === 'Все категории') {
+        filteredMarkets = markets;
+      } else {
+        filteredMarkets = $.grep(markets, function(market) { return (market.category.title === categoryTitle) });
+      }
+
+      for (var i = 0; i < categories.length; i++) {
+        if (categories[i].title === categoryTitle) {
+          selectedCategory = categories[i];
+        } else {
+          filteredCategories.push(categories[i]);
+        }
+      }
+
+      drawMarkets(filteredMarkets);
+      drawCategories(selectedCategory, filteredCategories);
+    })
+  }
+  // ====================
+
   $('#review_form_submit_button').click(function() {
     if (reviewText.val()) { reviewForm.submit() }
 
@@ -239,9 +264,3 @@ $(document).ready(function() {
     return false;
   })
 })
-// drawCategoriesLinks(categories);
-// if (!(filter === undefined)) {
-//   categories = $.map(categories, function (category) {
-//     if (category.title === filter) { return category }
-//   })
-// }

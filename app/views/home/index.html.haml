@@ -45,13 +45,6 @@
     %img.b-sidebar-middle-logo{ :src => image_path('golden.png') }
     %h1 Показывать:
     .b-categories
-      %ul
-        %li
-          %img.b-categories-icon{ :src => 'images/icon_infinity.png' }
-          %span.b-categories-span Все категории
-          %img.b-categories-arrow{ :src => image_path('list_arrow.png') }
-        %li
-        %li
     .b-market
       .b-tabs
         %ul.b-tabs-menu
@@ -95,6 +88,18 @@
     = link_to image_tag('tulp_logo_small.png'), 'http://tulp.ru'
 
 / Templates
+%script.b-categories-template{ :type => 'text/x-jquery-tmpl' }
+  %ul
+    %li
+      %img.b-categories-icon{ :src => '${activeCategory.icon_image}' }
+      %span.b-categories-span ${activeCategory.title}
+      %img.b-categories-arrow{ :src => image_path('list_arrow.png') }
+    {{each inactiveCategories}}
+    %li
+      %img.b-categories-icon{ :src => '${$value.icon_image}' }
+      %span.b-categories-span ${$value.title}
+    {{/each}}
+
 %script.b-sidebar-middle-description-template{ :type => 'text/x-jquery-tmpl' }
   %img{ :src => '${category.icon_image}' }
   .b-sidebat-middle-description-wrap

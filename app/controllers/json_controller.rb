@@ -1,7 +1,7 @@
 class JsonController < ApplicationController
   def markets
     render :json => Market.fields_for_json.to_json(:except  => :category_id,
-                                                   :include => { :category => { :only    => :icon_image },
+                                                   :include => { :category => { :except  => :id },
                                                                  :reviews  => { :only    => [:text, :rating],
                                                                                 :include => { :user => { :only => :email } } } })
 
