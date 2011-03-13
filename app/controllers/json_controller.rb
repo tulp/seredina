@@ -8,10 +8,19 @@ class JsonController < ApplicationController
   end
 
   def users
-    render :json => User.all.to_json(:only => :email, :methods => :confirmed?)
+    render :json => User.all.to_json(:only => :email, :methods => [:confirmed?, :can_give_gifts?])
   end
 
   def categories
     render :json => Category.all.to_json(:except => :id)
+  end
+
+  def current
+    result = if user_signed_in?
+      current_user.to_json(:only => :email, :methods => [:confirmed?, :can_give_gifts?])
+    else
+      false
+    end
+    render :json => result
   end
 end

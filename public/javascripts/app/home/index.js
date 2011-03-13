@@ -1,5 +1,5 @@
 $(document).ready(function() {
-  var markets, users, categories;
+  var markets, users, categories, current_user;
 
   var signUpForm      = $('#sign_up_form');
   var signUpUserEmail = $('#sign_up_user_email');
@@ -102,17 +102,16 @@ $(document).ready(function() {
   signUpForm.live('ajax:beforeSend', function(xhr, settings) {
     var emailRegexp  = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
     var invalidEmail = false;
-    var user;
 
     if (emailRegexp.test(signUpUserEmail.val())) {
       for (var i = 0; i < users.length; i++) {
         if (users[i].email === signUpUserEmail.val()) {
-          user = users[i];
+          current_user = users[i];
           break;
         }
       }
-      if (user) {
-        if (user['confirmed?']) {
+      if (current_user) {
+        if (current_user['confirmed?']) {
           $('.sign_up_form').hide();
           $('.sign_in_form').show();
           $('#sign_in_user_email').val(signUpUserEmail.val());
@@ -149,6 +148,7 @@ $(document).ready(function() {
   $('#sign_in_form').live('ajax:success', function(data, status, xhr) {
     if (status) {
       disableDialog();
+      checkCurrentUserGifts();
     } else {
       vibrateDialog();
       highlightField($('#user_password'));
@@ -202,6 +202,17 @@ $(document).ready(function() {
       drawCategories(selectedCategory, filteredCategories);
     })
   }
+  // ====================
+
+  // gifts
+  function showGiftNotification() { $('.b-notification-label').show() };
+
+  function checkCurrentUserGifts() { if (current_user && current_user['can_give_gifts?']) { showGiftNotification() } };
+
+  $.getJSON(jsonCurrentUserPath, function(response) {
+    current_user = response;
+    checkCurrentUserGifts();
+  })
   // ====================
 
   $('#review_form_submit_button').click(function() {

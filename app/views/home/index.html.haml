@@ -1,7 +1,8 @@
 :javascript
-  var jsonMarketsPath    = "#{json_markets_path}";
-  var jsonUsersPath      = "#{json_users_path}";
-  var jsonCategoriesPath = "#{json_categories_path}";
+  var jsonMarketsPath     = "#{json_markets_path}";
+  var jsonUsersPath       = "#{json_users_path}";
+  var jsonCategoriesPath  = "#{json_categories_path}";
+  var jsonCurrentUserPath = "#{json_current_user_path}";
 
 #yandex_maps
 
@@ -86,6 +87,8 @@
             %span.b-button-text Сохранить
   .b-sidebar-bottom
     = link_to image_tag('tulp_logo_small.png'), 'http://tulp.ru'
+
+.b-notification-label
 
 / Templates
 %script.b-categories-template{ :type => 'text/x-jquery-tmpl' }

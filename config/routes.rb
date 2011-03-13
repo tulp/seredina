@@ -16,9 +16,10 @@ Gold::Application.routes.draw do
   resources :gifts, :only => :create
 
   scope '/j' do
-    get 'markets',    :to => 'json#markets',    :as => 'json_markets'
-    get 'users',      :to => 'json#users',      :as => 'json_users'
-    get 'categories', :to => 'json#categories', :as => 'json_categories'
+    get 'markets',      :to => 'json#markets',    :as => 'json_markets'
+    get 'users',        :to => 'json#users',      :as => 'json_users'
+    get 'categories',   :to => 'json#categories', :as => 'json_categories'
+    get 'current_user', :to => 'json#current',    :as => 'json_current_user'
   end
 
   # Временно
