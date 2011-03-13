@@ -46,13 +46,14 @@
   height: 40px;
   position: relative;
   padding:0 20px 20px;
+  z-index: 1;
 }
 
 /*выпадающее меню*/
 .b-categories ul {
   position:absolute;
   list-style-type: none;
-  width:100%;
+  width:102%;
   margin-top:10px;
   font-size:14px;
   border:1px solid;
@@ -61,12 +62,18 @@
 }
 
 .b-categories li {
-  margin:5px 8px;
-  display:hidden;
+  padding:5px 8px;
+  display:none;
+}
+
+.b-categories li:hover {
+  cursor: pointer;
+  background-color: #FCDD9D;
 }
 
 .b-categories li:first-child {
   display: block;
+  background-color: transparent;
 }
 
 /*иконка в выпадающем меню*/
@@ -177,13 +184,14 @@
 }
 
 /*контакты заведения*/
-.b-details-phone {
+.b-details-phones {
   font-size:10px;
   margin:10px 0 0 10px;
   float:left;
+  width:28px;
 }
 
-.b-details-phone-number {
+.b-details-phone-numbers {
   list-style-type: none;
   font-size: 10px;
   margin:10px 0 0 5px;
@@ -197,6 +205,7 @@
   float:left;
   display: inline;
   clear:both;
+  width:28px;
 }
 
 .b-details-email-addresses {
@@ -205,9 +214,10 @@
   margin:10px 0 0 5px;
   display: block;
   float:left;
+  width:28px;
 }
 
-.b-details-site {
+.b-details-websites {
   font-size:10px;
   margin:10px 0 0 10px;
   float:left;
@@ -215,7 +225,7 @@
   clear:both;
 }
 
-.b-details-site-adress {
+.b-details-website-addresses {
   list-style-type: none;
   font-size: 10px;
   margin:10px 0 0 5px;
@@ -236,7 +246,6 @@
   position:absolute;
   margin:20px 0 0 80px;
 }
-
 
 .b-sidebar-middle-menu {
   margin-top:20px;
@@ -340,7 +349,6 @@
   max-width:200px;
   padding-left:40px
 }
-
 
 .b-stars {
   background:url('/images/stars_small.png') top repeat-x;
@@ -581,7 +589,6 @@ input.b-discount_form_send {
   position:absolute;  
 }
 
-
 /* landing page */
 
 .select_cart {
@@ -618,11 +625,11 @@ input.b-discount_form_send {
   width:200px;
 }
 
-#sign_up_form {
+.sign_up_form {
   display:block;
 }
 
-#sign_up_form span {
+.sign_up_form span {
   font-size:16px;
   font-weight:600;
   padding-bottom:5px;
@@ -654,22 +661,22 @@ input.b-discount_form_send {
   line-height:17px;
 }
 
-.password_form {
+.sign_in_form {
   font-size:14px;
   position:absolute;
-  display: none;
+  display:none;
 }
 
-.password_form span {
+.sign_in_form span {
   display: block;
   font-size: 16px;
   font-weight: 600;
   padding-bottom: 5px;
-  width:220px;
+  width:500px;
   line-height:19px;
 }
 
-.password_form form {
+.sign_in_form form {
   padding-top:5px;
 }
 
@@ -781,64 +788,6 @@ input.b-discount_form_send {
   vertical-align: sub;
 }
 
-/*
-#market_information {
-  background-color: white;
-  width:  300px;
-  z-index: 1;
-  position: absolute;
-  top: 10px;
-  left: 10px;
-
-  display: none;
-}
-
-#category_selector {
-  position: absolute;
-  top:      15%;
-  right:    1%;
-  z-index:  1;
-
-  padding: 5px;
-
-  background: url(/images/background.png) repeat;
-
-  -moz-border-radius: 5px;
-  border-radius:      5px;
-
-  display: none;
-}
-
-#category_selector ul {
-  padding: 0px;
-  margin:  0px;
-
-  list-style-type: none;
-}
-
-#category_selector ul li a {
-  text-decoration: none;
-  color:           black;
-
-  outline: none;
-}
-
-#category_selector ul li div {
-  border-radius:      5px;
-  -moz-border-radius: 5px;
-}
-
-#category_selector ul li a:hover div {
-  background-color: #F5DEB3;
-}
-
-#category_selector ul li a div img {
-  border: none;
-
-  vertical-align: middle;
-}
-
-*/
 #overlay {
   position: absolute;
   top:      0px;
@@ -910,7 +859,7 @@ input.b-discount_form_send {
   background: url(/images/landing_window_bottom.png) no-repeat;
 }
 
-#user_email {
+#sign_up_user_email {
   width:   355px;
   height:  33px;
   padding: 5px;
@@ -920,10 +869,9 @@ input.b-discount_form_send {
   font-size: 18px;
 }
 
-.sign_up_submit_button {
+.sign_up_form_submit_button {
   vertical-align: top;
   outline: 0;
-
   display: inline-block;
 }
 
