@@ -1,6 +1,7 @@
 :javascript
-  var jsonMarketsPath = "#{json_markets_path}";
-  var jsonUsersPath   = "#{json_users_path}";
+  var jsonMarketsPath    = "#{json_markets_path}";
+  var jsonUsersPath      = "#{json_users_path}";
+  var jsonCategoriesPath = "#{json_categories_path}";
 
 #yandex_maps
 
@@ -95,7 +96,7 @@
 
 / Templates
 %script.b-sidebar-middle-description-template{ :type => 'text/x-jquery-tmpl' }
-  %img{ :src => '${$item.imgSrc}' }
+  %img{ :src => '${category.icon_image}' }
   .b-sidebat-middle-description-wrap
     %h2 ${title}
     %p.b-sidebar-middle-adress ${address}

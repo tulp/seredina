@@ -1,22 +1,22 @@
 namespace :parser do
   desc 'Parse markets'
   task :markets => :environment do
-    geocoder_url       = "http://geocode-maps.yandex.ru/1.x/?key=#{YANDEX_MAPS_API_KEY}&results=1&geocode="
-    filename           = 'assets/data.csv'
-    yandex_icon_styles = { 'Авто'                      => 'default#carIcon',
-                           'Медицина'                  => 'default#hospitalIcon',
-                           'Одежда'                    => 'default#tailorShopIcon',
-                           'Подарки'                   => 'default#gymIcon',
-                           'Продукты питания'          => 'default#restaurauntIcon',
-                           'Спорт, отдых, развлечения' => 'default#stadiumIcon',
-                           'Строительство, ремонт'     => 'default#workshopIcon',
-                           'Техника'                   => 'default#dryCleanerIcon',
-                           'Товары для дома и офиса'   => 'default#houseIcon',
-                           'Услуги'                    => 'default#barberShopIcon' }
+    geocoder_url = "http://geocode-maps.yandex.ru/1.x/?key=#{YANDEX_MAPS_API_KEY}&results=1&geocode="
+    filename     = 'assets/data.csv'
+    icon_images  = { 'Авто'                      => '/images/categories/car.png',
+                     'Медицина'                  => '/images/categories/hospital.png',
+                     'Одежда'                    => '/images/categories/tailorShop.png',
+                     'Подарки'                   => '/images/categories/gym.png',
+                     'Продукты питания'          => '/images/categories/restauraunt.png',
+                     'Спорт, отдых, развлечения' => '/images/categories/stadium.png',
+                     'Строительство, ремонт'     => '/images/categories/workshop.png',
+                     'Техника'                   => '/images/categories/dryCleaner.png',
+                     'Товары для дома и офиса'   => '/images/categories/house.png',
+                     'Услуги'                    => '/images/categories/barberShop.png' }
 
     FasterCSV.foreach(filename) do |market|
-      category_title   = market[1]
-      category         = Category.find_or_create_by_title(category_title, :icon_style => yandex_icon_styles[category_title])
+      category_title = market[1]
+      category       = Category.find_or_create_by_title(category_title, :icon_image => icon_images[category_title])
 
       address = market[14]
 
@@ -53,8 +53,12 @@ namespace :parser do
                       :description => market[19],
                       :longitude   => coordinates.first,
                       :latitude    => coordinates.last })
+
       print '.'
     end
+
+    Category.create(:title => 'Все категории', :icon_image => '/images/categories/infinity.png')
+
     puts
   end
 end
