@@ -5,6 +5,8 @@ class Gift < ActiveRecord::Base
 
   before_create :generate_code
 
+  attr_accessor :recipient_name, :giver_name
+
   private
 
   def generate_code

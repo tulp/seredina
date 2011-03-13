@@ -1,20 +1,16 @@
 $(document).ready(function() {
   var markets, users, categories, current_user;
 
+  var emailRegexp = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+
   var signUpForm      = $('#sign_up_form');
   var signUpUserEmail = $('#sign_up_user_email');
 
+  var notificationLabel = $('.b-notification-label');
 
-
-
-
-  var reviewForm = $('#review_form');
-  var reviewText = $('#review_text');
-
-
-
-  // var gift                      = $('.gift');
-  // var gift_form                 = $('#gift_form');
+  var formDiscount   = $('.b-form_discount');
+  var giftForm       = $('#gift_form');
+  var recipientEmail = $('#gift_recipient');
 
   // markets
   function drawMarkets(markets) {
@@ -100,7 +96,6 @@ $(document).ready(function() {
 
   // sign up form
   signUpForm.live('ajax:beforeSend', function(xhr, settings) {
-    var emailRegexp  = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
     var invalidEmail = false;
 
     if (emailRegexp.test(signUpUserEmail.val())) {
@@ -205,15 +200,43 @@ $(document).ready(function() {
   // ====================
 
   // gifts
-  function showGiftNotification() { $('.b-notification-label').show() };
+  function checkCurrentUserGifts() { if (current_user && current_user['can_give_gifts?']) { notificationLabel.show() } };
 
-  function checkCurrentUserGifts() { if (current_user && current_user['can_give_gifts?']) { showGiftNotification() } };
+  function vibrateDiscount() { $('.b-form_discount_wrap').vibrate({ frequency: 5000, spread: 5, duration: 600 }) };
+
+  notificationLabel.click(function() { formDiscount.show() });
+
+  giftForm.live('ajax:beforeSend', function(xhr, settings) {
+    if (!emailRegexp.test(recipientEmail.val())) {
+      vibrateDiscount();
+      highlightField(recipientEmail);
+
+      return false;
+    }
+  })
+
+  giftForm.live('ajax:success', function(data, status, xhr) {
+    if (status[0]) {
+      formDiscount.hide();
+      if (!status[1]) { notificationLabel.hide() };
+    } else {
+      vibrateDiscount();
+      highlightField(recipientEmail);
+    }
+  })
+
+  recipientEmail.placeholder();
 
   $.getJSON(jsonCurrentUserPath, function(response) {
     current_user = response;
     checkCurrentUserGifts();
   })
   // ====================
+
+
+
+  var reviewForm = $('#review_form');
+  var reviewText = $('#review_text');
 
   $('#review_form_submit_button').click(function() {
     if (reviewText.val()) { reviewForm.submit() }
@@ -231,19 +254,6 @@ $(document).ready(function() {
       reviewText.val('');
     }
   })
-
-  // if (status[2]) { gift.show() }
-
-  // gift_form.live('ajax:beforeSend', function(xhr, settings) {
-  //    var recipient = $('#gift_recipient').val();
-  //    var regexp    = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
-  //
-  //    if (!regexp.test(recipient)) { return false };
-  //  })
-  //
-  //  gift_form.live('ajax:success', function(data, status, xhr) {
-  //    if (status) { gift.hide() }
-  //  })
 
   function toggleTab(tab) {
     $('.b-tabs-active').attr('class', 'b-tabs-inactive');
