@@ -78,7 +78,7 @@ $(document).ready(function() {
 
   function fillReviewForm(market) { $('#review_market_id').val(market.id) };
 
-  $.getJSON(jsonMarketsPath, function(markets) { drawMarkets(markets) });
+  $.getJSON(jsonMarketsPath, function(collection) { drawMarkets(collection) });
   // ====================
 
   // function drawCategoriesLinks(categories) {
