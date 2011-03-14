@@ -1,6 +1,10 @@
 namespace :parser do
   desc 'Parse markets'
   task :markets => :environment do
+    Category.delete_all
+    Market.delete_all
+    [Category, Market].each { |model| ActiveRecord::Base.connection.execute("ALTER TABLE #{model.table_name} AUTO_INCREMENT = 1") }
+
     geocoder_url = "http://geocode-maps.yandex.ru/1.x/?key=#{YANDEX_MAPS_API_KEY}&results=1&geocode="
     filename     = 'assets/data.csv'
     icon_images  = { 'Авто'                      => '/images/categories/car.png',
@@ -17,6 +21,8 @@ namespace :parser do
     FasterCSV.foreach(filename) do |market|
       category_title = market[1]
       category       = Category.find_or_create_by_title(category_title, :icon_image => icon_images[category_title])
+
+      subcategory = market[2].strip
 
       address = market[14]
 
@@ -42,6 +48,7 @@ namespace :parser do
       coordinates      = geocoder['ymaps']['GeoObjectCollection']['featureMember']['GeoObject']['Point']['pos'].split
 
       Market.create({ :category_id => category.id,
+                      :subcategory => subcategory,
                       :title       => market[4],
                       :classic     => market[7],
                       :vip         => market[10],

@@ -109,6 +109,10 @@
   float:left;
 }
 
+.b-sidebar-middle-subcategory {
+  padding: 0;
+}
+
 /*иконка заведения*/
 .b-sidebar-middle-description-text img {
   display:block;
