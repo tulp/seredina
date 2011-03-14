@@ -235,11 +235,11 @@
 
 /*нижняя часть сайдбара*/
 .b-sidebar-bottom {
-  width:100%;
-  height:125px;
-  background-image: url('/images/left_panel_bottom.png');
-  background-repeat: no-repeat;
-  float:left;
+    width:100%;
+    height:75px;
+    background-image: url('/images/left_panel_bottom.png');
+    background-repeat: no-repeat;
+    float:left;
 }
 
 .b-sidebar-bottom img {
@@ -412,6 +412,7 @@
 /*ИНФОРМАЦИЯ*/
 .b-sidebar-middle-info {
   display:block;
+  overflow-y: auto;
 }
 
 /*ОТЗЫВЫ*/
@@ -887,4 +888,3 @@ input.b-discount_form_send {
   height: 70px;
 
   background: url(/images/landing_arrow.png);
-}

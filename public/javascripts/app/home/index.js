@@ -12,6 +12,11 @@ $(document).ready(function() {
   var giftForm       = $('#gift_form');
   var recipientEmail = $('#gift_recipient');
 
+  var middleInfo = $('.b-sidebar-middle-info');
+
+  var reviewForm = $('#review_form');
+  var reviewText = $('#review_text');
+
   // markets
   function drawMarkets(markets) {
     var yandexMapsStyle               = new YMaps.Style();
@@ -63,7 +68,10 @@ $(document).ready(function() {
   function drawInfo(market) {
     var infoTemplate = $('.b-sidebar-middle-info-template');
 
-    $('.b-sidebar-middle-info').html(infoTemplate.tmpl(market));
+  	$('.b-sidebar-middle').css('max-height', $('body').height() - 100);
+  	middleInfo.css('height', $('body').height() - 380);
+
+    middleInfo.html(infoTemplate.tmpl(market));
   }
 
   function drawReviews(market) {
@@ -262,7 +270,7 @@ $(document).ready(function() {
     $('.b-sidebar-middle-description').nextAll(':visible').hide();
     switch(tab.attr('id')) {
       case 'info_tab':
-        $('.b-sidebar-middle-info').show();
+        middleInfo.show();
         break;
       case 'reviews_tab':
         $('.b-sidebar-middle-reviews').show();
