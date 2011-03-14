@@ -68,8 +68,8 @@ $(document).ready(function() {
   function drawInfo(market) {
     var infoTemplate = $('.b-sidebar-middle-info-template');
 
-  	$('.b-sidebar-middle').css('max-height', $('body').height() - 100);
-  	middleInfo.css('height', $('body').height() - 380);
+  	// $('.b-sidebar-middle').css('max-height', $('body').height() - 100);
+  	// middleInfo.css('height', $('body').height() - 380);
 
     middleInfo.html(infoTemplate.tmpl(market));
   }

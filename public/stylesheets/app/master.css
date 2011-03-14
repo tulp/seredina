@@ -107,10 +107,13 @@
   margin:3px 0 0 8px;
   padding:0;
   float:left;
+  clear:both;
 }
 
 .b-sidebar-middle-subcategory {
   padding: 0;
+  width:250px;
+  height:40px;
 }
 
 /*иконка заведения*/
@@ -153,6 +156,7 @@
   padding:1px 10px 0px 5px;
   float: left;
   width:240px;
+  line-height:13px;
 }
 
 .b-details-description {
@@ -219,6 +223,7 @@
   display: block;
   float:left;
   width:28px;
+  line-height:18px;
 }
 
 .b-details-websites {
@@ -298,12 +303,14 @@
   font-size:11px;
   float:left;
   display:block;
+  outline:none;
 }
 
 .b-tabs-inactive {
   float:left;
   display:block;
   font-size:11px;
+  outline:none;
 }
 
 .b-tabs-inactive span {
@@ -336,17 +343,21 @@
   clear:both;
   height:60px;
   padding-top:25px;
+  margin-bottom:35px;
 }
 
 .b-sidebar-middle-description h2 {
-  max-width:160px;
+  max-width:155px;
   display:block;
-  font-size:14px;   
+  font-size:14px;
+  float:left;
 }
 
 .b-sidebar-middle-description img {
   padding-left:20px;
   float:left;
+  display:block;
+  padding-bottom:20px;
 }
 
 .b-sidebat-middle-description-wrap {
@@ -359,8 +370,7 @@
   width:80px;
   height:15px;
   display:block;
-  margin:-15px 0 0 200px;
-  float:left;
+  margin:0px 0 0 210px;  
   position:absolute;
 }
 
@@ -416,7 +426,16 @@
 /*ИНФОРМАЦИЯ*/
 .b-sidebar-middle-info {
   display:block;
-  overflow-y: auto;
+  margin-top:5px;
+  /*  overflow-y: auto;*/
+}
+
+.b-sidebar-middle-info h3 {
+  clear:both;
+}
+
+.b-sidebar-middle-info ul {
+  line-height:18px;
 }
 
 /*ОТЗЫВЫ*/
@@ -530,6 +549,13 @@
   float:left;
   height:42px;
   width:617px;
+}
+
+.b-form_discount_top a {
+  display:block;
+  width:14px;
+  height:16px;
+  margin:20px 0 0 578px;
 }
 
 .b-form_discount_middle {
@@ -731,6 +757,13 @@ input.b-discount_form_send {
   height:72px;
 }
 
+.b-notifications-yellow-right a {
+  width:10px;
+  height:10px;
+  display:block;
+  margin:5px 0 0 11px;
+}
+
 .b-notifications-pink {
   margin-top:150px;
 }
@@ -753,6 +786,13 @@ input.b-discount_form_send {
   background:url('/images/notification_pink_right.png') no-repeat;
   width:23px;
   height:72px;
+}
+
+.b-notifications-pink-right a {
+  width:10px;
+  height:10px;
+  display:block;
+  margin:3px 0 0 8px;
 }
 
 .b-notification-text{
