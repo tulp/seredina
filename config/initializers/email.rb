@@ -1,14 +1,11 @@
-# Be sure to restart your server when you modify this file.
+require 'mail'
 
-#MAILER_CONF = YAML.load_file(File.join("#{Rails.root}", 'config', 'mailer_config.yml'))
+options = { :address              => "smtp.gmail.com",
+            :port                 => 587,
+            :domain               => 'gmail.com',
+            :user_name            => 'hooxe.o',
+            :password             => '4cjWB8YswEtFTv',
+            :authentication       => 'plain',
+            :enable_starttls_auto => true  }
 
-#ActionMailer::Base.delivery_method = :activerecord #For ar_send_mail
-ActionMailer::Base.delivery_method = :sendmail
-# ActionMailer::Base.default_content_type = "text/html"
-
-#ActionMailer::Base.smtp_settings = {
-#  :domain => "",
-#  :perform_deliveries => true,
-#  :address => '',
-#  :port => 25
-#}
+ActionMailer::Base.delivery_method = :smtp, options
