@@ -86,7 +86,7 @@
           %span.b-button-right
             %span.b-button-text Сохранить
   .b-sidebar-bottom
-    = link_to image_tag('tulp_logo_small.png'), 'http://tulp.ru'
+    = link_to image_tag('tulp_logo_small.png'), 'http://tulp.ru', :target => 'blank'
 
 .b-notification-label
 
@@ -123,7 +123,7 @@
 
 %script.b-sidebar-middle-description-template{ :type => 'text/x-jquery-tmpl' }
   %img{ :src => '${category.icon_image}' }
-  .b-sidebat-middle-description-wrap
+  .b-sidebar-middle-description-wrap
     %p.b-sidebar-middle-subcategory ${subcategory}
     %h2 ${title}
     %p.b-sidebar-middle-adress ${address}
@@ -136,11 +136,12 @@
   %p ${time}
   {{/if}}
   %h3 Скидка
-  %p
-    %strong 10%
-    на все услуги и товары, скидка на услуги кузовного цеха и заказ  запчастей по договоренности.
-    %strong 20%
-    на мойку.
+  {{if classic}}
+  %p Classic: ${classic}
+  {{/if}}
+  {{if vip}}
+  %p VIP: ${vip}
+  {{/if}}
   {{if phones || emails || websites}}
   .b-details
     .b-details-left
@@ -170,7 +171,7 @@
     %ul.b-details-website-addresses
       {{each websites}}
       %li
-        %a{ :href => 'http://${$value}' } ${$value}
+        %a{ :href => 'http://${$value}', :target => 'blank' } ${$value}
       {{/each}}
   {{/if}}
   {{/if}}

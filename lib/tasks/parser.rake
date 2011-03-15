@@ -32,6 +32,10 @@ namespace :parser do
         phones.map! { |phone| phone.strip }
       end
 
+      if time = market[16]
+        time.strip.gsub(/\.$/, '')
+      end
+
       if websites = market[17]
         websites = websites.gsub('http://', '')
         websites = websites.split(',')
@@ -54,7 +58,7 @@ namespace :parser do
                       :vip         => market[10],
                       :address     => address,
                       :phones      => phones,
-                      :time        => market[16],
+                      :time        => time,
                       :websites    => websites,
                       :emails      => emails,
                       :description => market[19],
