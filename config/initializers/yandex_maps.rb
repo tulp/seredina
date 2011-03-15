@@ -1,1 +1,1 @@
-YANDEX_MAPS_API_KEY = YAML.load_file('config/yandex_maps.yml')['api-key']
+YANDEX_MAPS_API_KEY = YAML.load_file('config/yandex_maps.yml')['api-key'][Rails.env]
