@@ -1,4 +1,15 @@
-%p Hello #{@gift.recipient}
-%p Your code: #{@gift.code}
-%p From: #{@gift.giver_name}
-%p Your code: #{@gift.recipient_name}
+%h4 Здравствуйте, #{@gift.recipient}!
+
+%p Ваш друг #{@gift.giver_name} дарит Вам уникальную возможность приобрести карту всероссийской дисконтной системы «<a href="http://www.seredina.ru">Золотая середина</a>»  по необыкновенно низкой цене – всего за 250 рублей!
+
+%p
+	Чтобы оформить покупку, пройдите по этой ссылке: <a href="http://www.seredina.ru">http://www.seredina.ru</a>
+
+
+Заведения, предосталяющие скидки по карточке «Золотая середина», вы можете посмотреть здесь: <a href="http://seredina.tulp.ru">http://seredina.tulp.ru</a>
+
+Ваш код для входа: #{@gift.code}
+
+%p
+	С уважением,<br/>
+	«Золотая середина» и tulp.ru
