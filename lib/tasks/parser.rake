@@ -3,7 +3,14 @@ namespace :parser do
   task :markets => :environment do
     Category.delete_all
     Market.delete_all
-    [Category, Market].each { |model| ActiveRecord::Base.connection.execute("ALTER TABLE #{model.table_name} AUTO_INCREMENT = 1") }
+
+    [Category, Market].each do |model|
+      if Rails.env.production?
+        ActiveRecord::Base.connection.reset_pk_sequence!(model.table_name)
+      else
+        ActiveRecord::Base.connection.execute("ALTER TABLE #{model.table_name} AUTO_INCREMENT = 1")
+      end
+    end
 
     geocoder_url = "http://geocode-maps.yandex.ru/1.x/?key=#{YANDEX_MAPS_API_KEY}&results=1&geocode="
     filename     = 'assets/data.csv'
@@ -32,6 +39,10 @@ namespace :parser do
         phones.map! { |phone| phone.strip }
       end
 
+      if time = market[16]
+        time.strip.gsub(/\.$/, '')
+      end
+
       if websites = market[17]
         websites = websites.gsub('http://', '')
         websites = websites.split(',')
@@ -54,7 +65,7 @@ namespace :parser do
                       :vip         => market[10],
                       :address     => address,
                       :phones      => phones,
-                      :time        => market[16],
+                      :time        => time,
                       :websites    => websites,
                       :emails      => emails,
                       :description => market[19],
