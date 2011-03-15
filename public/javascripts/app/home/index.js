@@ -91,7 +91,11 @@ $(document).ready(function() {
   // ====================
 
   // sign up and sign in forms
-  function disableDialog() { $('#overlay').hide() };
+  function showSignInForm() {
+    $('.sign_up_form').hide();
+    $('.sign_in_form').show();
+    $('#sign_in_user_email').val(signUpUserEmail.val());
+  }
 
   function vibrateDialog() { $('#dialog').vibrate({ frequency: 5000, spread: 5, duration: 600 }) };
 
@@ -104,8 +108,6 @@ $(document).ready(function() {
 
   // sign up form
   signUpForm.live('ajax:beforeSend', function(xhr, settings) {
-    var invalidEmail = false;
-
     if (emailRegexp.test(signUpUserEmail.val())) {
       for (var i = 0; i < users.length; i++) {
         if (users[i].email === signUpUserEmail.val()) {
@@ -113,35 +115,13 @@ $(document).ready(function() {
           break;
         }
       }
-      if (current_user) {
-        if (current_user['confirmed?']) {
-          $('.sign_up_form').hide();
-          $('.sign_in_form').show();
-          $('#sign_in_user_email').val(signUpUserEmail.val());
-
-          return false;
-        } else {
-          invalidEmail = true;
-        }
-      }
+      showSignInForm();
+      if (current_user) { return false };
     } else {
-      invalidEmail = true;
-    }
-
-    if (invalidEmail) {
       vibrateDialog();
       highlightField(signUpUserEmail);
 
       return false;
-    }
-  })
-
-  signUpForm.live('ajax:success', function(data, status, xhr) {
-    if (status) {
-      disableDialog();
-    } else {
-      vibrateDialog();
-      highlightField(signUpUserEmail);
     }
   })
 
@@ -150,7 +130,7 @@ $(document).ready(function() {
   // sign in form
   $('#sign_in_form').live('ajax:success', function(data, status, xhr) {
     if (status) {
-      disableDialog();
+      $('#overlay').hide();
       checkCurrentUserGifts();
     } else {
       vibrateDialog();
