@@ -17,6 +17,15 @@ $(document).ready(function() {
   var reviewForm = $('#review_form');
   var reviewText = $('#review_text');
 
+	// Создаем стили для меток
+	var regularSize = new YMaps.Style();
+  s.iconStyle        = new YMaps.IconStyle();
+  s.iconStyle.size   = new YMaps.Point(27, 26);
+
+	var selectedSize = new YMaps.Style();
+  s.iconStyle        = new YMaps.IconStyle();
+  s.iconStyle.size   = new YMaps.Point(40, 40);
+
   // markets
   function drawMarkets(markets) {
     var yandexMapsStyle               = new YMaps.Style();
@@ -42,6 +51,10 @@ $(document).ready(function() {
       yandexMaps.addOverlay(placemark);
 
       YMaps.Events.observe(placemark, placemark.Events.Click, function() {
+				var pOptions = {};
+				pOptions['style'] = selectedSize;
+				placemark.setOptions(pOptions);
+				
         drawDescription(market);
         drawInfo(market);
         drawReviews(market);
