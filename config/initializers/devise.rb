@@ -3,7 +3,7 @@
 Devise.setup do |config|
   # ==> Mailer Configuration
   # Configure the e-mail address which will be shown in DeviseMailer.
-  #config.mailer_sender = "seredina@tulp.ru"
+  # config.mailer_sender =  ActionMailer::Base.smtp_settings[:user_name]
 
   # Configure the class responsible to send e-mails.
   # config.mailer = "Devise::Mailer"
