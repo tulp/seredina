@@ -5,4 +5,9 @@ class UserMailer < ActionMailer::Base
     @gift = gift
     mail(:to => @gift.recipient, :subject => 'Put into locale')
   end
+
+  def confirmation(user)
+    @user = user
+    mail(:to => @user.email, :subject => 'Put into locale')
+  end
 end

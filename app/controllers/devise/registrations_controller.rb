@@ -6,12 +6,12 @@ class Devise::RegistrationsController < ApplicationController
     resource.set_password
 
     result = if resource.save
-      sign_in resource
+      UserMailer.confirmation(resource).deliver
       true
     else
-      clean_up_passwords resource
       false
     end
+
     render :json => result
   end
 end
