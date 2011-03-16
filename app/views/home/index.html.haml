@@ -18,14 +18,14 @@
             = image_tag 'gold.png'
           #description
             = t :dialog_description
-          .select_cart
-            %form{ :name => 'select', :method => 'post'}
-              %h3
-                Выберите ваш вид карты:
-              .classic
-                %input{ :type => 'radio', :name => 'cart', :value => 'Classic'}Классическая
-              .vip
-                %input{ :type => 'radio', :name => 'cart', :value => 'Vip'}VIP
+          /.select_cart
+          /  %form{ :name => 'select', :method => 'post'}
+          /    %h3
+          /      Выберите ваш вид карты:
+          /    .classic
+          /      %input{ :type => 'radio', :name => 'cart', :value => 'Classic'}Классическая
+          /    .vip
+          /      %input{ :type => 'radio', :name => 'cart', :value => 'Vip'}VIP
           .sign_up_form
             %span= t :sign_up_form_invitation_text
             = form_for :user, :url => user_registration_path, :remote => true, :html => { :id => 'sign_up_form' } do |f|
@@ -125,11 +125,12 @@
 %script.b-sidebar-middle-description-template{ :type => 'text/x-jquery-tmpl' }
   %p.b-sidebar-middle-subcategory ${subcategory}
   %img{ :src => '${category.icon_image}' }
+  %span.b-stars
+    {{html $item.rating}}
   .b-sidebat-middle-description-wrap
     %h2 ${title}
     %p.b-sidebar-middle-adress ${address}
-  %span.b-stars
-    {{html $item.rating}}
+  
 
 %script.b-sidebar-middle-info-template{ :type => 'text/x-jquery-tmpl' }
   {{if time}}
@@ -138,10 +139,11 @@
   {{/if}}
   %h3 Скидка
   %p
-    %strong 10%
-    на все услуги и товары, скидка на услуги кузовного цеха и заказ  запчастей по договоренности.
-    %strong 20%
-    на мойку.
+    %span.kind Classic:
+    %span 5%, при сумме покупки превышающей 5000 рублей.
+  %p  
+    %span.kind VIP:
+    %span 10%, при сумме покупки превышающей 5000 рублей.
   {{if phones || emails || websites}}
   .b-details
     .b-details-left

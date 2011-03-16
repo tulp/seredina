@@ -5,6 +5,7 @@
   width:300px;
   position:absolute;
   top:0px;
+  z-index:900;
 }
 
 .b-sidebar-content {
@@ -104,16 +105,17 @@
 .b-sidebar-middle-adress {
   font-size: 11px;
   color:#737373;
-  margin:0px 0 3px 8px;
+  margin:0px 0 3px 0px;
   padding:0;
   float:left;
-  clear:both;
+  clear:both;  
+  width:158px;
 }
 
 .b-sidebar-middle-subcategory {
   padding: 0;
   width:250px;  
-  margin:0 0 10px 20px;
+  margin:0 0 10px 20px;  
 }
 
 /*иконка заведения*/
@@ -131,6 +133,7 @@
   float:left;
   margin-left: -4px;
   padding-left:20px;
+  overflow:hidden;
 }
 
 .b-details-left {
@@ -340,17 +343,17 @@
   background-image:url('/images/tabs_background.png');
   background-repeat:repeat-x;
   background-position:top;
-  clear:both;
-  height:60px;
-  padding-top:25px;
-  margin-bottom:20px;
+  clear:both;  
+  padding-top:25px;  
+  width:300px;
+  overflow:hidden;
 }
 
 .b-sidebar-middle-description h2 {
   max-width:155px;
   display:block;
   font-size:14px;
-  float:left;
+  float:left;  
 }
 
 .b-sidebar-middle-description img {
@@ -360,8 +363,9 @@
 }
 
 .b-sidebat-middle-description-wrap {
-  max-width:200px;
-  padding-left:40px
+  max-width:158px;
+  /*padding-left:40px;*/
+  overflow:hidden;  
 }
 
 .b-stars {
@@ -370,7 +374,7 @@
   height:15px;
   display:block;
   margin:0px 0 0 210px;  
-  position:absolute;
+  position:absolute;  
 }
 
 .b-stars-full {
@@ -425,7 +429,8 @@
 /*ИНФОРМАЦИЯ*/
 .b-sidebar-middle-info {
   display:block;
-  margin-top:5px;
+  /*margin-top:5px;*/  
+  overflow:hidden;
   /*  overflow-y: auto;*/
 }
 
@@ -435,6 +440,13 @@
 
 .b-sidebar-middle-info ul {
   line-height:18px;
+}
+
+.kind {
+  display:block;
+  float:left;
+  height:30px;
+  width:43px;
 }
 
 /*ОТЗЫВЫ*/
@@ -671,8 +683,8 @@ input.b-discount_form_send {
   background-image:url('/images/action.png');
   background-repeat:no-repeat;
   position:absolute;
-  width:134px;
-  height:134px;
+  width:136px;
+  height:136px;
   margin-left:550px;
   margin-top:-40px;  
   z-index: 2;
@@ -901,7 +913,7 @@ input.b-discount_form_send {
 #window_bottom {
   width:  499;
   height: 120px;
-
+  width: 619px;
   padding: 0 60px;
   background: url(/images/landing_window_bottom.png) no-repeat;
 }
