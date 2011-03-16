@@ -131,5 +131,5 @@ DEPENDENCIES
   pg
   rails (= 3.0.4)
   ruby-debug (= 0.10.3)
-  tlsmail
+  tlsmail (= 0.0.1)
   wirble (= 0.1.3)

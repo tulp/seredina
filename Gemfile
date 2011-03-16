@@ -6,7 +6,7 @@ gem 'fastercsv', '1.5.3'
 gem 'httparty',  '0.7.4'
 gem 'jammit',    '0.6.0'
 gem 'devise',    '1.1.7'
-gem 'tlsmail', :require => false
+gem 'tlsmail',   '0.0.1', :require => false
 
 group :production do
   gem 'pg'
