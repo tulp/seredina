@@ -104,7 +104,7 @@
 .b-sidebar-middle-adress {
   font-size: 11px;
   color:#737373;
-  margin:3px 0 0 8px;
+  margin:0px 0 3px 8px;
   padding:0;
   float:left;
   clear:both;
@@ -113,7 +113,7 @@
 .b-sidebar-middle-subcategory {
   padding: 0;
   width:250px;
-  height:40px;
+  margin:0 0 10px 20px;
 }
 
 /*иконка заведения*/
@@ -342,7 +342,7 @@
   clear:both;
   height:60px;
   padding-top:25px;
-  margin-bottom:35px;
+  margin-bottom:20px;
 }
 
 .b-sidebar-middle-description h2 {
@@ -356,7 +356,6 @@
   padding-left:20px;
   float:left;
   display:block;
-  padding-bottom:20px;
 }
 
 .b-sidebar-middle-description-wrap {
