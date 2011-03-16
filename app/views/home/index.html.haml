@@ -17,10 +17,9 @@
             %h2= t :dialog_title
             = image_tag 'gold.png'
           #description
-            Совместный проект дисконтной системы "#{link_to "Золотая Середина"}" и сайта Тюльп.ру<br/>
-            Все скидки Золотой Середины в Новосибирске на одной карте.<br/><br/>
-
-            Легко найти. Легко дойти. Легко пользоваться!
+            = raw t :dialog_description,
+                    :gold_link => link_to(t(:gold_link_title), 'http://seredina.ru', :target => 'blank'),
+                    :tulp_link => link_to(t(:tulp_link_title), 'http://tulp.ru',     :target => 'blank')
           .select_cart
             %form{ :name => 'select', :method => 'post'}
               %h3
