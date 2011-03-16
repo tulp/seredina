@@ -11,6 +11,7 @@ class Devise::SessionsController < ApplicationController
     render :json => result
   end
 
+  # временно
   def destroy
     sign_out_and_redirect resource_name
   end

@@ -8,6 +8,6 @@ class UserMailer < ActionMailer::Base
 
   def confirmation(user)
     @user = user
-    mail(:to => @user.email, :subject => 'Put into locale')
+    mail(:to => @user.email, :subject => t(:confirmation_email_subject))
   end
 end
