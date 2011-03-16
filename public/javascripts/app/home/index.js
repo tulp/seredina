@@ -17,6 +17,8 @@ $(document).ready(function() {
   var reviewForm = $('#review_form');
   var reviewText = $('#review_text');
 
+
+
 	// function regularPlacemark(market) {
 	// 	// Создаем стили для меток
 	// 	var regularSize = new YMaps.Style();
@@ -29,15 +31,15 @@ $(document).ready(function() {
 	// 
 	// 
 	// 
-	// function selectedPlacemark(market) {
-	// 	var selectedSize = new YMaps.Style();
-	//   selectedSize.iconStyle        = new YMaps.IconStyle();
-	//   selectedSize.iconStyle.size   = new YMaps.Point(40, 40);
-	//   selectedSize.iconStyle.href   = market.category.icon_image;
-	// 	// console.log(market.category.icon_image);
-	//   selectedSize.iconStyle.offset = new YMaps.Point(-15, -37);
-	// 	return selectedSize;
-	// }
+	function selectedPlacemark(market) {
+		var selectedSize = new YMaps.Style();
+	  selectedSize.iconStyle        = new YMaps.IconStyle();
+	  selectedSize.iconStyle.size   = new YMaps.Point(40, 40);
+	  selectedSize.iconStyle.href   = '/images/current.png';
+		// console.log(market.category.icon_image);
+	  selectedSize.iconStyle.offset = new YMaps.Point(-15, -37);
+		return selectedSize;
+	}
 
   // markets
   function drawMarkets(markets) {
@@ -64,10 +66,10 @@ $(document).ready(function() {
       yandexMaps.addOverlay(placemark);
 
       YMaps.Events.observe(placemark, placemark.Events.Click, function() {
-				// var pOptions = {};
-				// pOptions['style'] = selectedPlacemark(market);
-				// placemark.setOptions(pOptions);
-				placemark.setStyle('default#metroYekaterinburgIcon');
+				var pOptions = {};
+				pOptions['style'] = selectedPlacemark(market);
+				placemark.setOptions(pOptions);
+				// placemark.setStyle('default#metroYekaterinburgIcon');
 				
         drawDescription(market);
         drawInfo(market);
