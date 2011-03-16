@@ -213,6 +213,13 @@ $(document).ready(function() {
     }
   })
 
+  formDiscount.find('.b-form_discount_top a').click(function() {
+    giftForm.find('input').not(':hidden, :image').val('');
+    formDiscount.hide();
+
+    return false;
+  })
+
   recipientEmail.placeholder();
 
   $.getJSON(jsonCurrentUserPath, function(response) {
