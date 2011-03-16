@@ -5,6 +5,7 @@
   width:300px;
   position:absolute;
   top:0px;
+  z-index:900;
 }
 
 .b-sidebar-content {
@@ -104,10 +105,11 @@
 .b-sidebar-middle-adress {
   font-size: 11px;
   color:#737373;
-  margin:0px 0 3px 8px;
+  margin:0px 0 3px 0px;
   padding:0;
   float:left;
   clear:both;
+  width:158px;
 }
 
 .b-sidebar-middle-subcategory {
@@ -131,6 +133,7 @@
   float:left;
   margin-left: -4px;
   padding-left:20px;
+  overflow:hidden;
 }
 
 .b-details-left {
@@ -340,9 +343,9 @@
   background-repeat:repeat-x;
   background-position:top;
   clear:both;
-  height:60px;
   padding-top:25px;
-  margin-bottom:20px;
+  width:300px;
+  overflow:hidden;
 }
 
 .b-sidebar-middle-description h2 {
@@ -359,8 +362,8 @@
 }
 
 .b-sidebar-middle-description-wrap {
-  max-width:200px;
-  padding-left:40px
+  max-width:158px;
+  overflow:hidden;
 }
 
 .b-stars {
@@ -424,7 +427,7 @@
 /*ИНФОРМАЦИЯ*/
 .b-sidebar-middle-info {
   display:block;
-  margin-top:5px;
+  overflow:hidden;
 }
 
 .b-sidebar-middle-info h3 {
@@ -433,6 +436,13 @@
 
 .b-sidebar-middle-info ul {
   line-height:18px;
+}
+
+.kind {
+  display:block;
+  float:left;
+  height:30px;
+  width:43px;
 }
 
 /*ОТЗЫВЫ*/
@@ -669,8 +679,8 @@ input.b-discount_form_send {
   background-image:url('/images/action.png');
   background-repeat:no-repeat;
   position:absolute;
-  width:134px;
-  height:134px;
+  width:136px;
+  height:136px;
   margin-left:550px;
   margin-top:-40px;  
   z-index: 2;
@@ -899,7 +909,7 @@ input.b-discount_form_send {
 #window_bottom {
   width:  499;
   height: 120px;
-
+  width: 619px;
   padding: 0 60px;
   background: url(/images/landing_window_bottom.png) no-repeat;
 }

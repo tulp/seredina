@@ -127,11 +127,11 @@
 %script.b-sidebar-middle-description-template{ :type => 'text/x-jquery-tmpl' }
   %p.b-sidebar-middle-subcategory ${subcategory}
   %img{ :src => '${category.icon_image}' }
+  %span.b-stars
+    {{html $item.rating}}
   .b-sidebar-middle-description-wrap
     %h2 ${title}
     %p.b-sidebar-middle-adress ${address}
-  %span.b-stars
-    {{html $item.rating}}
 
 %script.b-sidebar-middle-info-template{ :type => 'text/x-jquery-tmpl' }
   {{if time}}
@@ -140,10 +140,14 @@
   {{/if}}
   %h3 Скидка
   {{if classic}}
-  %p Classic: ${classic}
+  %p
+    %span.kind Classic:
+    %span ${classic}
   {{/if}}
   {{if vip}}
-  %p VIP: ${vip}
+  %p
+    %span.kind VIP:
+    %span ${vip}
   {{/if}}
   {{if phones || emails || websites}}
   .b-details
