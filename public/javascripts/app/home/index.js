@@ -10,9 +10,11 @@ $(document).ready(function() {
 
   var formDiscount   = $('.b-form_discount');
   var giftForm       = $('#gift_form');
-  var recipientEmail = $('#gift_recipient');
+  var recipientEmail = $('#recipient_email');
 
   var middleInfo = $('.b-sidebar-middle-info');
+
+
 
   var reviewForm = $('#review_form');
   var reviewText = $('#review_text');

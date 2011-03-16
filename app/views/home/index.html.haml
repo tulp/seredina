@@ -99,15 +99,15 @@
     .b-form_discount_middle
       %h1.b-form_discount_middle_title Поздравляем, вы разместили 3 отзыва!
       %img.b-form_discount_middle_logo{ :src => image_path('gm_logo_discount.png') }
-      %span.b-form_discount_middle_msg Укажите email вашего друга - и он сможет приобрести карту "Золотая середина" всего за 50 рублей!
+      %span.b-form_discount_middle_msg Укажите email вашего друга - и он сможет приобрести карту "Золотая середина" всего за 250 рублей!
       .b-discount_form
         = form_for :gift, :url => gifts_path, :remote => true, :html => { :id => 'gift_form' } do |f|
           %span Введите адрес, на который будет отправлена скидка:
-          = f.text_field :recipient, :placeholder => 'Адрес электронной почты'
+          = text_field_tag :recipient_email, nil, :placeholder => 'Адрес электронной почты'
           %span Имя друга:
           = f.text_field :recipient_name
           %span Ваше имя:
-          = f.text_field :giver_name
+          = f.text_field :user_name
           = image_submit_tag 'send_dicount_button.png', :class => 'b-discount_form_send'
     .b-form_discount_bottom
 

@@ -9,7 +9,7 @@ class User < ActiveRecord::Base
   attr_accessor :temporary_password_accessor
 
   def set_password
-    self.password = self.temporary_password_accessor = KeyGenerator.generate
+    self.password = self.temporary_password_accessor = (Digest::SHA1.new << Time.now.to_s).to_s[0..9]
   end
 
   def get_gift!

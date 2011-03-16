@@ -3,7 +3,7 @@ class UserMailer < ActionMailer::Base
 
   def give_gift(gift)
     @gift = gift
-    mail(:to => @gift.recipient, :subject => 'Put into locale')
+    mail(:to => @gift.recipient.email, :subject => t(:give_gift_email_subject))
   end
 
   def confirmation(user)
