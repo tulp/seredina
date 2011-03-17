@@ -26,11 +26,8 @@ $(document).ready(function() {
 			// выделить текущую категорию
 			$('.b-categories li.' + category).toggleClass('active');
 			
-			
 			// отрендерить маркеты это категории
-			console.log('/j/markets?category='+category);
 			$.get('/j/markets?category='+category, function(data){
-			  // console.log(data);
 				drawMarkets(data);
 			}, 'json');
 			
@@ -62,8 +59,8 @@ $(document).ready(function() {
   });
 
 	
-	//   var markets, users, categories, current_user;
-	// var oldMarket, oldPlacemark;
+	  // var markets, users, categories, current_user;
+	var oldMarket, oldPlacemark;
 	// 
 	//   var emailRegexp = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
 	// 
@@ -71,26 +68,26 @@ $(document).ready(function() {
 	//   var signUpUserEmail = $('#sign_up_user_email');
 	// 
 	//   var notificationLabel = $('.b-notification-label');
+	
+	  var formDiscount   = $('.b-form_discount');
+	  var giftForm       = $('#gift_form');
+	  var recipientEmail = $('#recipient_email');
 	// 
-	//   var formDiscount   = $('.b-form_discount');
-	//   var giftForm       = $('#gift_form');
-	//   var recipientEmail = $('#recipient_email');
-	// 
-	//   var middleInfo = $('.b-sidebar-middle-info');
+	  var middleInfo = $('.b-sidebar-middle-info');
 	// 
 	// 
 	// 
 	//   var reviewForm = $('#review_form');
 	//   var reviewText = $('#review_text');
 	// 
-	// function selectedPlacemark(market) {
-	// 	var selectedSize = new YMaps.Style();
-	//   selectedSize.iconStyle        = new YMaps.IconStyle();
-	//   selectedSize.iconStyle.size   = new YMaps.Point(54, 52);
-	//   selectedSize.iconStyle.href   = '/images/current.png';
-	//   selectedSize.iconStyle.offset = new YMaps.Point(-19, -48);
-	// 	return selectedSize;
-	// }
+	function selectedPlacemark(market) {
+		var selectedSize = new YMaps.Style();
+	  selectedSize.iconStyle        = new YMaps.IconStyle();
+	  selectedSize.iconStyle.size   = new YMaps.Point(54, 52);
+	  selectedSize.iconStyle.href   = '/images/current.png';
+	  selectedSize.iconStyle.offset = new YMaps.Point(-19, -48);
+		return selectedSize;
+	}
 	// 
 	//   // markets
 	  function drawMarkets(markets) {
@@ -128,39 +125,39 @@ $(document).ready(function() {
 	      })
 	    })
 	
-	    yandexMaps.setBounds(yandexMapsGeoCollectionBounds);
+	    // yandexMaps.setBounds(yandexMapsGeoCollectionBounds);
 	  }
 	// 
-	//   function drawDescription(market) {
-	//     var descriptionTemplate = $('.b-sidebar-middle-description-template');
+	  function drawDescription(market) {
+	    var descriptionTemplate = $('.b-sidebar-middle-description-template');
+	
+	    $('.b-sidebar-middle-description').html(descriptionTemplate.tmpl(market, { rating: drawRating(market) }));
+	  }
 	// 
-	//     $('.b-sidebar-middle-description').html(descriptionTemplate.tmpl(market, { rating: drawRating(market) }));
-	//   }
+	  function drawRating(object) {
+	    var spanWidth = 16 * object.rating;
+	
+	    return "<span class='b-stars-full' style='width:" + spanWidth + "px;'></span>";
+	  }
 	// 
-	//   function drawRating(object) {
-	//     var spanWidth = 16 * object.rating;
+	  function drawInfo(market) {
+	    var infoTemplate = $('.b-sidebar-middle-info-template');
+	
+	  	// $('.b-sidebar-middle').css('max-height', $('body').height() - 100);
+	  	// middleInfo.css('height', $('body').height() - 380);
+	
+	    middleInfo.html(infoTemplate.tmpl(market));
+	  }
 	// 
-	//     return "<span class='b-stars-full' style='width:" + spanWidth + "px;'></span>";
-	//   }
+	  function drawReviews(market) {
+	    var reviewsTemplate = $('.b-sidebar-middle-reviews-template');
+	
+	    $.each(market.reviews, function(index, review) { review.rating = drawRating(review) });
+	
+	    $('.b-reviews').html(reviewsTemplate.tmpl(market));
+	  }
 	// 
-	//   function drawInfo(market) {
-	//     var infoTemplate = $('.b-sidebar-middle-info-template');
-	// 
-	//   	// $('.b-sidebar-middle').css('max-height', $('body').height() - 100);
-	//   	// middleInfo.css('height', $('body').height() - 380);
-	// 
-	//     middleInfo.html(infoTemplate.tmpl(market));
-	//   }
-	// 
-	//   function drawReviews(market) {
-	//     var reviewsTemplate = $('.b-sidebar-middle-reviews-template');
-	// 
-	//     $.each(market.reviews, function(index, review) { review.rating = drawRating(review) });
-	// 
-	//     $('.b-reviews').html(reviewsTemplate.tmpl(market));
-	//   }
-	// 
-	//   function fillReviewForm(market) { $('#review_market_id').val(market.id) };
+	  function fillReviewForm(market) { $('#review_market_id').val(market.id) };
 	// 
 	//   $.getJSON(jsonMarketsPath, function(collection) {
 	//     markets = collection;
