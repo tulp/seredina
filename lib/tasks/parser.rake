@@ -4,26 +4,26 @@ namespace :parser do
     Category.delete_all
     Market.delete_all
 
-    [Category, Market].each do |model|
-      if Rails.env.production?
-        ActiveRecord::Base.connection.reset_pk_sequence!(model.table_name)
-      else
-        ActiveRecord::Base.connection.execute("ALTER TABLE #{model.table_name} AUTO_INCREMENT = 1")
-      end
-    end
+    # [Category, Market].each do |model|
+    #   if Rails.env.production?
+    #     ActiveRecord::Base.connection.reset_pk_sequence!(model.table_name)
+    #   else
+    #     ActiveRecord::Base.connection.execute("ALTER TABLE #{model.table_name} AUTO_INCREMENT = 1")
+    #   end
+    # end
 
     geocoder_url = "http://geocode-maps.yandex.ru/1.x/?key=#{YANDEX_MAPS_API_KEY}&results=1&geocode="
     filename     = 'assets/data.csv'
-    icon_images  = { 'Авто'                      => '/images/categories/car.png',
-                     'Медицина'                  => '/images/categories/hospital.png',
-                     'Одежда'                    => '/images/categories/tailorShop.png',
-                     'Подарки'                   => '/images/categories/gym.png',
-                     'Продукты питания'          => '/images/categories/restauraunt.png',
-                     'Спорт, отдых, развлечения' => '/images/categories/stadium.png',
-                     'Строительство, ремонт'     => '/images/categories/workshop.png',
-                     'Техника'                   => '/images/categories/dryCleaner.png',
-                     'Товары для дома и офиса'   => '/images/categories/house.png',
-                     'Услуги'                    => '/images/categories/barberShop.png' }
+    icon_images  = { 'Авто'                      => 'car',
+                     'Медицина'                  => 'hospital',
+                     'Одежда'                    => 'tailorShop',
+                     'Подарки'                   => 'gym',
+                     'Продукты питания'          => 'restauraunt',
+                     'Спорт, отдых, развлечения' => 'stadium',
+                     'Строительство, ремонт'     => 'workshop',
+                     'Техника'                   => 'dryCleaner',
+                     'Товары для дома и офиса'   => 'house',
+                     'Услуги'                    => 'barberShop' }
                      
     icon_styles = { 'Авто'                      => 'default#carIcon',
                     'Медицина'                  => 'default#hospitalIcon',
@@ -37,6 +37,9 @@ namespace :parser do
                     'Услуги'                    => 'default#barberShopIcon' }
 
 
+    Category.create(:title => 'Все категории', :icon_image => 'all')
+    # /images/categories/hospital.png
+    
     FasterCSV.foreach(filename) do |market|
       category_title = market[1]
       category       = Category.find_or_create_by_title(category_title, :icon_image => icon_images[category_title], :icon_style => icon_styles[category_title])
@@ -86,8 +89,6 @@ namespace :parser do
 
       print '.'
     end
-
-    Category.create(:title => 'Все категории', :icon_image => '/images/categories/infinity.png')
 
     puts
   end

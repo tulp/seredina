@@ -48,6 +48,14 @@
     %img.b-sidebar-middle-logo{ :src => image_path('golden.png') }
     %h1 Показывать:
     .b-categories
+      %ul
+        -@categories.each do |category|
+          %li{:class => "#{category.icon_image}"}
+            //%a{:href => "#/#{category.icon_image}"}
+            %img.b-categories-icon{ :src => "/images/categories/#{category.icon_image}.png" }
+            %span.b-categories-span #{category.title}
+            %img.b-categories-arrow.hidden{ :src => image_path('list_arrow.png') }
+    
     .b-market
       .b-tabs
         %ul.b-tabs-menu
