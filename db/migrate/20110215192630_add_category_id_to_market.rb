@@ -1,6 +1,6 @@
 class AddCategoryIdToMarket < ActiveRecord::Migration
   def self.up
-    add_column :markets, :category_id, :integer, :null => false
+    add_column :markets, :category_id, :integer #, :null => false
   end
 
   def self.down

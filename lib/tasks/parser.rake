@@ -24,10 +24,22 @@ namespace :parser do
                      'Техника'                   => '/images/categories/dryCleaner.png',
                      'Товары для дома и офиса'   => '/images/categories/house.png',
                      'Услуги'                    => '/images/categories/barberShop.png' }
+                     
+    icon_styles = { 'Авто'                      => 'default#carIcon',
+                    'Медицина'                  => 'default#hospitalIcon',
+                    'Одежда'                    => 'default#tailorShopIcon',
+                    'Подарки'                   => 'default#gymIcon',
+                    'Продукты питания'          => 'default#restaurauntIcon',
+                    'Спорт, отдых, развлечения' => 'default#stadiumIcon',
+                    'Строительство, ремонт'     => 'default#workshopIcon',
+                    'Техника'                   => 'default#dryCleanerIcon',
+                    'Товары для дома и офиса'   => 'default#houseIcon',
+                    'Услуги'                    => 'default#barberShopIcon' }
+
 
     FasterCSV.foreach(filename) do |market|
       category_title = market[1]
-      category       = Category.find_or_create_by_title(category_title, :icon_image => icon_images[category_title])
+      category       = Category.find_or_create_by_title(category_title, :icon_image => icon_images[category_title], :icon_style => icon_styles[category_title])
 
       subcategory = market[2].strip
 
