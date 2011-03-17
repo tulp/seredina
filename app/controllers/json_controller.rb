@@ -1,10 +1,14 @@
 class JsonController < ApplicationController
   def markets
-    render :json => Market.fields_for_json.to_json(:except  => :category_id,
+    if params[:category] == 'all'
+      markets = Market.all
+    else
+      markets = Category.find_by_icon_image(params[:category]).markets
+    end
+    render :json => markets.fields_for_json.to_json(:except  => :category_id,
                                                    :include => { :category => { :except  => :id },
                                                                  :reviews  => { :only    => [:text, :rating],
                                                                                 :include => { :user => { :only => :email } } } })
-
   end
 
   def users
@@ -12,6 +16,7 @@ class JsonController < ApplicationController
   end
 
   def categories
+    # params[:category]
     render :json => Category.all.to_json(:except => :id)
   end
 

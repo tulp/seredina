@@ -9,6 +9,7 @@ $(document).ready(function() {
 	
  var app = $.sammy('#main', function() {
     this.get('#/', function(context) {
+			app.runRoute('get','#/all');
 			//// Главная страница
 			// отрендерить выбиралку категорий - развернутое состояние
 			// отрендерить все маркет
@@ -27,6 +28,10 @@ $(document).ready(function() {
 			
 			
 			// отрендерить маркеты это категории
+			console.log('/j/markets?category='+category);
+			$.get('/j/markets?category='+category, function(data){
+			  console.log(data);
+			}, 'json');
 			
     });
 
