@@ -3,22 +3,34 @@ $(document).ready(function() {
  var app = $.sammy('#main', function() {
     this.get('#/', function(context) {
       context.log('landing');
+			//// Главная страница
+			// отрендерить выбиралку категорий - развернутое состояние
+			// отрендерить все маркеты
     });
 
 		this.get('#/:category', function(context) {
       context.log('category');
+			// отрендерить выбиралку категорий - развернутое состояние, одна категория выделена
+			// отрендерить маркеты это категории
     });
 
 		this.get('#/:category/:id', function(context) {
       context.log('market');
+			// переключить выбиралку категорий в свернутое состояние
+			// отрендерить инфу о заведении
+			// выделить текущий маркет на карте
     });
 
 		this.get('#/:category/:id/reviews', function(context) {
       context.log('reviews of market');
+			// показать отзывы 
+
     });
 
 		this.get('#/:category/:id/add_review', function(context) {
       context.log('add review to market');
+			// показать форму добавления отзыва
+			
     });
  });
 
