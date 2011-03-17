@@ -1,7 +1,7 @@
 $(document).ready(function() {
 	
  var app = $.sammy('#main', function() {
-    this.get('#landing', function(context) {
+    this.get('#/', function(context) {
       context.log('landing');
     });
 
@@ -24,7 +24,7 @@ $(document).ready(function() {
 
   $(function() {
 			
-    app.run('#landing');
+    app.run('#/');
   });
 	
   var markets, users, categories, current_user;
