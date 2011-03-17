@@ -1,5 +1,6 @@
 $(document).ready(function() {
   var markets, users, categories, current_user;
+	var oldMarket, oldPlacemark;
 
   var emailRegexp = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
 
@@ -19,36 +20,61 @@ $(document).ready(function() {
   var reviewForm = $('#review_form');
   var reviewText = $('#review_text');
 
+	// function regularPlacemark(market) {
+	// 	// Создаем стили для меток
+	// 	var regularSize = new YMaps.Style();
+	//   regularSize.iconStyle        = new YMaps.IconStyle();
+	//   regularSize.iconStyle.size   = new YMaps.Point(27, 26);
+	//   regularSize.iconStyle.href   = market.category.icon_image;
+	//   regularSize.iconStyle.offset = new YMaps.Point(-10, -25);
+	// 	return regularSize;
+	// }
+	// 
+	
+	function selectedPlacemark(market) {
+		var selectedSize = new YMaps.Style();
+	  selectedSize.iconStyle        = new YMaps.IconStyle();
+	  selectedSize.iconStyle.size   = new YMaps.Point(54, 52);
+	  selectedSize.iconStyle.href   = '/images/current.png';
+		// console.log(market.category.icon_image);
+	  selectedSize.iconStyle.offset = new YMaps.Point(-19, -48);
+	  // selectedSize.iconStyle.offset = new YMaps.Point(-15, -37);
+		return selectedSize;
+	}
+
   // markets
   function drawMarkets(markets) {
     var yandexMapsStyle               = new YMaps.Style();
     var yandexMapsGeoCollectionBounds = new YMaps.GeoCollectionBounds();
-    var placemarkOptions              = { hideIcon: false, hasBalloon: false };
+    // var placemarkOptions              = { hideIcon: false, hasBalloon: false };
 
     yandexMaps.removeAllOverlays();
-
+		// console.log(markets);
     $.each(markets, function(index, market) {
       var geoPoint, placemark;
 
-      yandexMapsStyle.iconStyle        = new YMaps.IconStyle();
-      yandexMapsStyle.iconStyle.href   = market.category.icon_image;
-      yandexMapsStyle.iconStyle.size   = new YMaps.Point(27, 26);
-      yandexMapsStyle.iconStyle.offset = new YMaps.Point(-10, -25);
-
-      placemarkOptions['style'] = yandexMapsStyle;
-
       geoPoint  = new YMaps.GeoPoint(market.longitude, market.latitude);
-      placemark = new YMaps.Placemark(geoPoint, placemarkOptions);
+      placemark = new YMaps.Placemark(geoPoint, {style: market.category.icon_style, hideIcon: false, hasBalloon: false, zIndexActive: 800 });
 
       yandexMapsGeoCollectionBounds.add(geoPoint);
       yandexMaps.addOverlay(placemark);
 
       YMaps.Events.observe(placemark, placemark.Events.Click, function() {
+				var pOptions = {};
+				placemark.setOptions({style: selectedPlacemark(market)});
+				if(oldPlacemark){
+					oldPlacemark.setOptions({style: oldMarket.category.icon_style, hideIcon: false, hasBalloon: false, zIndexActive: 100});
+				}
+				
         drawDescription(market);
         drawInfo(market);
         drawReviews(market);
         fillReviewForm(market);
+
         $('.b-market').show();
+				oldMarket = market;
+				oldPlacemark = placemark;
+
       })
     })
 
