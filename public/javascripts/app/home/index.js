@@ -30,7 +30,8 @@ $(document).ready(function() {
 			// отрендерить маркеты это категории
 			console.log('/j/markets?category='+category);
 			$.get('/j/markets?category='+category, function(data){
-			  console.log(data);
+			  // console.log(data);
+				drawMarkets(data);
 			}, 'json');
 			
     });
@@ -92,43 +93,43 @@ $(document).ready(function() {
 	// }
 	// 
 	//   // markets
-	//   function drawMarkets(markets) {
-	//     var yandexMapsStyle               = new YMaps.Style();
-	//     var yandexMapsGeoCollectionBounds = new YMaps.GeoCollectionBounds();
-	//     // var placemarkOptions              = { hideIcon: false, hasBalloon: false };
-	// 
-	//     yandexMaps.removeAllOverlays();
-	// 	// console.log(markets);
-	//     $.each(markets, function(index, market) {
-	//       var geoPoint, placemark;
-	// 
-	//       geoPoint  = new YMaps.GeoPoint(market.longitude, market.latitude);
-	//       placemark = new YMaps.Placemark(geoPoint, {style: market.category.icon_style, hideIcon: false, hasBalloon: false, zIndexActive: 800 });
-	// 
-	//       yandexMapsGeoCollectionBounds.add(geoPoint);
-	//       yandexMaps.addOverlay(placemark);
-	// 
-	//       YMaps.Events.observe(placemark, placemark.Events.Click, function() {
-	// 			var pOptions = {};
-	// 			placemark.setOptions({style: selectedPlacemark(market)});
-	// 			if(oldPlacemark){
-	// 				oldPlacemark.setOptions({style: oldMarket.category.icon_style, hideIcon: false, hasBalloon: false, zIndexActive: 100});
-	// 			}
-	// 			
-	//         drawDescription(market);
-	//         drawInfo(market);
-	//         drawReviews(market);
-	//         fillReviewForm(market);
-	// 
-	//         $('.b-market').show();
-	// 			oldMarket = market;
-	// 			oldPlacemark = placemark;
-	// 
-	//       })
-	//     })
-	// 
-	//     yandexMaps.setBounds(yandexMapsGeoCollectionBounds);
-	//   }
+	  function drawMarkets(markets) {
+	    var yandexMapsStyle               = new YMaps.Style();
+	    var yandexMapsGeoCollectionBounds = new YMaps.GeoCollectionBounds();
+	    // var placemarkOptions              = { hideIcon: false, hasBalloon: false };
+	
+	    yandexMaps.removeAllOverlays();
+		// console.log(markets);
+	    $.each(markets, function(index, market) {
+	      var geoPoint, placemark;
+	
+	      geoPoint  = new YMaps.GeoPoint(market.longitude, market.latitude);
+	      placemark = new YMaps.Placemark(geoPoint, {style: market.category.icon_style, hideIcon: false, hasBalloon: false, zIndexActive: 800 });
+	
+	      yandexMapsGeoCollectionBounds.add(geoPoint);
+	      yandexMaps.addOverlay(placemark);
+	
+	      YMaps.Events.observe(placemark, placemark.Events.Click, function() {
+				var pOptions = {};
+				placemark.setOptions({style: selectedPlacemark(market)});
+				if(oldPlacemark){
+					oldPlacemark.setOptions({style: oldMarket.category.icon_style, hideIcon: false, hasBalloon: false, zIndexActive: 100});
+				}
+				
+	        drawDescription(market);
+	        drawInfo(market);
+	        drawReviews(market);
+	        fillReviewForm(market);
+	
+	        $('.b-market').show();
+				oldMarket = market;
+				oldPlacemark = placemark;
+	
+	      })
+	    })
+	
+	    yandexMaps.setBounds(yandexMapsGeoCollectionBounds);
+	  }
 	// 
 	//   function drawDescription(market) {
 	//     var descriptionTemplate = $('.b-sidebar-middle-description-template');

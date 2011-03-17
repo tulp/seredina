@@ -1,7 +1,7 @@
 class JsonController < ApplicationController
   def markets
     if params[:category] == 'all'
-      markets = Market.all
+      markets = Market
     else
       markets = Category.find_by_icon_image(params[:category]).markets
     end
