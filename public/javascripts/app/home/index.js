@@ -52,7 +52,7 @@ $(document).ready(function() {
       var geoPoint, placemark;
 
       geoPoint  = new YMaps.GeoPoint(market.longitude, market.latitude);
-      placemark = new YMaps.Placemark(geoPoint, {style: market.category.icon_image, hideIcon: false, hasBalloon: false, zIndexActive: 500 });
+      placemark = new YMaps.Placemark(geoPoint, {style: market.category.icon_style, hideIcon: false, hasBalloon: false, zIndexActive: 800 });
 
       yandexMapsGeoCollectionBounds.add(geoPoint);
       yandexMaps.addOverlay(placemark);
@@ -61,8 +61,7 @@ $(document).ready(function() {
 				var pOptions = {};
 				placemark.setOptions({style: selectedPlacemark(market)});
 				if(oldPlacemark){
-					console.log(oldMarket);
-					oldPlacemark.setOptions({style: oldMarket.category.icon_image, hideIcon: false, hasBalloon: false, zIndexActive: 500});
+					oldPlacemark.setOptions({style: oldMarket.category.icon_style, hideIcon: false, hasBalloon: false, zIndexActive: 100});
 				}
 				
         drawDescription(market);
