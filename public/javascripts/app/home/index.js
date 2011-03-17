@@ -1,5 +1,6 @@
 $(document).ready(function() {
   var markets, users, categories, current_user;
+	var oldMarket, oldPlacemark;
 
   var emailRegexp = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
 
@@ -17,8 +18,6 @@ $(document).ready(function() {
   var reviewForm = $('#review_form');
   var reviewText = $('#review_text');
 
-
-
 	// function regularPlacemark(market) {
 	// 	// Создаем стили для меток
 	// 	var regularSize = new YMaps.Style();
@@ -29,15 +28,15 @@ $(document).ready(function() {
 	// 	return regularSize;
 	// }
 	// 
-	// 
-	// 
+	
 	function selectedPlacemark(market) {
 		var selectedSize = new YMaps.Style();
 	  selectedSize.iconStyle        = new YMaps.IconStyle();
-	  selectedSize.iconStyle.size   = new YMaps.Point(40, 40);
+	  selectedSize.iconStyle.size   = new YMaps.Point(54, 52);
 	  selectedSize.iconStyle.href   = '/images/current.png';
 		// console.log(market.category.icon_image);
-	  selectedSize.iconStyle.offset = new YMaps.Point(-15, -37);
+	  selectedSize.iconStyle.offset = new YMaps.Point(-19, -48);
+	  // selectedSize.iconStyle.offset = new YMaps.Point(-15, -37);
 		return selectedSize;
 	}
 
@@ -45,37 +44,36 @@ $(document).ready(function() {
   function drawMarkets(markets) {
     var yandexMapsStyle               = new YMaps.Style();
     var yandexMapsGeoCollectionBounds = new YMaps.GeoCollectionBounds();
-    var placemarkOptions              = { hideIcon: false, hasBalloon: false };
+    // var placemarkOptions              = { hideIcon: false, hasBalloon: false };
 
     yandexMaps.removeAllOverlays();
-
+		// console.log(markets);
     $.each(markets, function(index, market) {
       var geoPoint, placemark;
 
-      yandexMapsStyle.iconStyle        = new YMaps.IconStyle();
-      yandexMapsStyle.iconStyle.href   = market.category.icon_image;
-      yandexMapsStyle.iconStyle.size   = new YMaps.Point(27, 26);
-      yandexMapsStyle.iconStyle.offset = new YMaps.Point(-10, -25);
-
-      placemarkOptions['style'] = yandexMapsStyle;
-
       geoPoint  = new YMaps.GeoPoint(market.longitude, market.latitude);
-      placemark = new YMaps.Placemark(geoPoint, placemarkOptions);
+      placemark = new YMaps.Placemark(geoPoint, {style: market.category.icon_image, hideIcon: false, hasBalloon: false, zIndexActive: 500 });
 
       yandexMapsGeoCollectionBounds.add(geoPoint);
       yandexMaps.addOverlay(placemark);
 
       YMaps.Events.observe(placemark, placemark.Events.Click, function() {
 				var pOptions = {};
-				pOptions['style'] = selectedPlacemark(market);
-				placemark.setOptions(pOptions);
-				// placemark.setStyle('default#metroYekaterinburgIcon');
+				placemark.setOptions({style: selectedPlacemark(market)});
+				if(oldPlacemark){
+					console.log(oldMarket);
+					oldPlacemark.setOptions({style: oldMarket.category.icon_image, hideIcon: false, hasBalloon: false, zIndexActive: 500});
+				}
 				
         drawDescription(market);
         drawInfo(market);
         drawReviews(market);
         fillReviewForm(market);
+
         $('.b-market').show();
+				oldMarket = market;
+				oldPlacemark = placemark;
+
       })
     })
 
