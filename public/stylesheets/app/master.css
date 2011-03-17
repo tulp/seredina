@@ -60,6 +60,7 @@
   border:1px solid;
   background-image: url('/images/list_background.png');
   font-weight:600;
+  z-index:150;
 }
 
 .b-categories li {
@@ -75,11 +76,11 @@
 .b-categories li:first-child {
   display: block;
   background-color: transparent;
+  overflow:hidden;
 }
 
 /*иконка в выпадающем меню*/
-.b-categories-icon {
-  margin-top:-2px;
+.b-categories-icon {  
   display:block;
   float:left;
 }
@@ -87,13 +88,15 @@
 /*стрелка в выпадающем меню*/
 .b-categories-arrow {
   float:right;
-  margin-top: 8px;
+  margin-top: 11px;
+  *margin-top: -11px;
+  display:block;  
 }
 
 /*текст в выпадающем меню*/
 .b-categories-span {
   margin:6px 0 0 10px;
-  line-height:21px;
+  line-height:23px;  
 }
 
 /*блок магазина*/
@@ -133,7 +136,8 @@
   float:left;
   margin-left: -4px;
   padding-left:20px;
-  overflow:hidden;
+  overflow:hidden;  
+  *width:274px;
 }
 
 .b-details-left {
@@ -141,7 +145,7 @@
   height:15px;
   background-image: url('/images/more_text_sprite.png');
   background-position: left top;
-  float:left;
+  float:left;  
 }
 
 .b-details-right {
@@ -149,7 +153,8 @@
   background-image: url('/images/more_text_sprite.png');
   background-position: right top;
   float:right;
-  width:auto;
+  width:auto;  
+  *float:left;
 }
 
 .b-details-text {
@@ -226,6 +231,7 @@
   display: block;
   float:left;
   line-height:18px;
+  overflow:hidden;
 }
 
 .b-details-websites {
@@ -256,6 +262,8 @@
 .b-sidebar-bottom img {
   position:absolute;
   margin:20px 0 0 80px;
+  *position:relative;
+  z-index:50 !important;  
 }
 
 .b-sidebar-middle-menu {
@@ -373,6 +381,7 @@
   display:block;
   margin:0px 0 0 210px;  
   position:absolute;
+  *margin:0 0 0 160px;
 }
 
 .b-stars-full {
