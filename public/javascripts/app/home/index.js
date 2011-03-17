@@ -1,4 +1,32 @@
 $(document).ready(function() {
+	
+ var app = $.sammy('#main', function() {
+    this.get('#landing', function(context) {
+      context.log('landing');
+    });
+
+		this.get('#/:category', function(context) {
+      context.log('category');
+    });
+
+		this.get('#/:category/:id', function(context) {
+      context.log('market');
+    });
+
+		this.get('#/:category/:id/reviews', function(context) {
+      context.log('reviews of market');
+    });
+
+		this.get('#/:category/:id/add_review', function(context) {
+      context.log('add review to market');
+    });
+ });
+
+  $(function() {
+			
+    app.run('#landing');
+  });
+	
   var markets, users, categories, current_user;
 	var oldMarket, oldPlacemark;
 
