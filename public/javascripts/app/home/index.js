@@ -19,26 +19,13 @@ $(document).ready(function() {
 
   var reviewForm = $('#review_form');
   var reviewText = $('#review_text');
-
-	// function regularPlacemark(market) {
-	// 	// Создаем стили для меток
-	// 	var regularSize = new YMaps.Style();
-	//   regularSize.iconStyle        = new YMaps.IconStyle();
-	//   regularSize.iconStyle.size   = new YMaps.Point(27, 26);
-	//   regularSize.iconStyle.href   = market.category.icon_image;
-	//   regularSize.iconStyle.offset = new YMaps.Point(-10, -25);
-	// 	return regularSize;
-	// }
-	// 
 	
 	function selectedPlacemark(market) {
 		var selectedSize = new YMaps.Style();
 	  selectedSize.iconStyle        = new YMaps.IconStyle();
 	  selectedSize.iconStyle.size   = new YMaps.Point(54, 52);
 	  selectedSize.iconStyle.href   = '/images/current.png';
-		// console.log(market.category.icon_image);
 	  selectedSize.iconStyle.offset = new YMaps.Point(-19, -48);
-	  // selectedSize.iconStyle.offset = new YMaps.Point(-15, -37);
 		return selectedSize;
 	}
 
@@ -179,6 +166,7 @@ $(document).ready(function() {
     inactiveCategories = categories.slice(0, indexLastElement);
 
     drawCategories(activeCategory, inactiveCategories);
+		// $('.b-categories ul li:not(:first)').toggle();
   })
 
   function drawCategories(activeCategory, inactiveCategories) {
