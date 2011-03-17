@@ -1,0 +1,9 @@
+ru:
+  # confirmation
+  confirmation_email_subject:   'Ваши регистрационные данные на «Карте скидок»'
+  confirmation_gold_link_title: '«Карта скидок Золотой Середины»'
+
+  # give gift
+  give_gift_email_subject:   'Вам подарили скидку на приобретение карты «Золотая середина»!'
+  give_gift_gold_link_title: 'Золотая середина'
+  give_gift_use_link_title:  '«Картой скидок»'
