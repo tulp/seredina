@@ -11,15 +11,7 @@ $(document).ready(function() {
     console.log(a);
   }
 
-  var handler1 = function() {
-    redirect($(this).attr('class').split(' ')[0]);
-  };
 
-  var handler2 = function() {
-    $('.b-categories ul li:not(.active)').show();
-    $('.b-categories li').unbind('click', handler2);
-		$('.b-categories li').one('click',handler1);
-  };
 
 	// $('.b-categories ul li:not(.active)').hide();
 	
@@ -35,7 +27,17 @@ $(document).ready(function() {
          .then(callback);
    });
    
-  function showCategories(category){
+   var handler1 = function() {
+     redirect($(this).attr('class').split(' ')[0]);
+   };
+
+   var handler2 = function() {
+     $('.b-categories ul li:not(.active)').show();
+     $('.b-categories li').unbind('click', handler2);
+ 		$('.b-categories li').one('click',handler1);
+   };
+   
+   function showCategories(category){
     $('.b-categories li').removeClass('active');
     $('.b-categories li.' + category).toggleClass('active');
      
@@ -43,6 +45,11 @@ $(document).ready(function() {
     $('.b-categories li').one('click',handler1);
   }
    
+   function collapseCategories(){
+     $('.b-categories ul li:not(.active)').hide();
+     $('.b-categories li').unbind('click', handler1);
+		 $('.b-categories ul li.active').one('click',handler2);
+   }
    
     //Category
 		this.get('#/:category', function(context) {
@@ -100,10 +107,7 @@ $(document).ready(function() {
 
 			// переключить выбиралку категорий в свернутое состояние
 			
-			$('.b-categories ul li:not(.active)').hide();
-
-      $('.b-categories li').unbind('click', handler1);
-			$('.b-categories ul li.active').one('click',handler2);
+      collapseCategories();
 			
 			// выделить текущий маркет на карте
     });
