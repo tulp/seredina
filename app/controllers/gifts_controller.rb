@@ -3,8 +3,10 @@ class GiftsController < ApplicationController
 
   def create
     results = if current_user.can_give_gifts?
-      recipient = User.new(:email => params[:recipient_email])
+      # TODO nested there
+      recipient = User.new(:email => params[:recipient_email], :name => params[:recipient_name])
       recipient.set_password
+      recipient.generate_discount_code
       if recipient.save
         gift = current_user.gifts.new(params[:gift])
         gift.recipient = recipient

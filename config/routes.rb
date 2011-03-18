@@ -8,6 +8,8 @@ Gold::Application.routes.draw do
 
   resources :gifts, :only => :create
 
+  resources :users, :only => [:show, :update]
+
   scope '/j' do
     get 'markets',      :to => 'json#markets',    :as => 'json_markets'
     get 'categories',   :to => 'json#categories', :as => 'json_categories'

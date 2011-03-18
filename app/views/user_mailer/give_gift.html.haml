@@ -1,11 +1,11 @@
-%h4 Здравствуйте, #{@gift.recipient_name}!
+%h4 Здравствуйте, #{@gift.recipient.name}!
 
 %p
   Ваш друг #{@gift.user_name} дарит Вам уникальную возможность приобрести карту всероссийской дисконтной системы
   #{link_to t(:give_gift_gold_link_title), 'http://www.seredina.ru'} по необыкновенно низкой цене – всего за 250 рублей!
 
 %p
-  Чтобы оформить покупку, пройдите по этой ссылке: #{link_to 'link_to_seredina', 'link_to_seredina'}
+  Чтобы оформить покупку, пройдите по этой ссылке: #{link_to 'link_to_seredina', user_url(@gift.recipient.discount_code)}
 
 %p
   Хотите быстро и легко находить заведения, предоставляющие скидки держателям карт «Золотая середина»?
