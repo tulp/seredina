@@ -212,38 +212,38 @@ $(document).ready(function() {
 	// 	// $('.b-categories ul li:not(:first)').toggle();
 	//   })
 	// 
-	//   function drawCategories(activeCategory, inactiveCategories) {
-	//     var activeItem, inactiveItems;
-	//     var categoriesTemplate = $('.b-categories-template');
-	// 
-	//     $('.b-categories').html(categoriesTemplate.tmpl({ activeCategory: activeCategory, inactiveCategories: inactiveCategories }));
-	// 
-	//     activeItem    = $('.b-categories ul li:first');
-	//     inactiveItems = $('.b-categories ul li:not(:first)');
-	// 
-	//     activeItem.click(function() { inactiveItems.toggle() });
-	//     inactiveItems.click(function() {
-	//       var filteredMarkets, selectedCategory, filteredCategories = [];
-	//       var categoryTitle = $(this).find('span').text();
-	// 
-	//       if (categoryTitle === 'Все категории') {
-	//         filteredMarkets = markets;
-	//       } else {
-	//         filteredMarkets = $.grep(markets, function(market) { return (market.category.title === categoryTitle) });
-	//       }
-	// 
-	//       for (var i = 0; i < categories.length; i++) {
-	//         if (categories[i].title === categoryTitle) {
-	//           selectedCategory = categories[i];
-	//         } else {
-	//           filteredCategories.push(categories[i]);
-	//         }
-	//       }
-	// 
-	//       drawMarkets(filteredMarkets);
-	//       drawCategories(selectedCategory, filteredCategories);
-	//     })
-	//   }
+    function drawCategories(activeCategory, inactiveCategories) {
+      var activeItem, inactiveItems;
+      var categoriesTemplate = $('.b-categories-template');
+  
+      $('.b-categories').html(categoriesTemplate.tmpl({ activeCategory: activeCategory, inactiveCategories: inactiveCategories }));
+  
+      activeItem    = $('.b-categories ul li:first');
+      inactiveItems = $('.b-categories ul li:not(:first)');
+  
+      activeItem.click(function() { inactiveItems.toggle() });
+      inactiveItems.click(function() {
+        var filteredMarkets, selectedCategory, filteredCategories = [];
+        var categoryTitle = $(this).find('span').text();
+  
+        if (categoryTitle === 'Все категории') {
+          filteredMarkets = markets;
+        } else {
+          filteredMarkets = $.grep(markets, function(market) { return (market.category.title === categoryTitle) });
+        }
+  
+        for (var i = 0; i < categories.length; i++) {
+          if (categories[i].title === categoryTitle) {
+            selectedCategory = categories[i];
+          } else {
+            filteredCategories.push(categories[i]);
+          }
+        }
+  
+        drawMarkets(filteredMarkets);
+        drawCategories(selectedCategory, filteredCategories);
+      })
+    }
 	//   // ====================
 	// 
 	//   // gifts
