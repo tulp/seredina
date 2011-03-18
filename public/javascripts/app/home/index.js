@@ -1,21 +1,30 @@
 $(document).ready(function() {
+	function redirect(path){
+		window.location = "#/"+path; app.runRoute('get','#/'+path); 
+	}
+	
+	function render(path){
+		app.runRoute('get','#/'+path); 
+	}
 
-	$('.b-categories li').click(function(){
-		var cl = $(this).attr('class');
-		window.location = "#/"+cl; app.runRoute('get','#/'+cl); 
-	});
+  function cl(a){
+    console.log(a);
+  }
 
+  var handler1 = function() {
+    redirect($(this).attr('class').split(' ')[0]);
+  };
+
+  var handler2 = function() {
+    $('.b-categories ul li:not(.active)').show();
+    $('.b-categories li').unbind('click', handler2);
+		$('.b-categories li').one('click',handler1);
+  };
+
+	// $('.b-categories ul li:not(.active)').hide();
 
 	
  var app = $.sammy('#main', function() {
-    this.get('#/', function(context) {
-			app.runRoute('get','#/all');
-			//// Главная страница
-			// отрендерить выбиралку категорий - развернутое состояние
-			// отрендерить все маркет
-			
-    });
-
 		this.get('#/:category', function(context) {
       var category = this.params['category'];
 
@@ -26,17 +35,39 @@ $(document).ready(function() {
 			// выделить текущую категорию
 			$('.b-categories li.' + category).toggleClass('active');
 			
-			// отрендерить маркеты это категории
+			// отрендерить маркеты этой категории
 			$.get('/j/markets?category='+category, function(data){
 				drawMarkets(data);
 			}, 'json');
 			
+      $('.b-categories li').unbind('click');
+      $('.b-categories li').one('click',handler1);
+
     });
 
 		this.get('#/:category/:id', function(context) {
-      console.log('market');
+		  var category = this.params['category'];
+			var id = this.params['id'];
+			render(category);
+			$.get('/j/markets?id='+id, function(market){
+				console.log(market);
+				
+				// отрендерить инфу о заведении
+  			drawDescription(market);
+  			drawInfo(market);
+  			drawReviews(market);
+  			fillReviewForm(market);
+
+  			$('.b-market').show();
+			})
+      
+
 			// переключить выбиралку категорий в свернутое состояние
-			// отрендерить инфу о заведении
+			$('.b-categories ul li:not(.active)').hide();
+
+      $('.b-categories li').unbind('click', handler1);
+			$('.b-categories ul li.active').one('click',handler2);
+			
 			// выделить текущий маркет на карте
     });
 
@@ -55,11 +86,11 @@ $(document).ready(function() {
 
   $(function() {
 			
-    app.run('#/');
+    app.run('#/all');
   });
 
 	
-	  // var markets, users, categories, current_user;
+  // var markets, users, categories, current_user;
 	var oldMarket, oldPlacemark;
 	// 
 	//   var emailRegexp = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
@@ -67,18 +98,18 @@ $(document).ready(function() {
 	//   var signUpForm      = $('#sign_up_form');
 	//   var signUpUserEmail = $('#sign_up_user_email');
 	// 
-	//   var notificationLabel = $('.b-notification-label');
+	  var notificationLabel = $('.b-notification-label');
 	
 	  var formDiscount   = $('.b-form_discount');
 	  var giftForm       = $('#gift_form');
 	  var recipientEmail = $('#recipient_email');
-	// 
+	//
 	  var middleInfo = $('.b-sidebar-middle-info');
 	// 
 	// 
 	// 
-	//   var reviewForm = $('#review_form');
-	//   var reviewText = $('#review_text');
+	  var reviewForm = $('#review_form');
+	  var reviewText = $('#review_text');
 	// 
 	function selectedPlacemark(market) {
 		var selectedSize = new YMaps.Style();
@@ -107,21 +138,17 @@ $(document).ready(function() {
 	      yandexMaps.addOverlay(placemark);
 	
 	      YMaps.Events.observe(placemark, placemark.Events.Click, function() {
-				var pOptions = {};
-				placemark.setOptions({style: selectedPlacemark(market)});
-				if(oldPlacemark){
-					oldPlacemark.setOptions({style: oldMarket.category.icon_style, hideIcon: false, hasBalloon: false, zIndexActive: 100});
-				}
-				
-	        drawDescription(market);
-	        drawInfo(market);
-	        drawReviews(market);
-	        fillReviewForm(market);
-	
-	        $('.b-market').show();
-				oldMarket = market;
-				oldPlacemark = placemark;
-	
+          // market.placemark = placemark;
+    			placemark.setOptions({style: selectedPlacemark(market)});
+    			
+					if(oldPlacemark){
+						oldPlacemark.setOptions({style: oldMarket.category.icon_style, hideIcon: false, hasBalloon: false, zIndexActive: 100});
+					}
+
+					oldMarket = market;
+					oldPlacemark = placemark;
+					
+					redirect(market.category.icon_image+"/"+market.id);
 	      })
 	    })
 	

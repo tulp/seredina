@@ -46,7 +46,6 @@
   .b-sidebar-top
   .b-sidebar-middle
     %img.b-sidebar-middle-logo{ :src => image_path('golden.png') }
-    %h1 Показывать:
     .b-categories
       %ul
         -@categories.each do |category|
@@ -142,7 +141,7 @@
 
 %script.b-sidebar-middle-description-template{ :type => 'text/x-jquery-tmpl' }
   %p.b-sidebar-middle-subcategory ${subcategory}
-  %img{ :src => '${category.icon_image}' }
+  %img{ :src => '/images/categories/${category.icon_image}.png' }
   %span.b-stars
     {{html $item.rating}}
   .b-sidebar-middle-description-wrap
