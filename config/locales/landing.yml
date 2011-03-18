@@ -1,0 +1,15 @@
+ru:
+  landing_title:           'Воспользуйся своим преимуществом!'
+
+  landing_gold_link_title: 'Золотая Середина'
+  landing_tulp_link_title: 'Тюльп.ру'
+  landing_description:     'Совместный проект дисконтной системы %{landing_gold_link} и сайта %{landing_tulp_link}.
+                            <br />
+                            Все скидки Золотой Середины в Новосибирске на одной карте.
+                            <br/>
+                            <br/>
+                            Легко найти. Легко дойти. Легко пользоваться!'
+
+  landing_email_invitation_text:    'Чтобы перейти к карте, введите свой email:'
+  landing_email_placeholder:        'Адрес электронной почты'
+  landing_password_invitation_text: 'Введите ваш код доступа (присланный вам на email):'

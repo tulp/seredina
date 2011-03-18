@@ -7,10 +7,6 @@ class JsonController < ApplicationController
 
   end
 
-  def users
-    render :json => User.all.to_json(:only => :email, :methods => :can_give_gifts?)
-  end
-
   def categories
     render :json => Category.all.to_json(:except => :id)
   end

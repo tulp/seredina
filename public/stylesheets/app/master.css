@@ -630,6 +630,7 @@ input.b-discount_form_send {
 
 /* landing page */
 
+/* TODO select_cart */
 .select_cart {
   height:150px;
   display: none;
@@ -664,15 +665,27 @@ input.b-discount_form_send {
   width:200px;
 }
 
-.sign_up_form {
-  display:block;
+.landing_form {
+  font-size:14px;
+  position:absolute;
 }
 
-.sign_up_form span {
+.landing_form span {
   font-size:16px;
   font-weight:600;
   padding-bottom:5px;
   display:block;
+  width:500px;
+  line-height:19px;
+}
+
+.landing_form_email {
+  float: left;
+}
+
+.landing_form_password {
+  display: none;
+  float: left;
 }
 
 .action {
@@ -700,22 +713,7 @@ input.b-discount_form_send {
   line-height:17px;
 }
 
-.sign_in_form {
-  font-size:14px;
-  position:absolute;
-  display:none;
-}
-
-.sign_in_form span {
-  display: block;
-  font-size: 16px;
-  font-weight: 600;
-  padding-bottom: 5px;
-  width:500px;
-  line-height:19px;
-}
-
-.sign_in_form form {
+.landing_form form {
   padding-top:5px;
 }
 
@@ -729,8 +727,8 @@ input.b-discount_form_send {
 
 .to_map {
   display: inline-block;
-  outline: 0 none;
-  vertical-align: top;
+  margin-left: -110px;
+  margin-top: 25px;
 }
 
 #yandex_maps {
@@ -843,7 +841,7 @@ input.b-discount_form_send {
   vertical-align: sub;
 }
 
-#overlay {
+.overlay {
   position: absolute;
   top:      0px;
   z-index:  2;
@@ -854,59 +852,50 @@ input.b-discount_form_send {
   background: url(/images/landing_fade.png) right bottom;
 }
 
-#buzz {
+.buzz {
   position: absolute;
   left: 50%;
   margin-left: -310px;
   margin-top:45px;
 }
 
-#window_top {
+.window_top {
   width:  619px;
   height: 50px;
   background: url(/images/landing_window_top.png) no-repeat;
 }
 
-#window_middle {
+.window_middle {
   width:   499px;
   padding: 0 60px;
 
   background: url(/images/landing_window_middle.png) repeat;
 }
 
-#title {
+.title {
   margin-bottom: 18px;
   clear: both;
 }
 
-#title h2 {
+.title h2 {
   font-size: 26px;
   width: 300px;
   line-height: 32px;
   display: inline-block;
 }
 
-#title img {
+.title img {
   vertical-align: top;
   margin-top: -4px;
 }
 
-#description {
+.description {
   font-size: 13px;
   line-height: 22px;
   padding-bottom: 20px;
 }
 
-#sign_up_form {
-  position: absolute;
-  font-size: 14px;
-}
-
-#dialog_form {
-  padding-top: 5px;
-}
-
-#window_bottom {
+.window_bottom {
   width:  499;
   height: 120px;
   width: 619px;
@@ -914,7 +903,7 @@ input.b-discount_form_send {
   background: url(/images/landing_window_bottom.png) no-repeat;
 }
 
-#sign_up_user_email {
+#user_email {
   width:   355px;
   height:  33px;
   padding: 5px;
@@ -924,13 +913,7 @@ input.b-discount_form_send {
   font-size: 18px;
 }
 
-.sign_up_form_submit_button {
-  vertical-align: top;
-  outline: 0;
-  display: inline-block;
-}
-
-#arrow {
+.arrow {
   position: absolute;
   bottom: 175px;
   right:  -85px;
@@ -939,3 +922,4 @@ input.b-discount_form_send {
   height: 70px;
 
   background: url(/images/landing_arrow.png);
+}
