@@ -27,7 +27,7 @@
 
 .b-sidebar-middle {
   width:100%;
-  height:440px;
+/*  height:440px;*/
   background-image: url('/images/left_panel_middle.png');
   float:left;
   position:relative;

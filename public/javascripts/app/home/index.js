@@ -1,11 +1,11 @@
 $(document).ready(function() {
-	function redirect(path){
-		window.location = "#/"+path; app.runRoute('get','#/'+path); 
-	}
-	
-	function render(path){
-		app.runRoute('get','#/'+path); 
-	}
+    function redirect(path){
+      window.location = "#/"+path//; app.runRoute('get','#/'+path); 
+    }
+  // 
+  function render(path){
+   app.runRoute('get','#/'+path); 
+  }
 
   function cl(a){
     console.log(a);
@@ -22,47 +22,84 @@ $(document).ready(function() {
   };
 
 	// $('.b-categories ul li:not(.active)').hide();
-
 	
- var app = $.sammy('#main', function() {
+ var app = $.sammy('.b-sidebar', function() {
+
+   //Around
+   this.around(function(callback) {
+     var context = this;
+     this.load('/j/markets?category=all')
+         .then(function(items){
+           context.items = items;
+         })
+         .then(callback);
+   });
+   
+  function showCategories(category){
+    $('.b-categories li').removeClass('active');
+    $('.b-categories li.' + category).toggleClass('active');
+     
+    $('.b-categories li').unbind('click');
+    $('.b-categories li').one('click',handler1);
+  }
+   
+   
+    //Category
 		this.get('#/:category', function(context) {
       var category = this.params['category'];
-
-			// отрендерить выбиралку категорий - развернутое состояние, 
-			
-			// снять выделение со всех категорий
-			$('.b-categories li').removeClass('active');
-			// выделить текущую категорию
-			$('.b-categories li.' + category).toggleClass('active');
+      showCategories(category);
 			
 			// отрендерить маркеты этой категории
-			$.get('/j/markets?category='+category, function(data){
-				drawMarkets(data);
+			$.get('/j/markets?category='+category, function(markets){
+  	    var yandexMapsStyle               = new YMaps.Style();
+  	    var yandexMapsGeoCollectionBounds = new YMaps.GeoCollectionBounds();
+
+  	    yandexMaps.removeAllOverlays();
+  	    $.each(markets, function(index, market) {
+  	      var geoPoint, placemark;
+
+  	      geoPoint  = new YMaps.GeoPoint(market.longitude, market.latitude);
+  	      placemark = new YMaps.Placemark(geoPoint, {style: market.category.icon_style, hideIcon: false, hasBalloon: false, zIndexActive: 800 });
+
+  	      yandexMapsGeoCollectionBounds.add(geoPoint);
+  	      yandexMaps.addOverlay(placemark);
+
+  	      YMaps.Events.observe(placemark, placemark.Events.Click, function() {
+  					context.redirect("#", market.category.icon_image, market.id);
+            placemark.setOptions({style: selectedPlacemark(market)});
+
+            if(oldPlacemark){
+             oldPlacemark.setOptions({style: oldMarket.category.icon_style, hideIcon: false, hasBalloon: false, zIndexActive: 100});
+            }
+            
+            oldMarket = market;
+            oldPlacemark = placemark;
+  	      })
+  	    })
+
 			}, 'json');
 			
-      $('.b-categories li').unbind('click');
-      $('.b-categories li').one('click',handler1);
 
     });
 
 		this.get('#/:category/:id', function(context) {
-		  var category = this.params['category'];
+      var category = this.params['category'];
+      showCategories(category);
+
 			var id = this.params['id'];
-			render(category);
+      // render(category);
 			$.get('/j/markets?id='+id, function(market){
-				console.log(market);
-				
-				// отрендерить инфу о заведении
   			drawDescription(market);
   			drawInfo(market);
-  			drawReviews(market);
-  			fillReviewForm(market);
+        // drawReviews(market);
+        // fillReviewForm(market);
 
   			$('.b-market').show();
 			})
       
 
 			// переключить выбиралку категорий в свернутое состояние
+			
 			$('.b-categories ul li:not(.active)').hide();
 
       $('.b-categories li').unbind('click', handler1);
@@ -85,7 +122,6 @@ $(document).ready(function() {
  });
 
   $(function() {
-			
     app.run('#/all');
   });
 
@@ -121,39 +157,6 @@ $(document).ready(function() {
 	}
 	// 
 	//   // markets
-	  function drawMarkets(markets) {
-	    var yandexMapsStyle               = new YMaps.Style();
-	    var yandexMapsGeoCollectionBounds = new YMaps.GeoCollectionBounds();
-	    // var placemarkOptions              = { hideIcon: false, hasBalloon: false };
-	
-	    yandexMaps.removeAllOverlays();
-		// console.log(markets);
-	    $.each(markets, function(index, market) {
-	      var geoPoint, placemark;
-	
-	      geoPoint  = new YMaps.GeoPoint(market.longitude, market.latitude);
-	      placemark = new YMaps.Placemark(geoPoint, {style: market.category.icon_style, hideIcon: false, hasBalloon: false, zIndexActive: 800 });
-	
-	      yandexMapsGeoCollectionBounds.add(geoPoint);
-	      yandexMaps.addOverlay(placemark);
-	
-	      YMaps.Events.observe(placemark, placemark.Events.Click, function() {
-          // market.placemark = placemark;
-    			placemark.setOptions({style: selectedPlacemark(market)});
-    			
-					if(oldPlacemark){
-						oldPlacemark.setOptions({style: oldMarket.category.icon_style, hideIcon: false, hasBalloon: false, zIndexActive: 100});
-					}
-
-					oldMarket = market;
-					oldPlacemark = placemark;
-					
-					redirect(market.category.icon_image+"/"+market.id);
-	      })
-	    })
-	
-	    // yandexMaps.setBounds(yandexMapsGeoCollectionBounds);
-	  }
 	// 
 	  function drawDescription(market) {
 	    var descriptionTemplate = $('.b-sidebar-middle-description-template');
