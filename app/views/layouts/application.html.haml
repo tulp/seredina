@@ -1,11 +1,13 @@
 !!! 5
 %html
   %head
-    %title= t :title
     = csrf_meta_tag
-    = include_stylesheets :app, :lib
-    = include_javascripts :lib, :global, :app
     = javascript_include_tag "http://api-maps.yandex.ru/1.1/index.xml?key=#{YANDEX_MAPS_API_KEY}"
+    = include_javascripts :lib, :global, :app
+    = include_stylesheets :app, :lib
+    %title= t :application_title
+    = yield :head
 
   %body
+    #yandex_maps
     = yield

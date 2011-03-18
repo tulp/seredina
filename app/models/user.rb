@@ -1,7 +1,7 @@
 class User < ActiveRecord::Base
-  devise :database_authenticatable, :registerable, :validatable
+  devise :database_authenticatable, :validatable
 
-  attr_accessible :email, :password, :password_confirmation
+  attr_accessible :email, :password
 
   has_many :reviews
   has_many :gifts

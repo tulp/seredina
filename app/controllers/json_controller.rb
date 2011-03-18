@@ -15,10 +15,6 @@ class JsonController < ApplicationController
                                                                   :include => { :user => { :only => :email } } } })
   end
 
-  def users
-    render :json => User.all.to_json(:only => :email, :methods => :can_give_gifts?)
-  end
-
   def categories
     # params[:category]
     render :json => Category.all.to_json(:except => :id)

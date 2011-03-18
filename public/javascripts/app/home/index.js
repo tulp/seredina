@@ -192,57 +192,6 @@ $(document).ready(function() {
 	//   });
 	//   // ====================
 	// 
-	//   // sign up and sign in forms
-	//   function showSignInForm() {
-	//     $('.sign_up_form').hide();
-	//     $('.sign_in_form').show();
-	//     $('#sign_in_user_email').val(signUpUserEmail.val());
-	//   }
-	// 
-	//   function vibrateDialog() { $('#dialog').vibrate({ frequency: 5000, spread: 5, duration: 600 }) };
-	// 
-	//   function highlightField(field) {
-	//     if ((field.attr('placeholder') !== field.val()) && (field.val() !== '')) {
-	//       field.css('color', 'red');
-	//       setTimeout(function() { field.css('color', '') }, 600);
-	//     }
-	//   }
-	// 
-	//   // sign up form
-	//   signUpForm.live('ajax:beforeSend', function(xhr, settings) {
-	//     if (emailRegexp.test(signUpUserEmail.val())) {
-	//       for (var i = 0; i < users.length; i++) {
-	//         if (users[i].email === signUpUserEmail.val()) {
-	//           current_user = users[i];
-	//           break;
-	//         }
-	//       }
-	//       showSignInForm();
-	//       if (current_user) { return false };
-	//     } else {
-	//       vibrateDialog();
-	//       highlightField(signUpUserEmail);
-	// 
-	//       return false;
-	//     }
-	//   })
-	// 
-	//   signUpUserEmail.placeholder();
-	// 
-	//   // sign in form
-	//   $('#sign_in_form').live('ajax:success', function(data, status, xhr) {
-	//     if (status) {
-	//       $('#overlay').hide();
-	//       checkCurrentUserGifts();
-	//     } else {
-	//       vibrateDialog();
-	//       highlightField($('#user_password'));
-	//     }
-	//   })
-	// 
-	//   $.getJSON(jsonUsersPath, function(collection) { users = collection });
-	//   // ====================
-	// 
 	//   // categories
 	//   $.getJSON(jsonCategoriesPath, function(collection) {
 	//     var activeCategory, inactiveCategories, indexLastElement;
