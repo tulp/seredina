@@ -115,13 +115,13 @@ $(document).ready(function() {
 		this.get('#/:category/:id/reviews', function(context) {
       console.log('reviews of market');
 			// показать отзывы 
-
+      $('.b-sidebar-middle-reviews').show();
     });
 
 		this.get('#/:category/:id/add_review', function(context) {
       console.log('add review to market');
 			// показать форму добавления отзыва
-			
+			$('.b-sidebar-middle-add_review').show();
     });
  });
 
@@ -289,53 +289,59 @@ $(document).ready(function() {
 	// 
 	// 
 	// 
-	//   var reviewForm = $('#review_form');
-	//   var reviewText = $('#review_text');
+    var reviewForm = $('#review_form');
+    var reviewText = $('#review_text');
+
+    $('#review_form_submit_button').click(function() {
+      if (reviewText.val()) { reviewForm.submit() }
+
+      return false;
+    })
+
+    reviewForm.live('ajax:success', function(data, status, xhr) {
+      if (status[0]) {
+        var market = $.parseJSON(status[1]);
+
+        drawDescription(market);
+        drawReviews(market);
+        toggleTab($('#reviews_tab'));
+        reviewText.val('');
+      }
+    })
+	//
+  function toggleTab(tab) {
+    $('.b-tabs-active').attr('class', 'b-tabs-inactive');
+    tab.attr('class', 'b-tabs-active');
+
+    $('.b-sidebar-middle-description').nextAll(':visible').hide();
+
+    var path = window.location.hash.match(/^.+\d+/);
+
+    switch(tab.attr('id')) {
+      case 'info_tab':
+        // window.location = path;
+        middleInfo.show();
+        break;
+        case 'reviews_tab':
+        window.location = path + '/reviews';
+        app.runRoute('get', path + '/reviews');
+        break;
+        case 'add_review_tab':
+        window.location = path + '/add_review';
+        app.runRoute('get', path + '/add_review');
+        break;
+    }
+  }
 	// 
-	//   $('#review_form_submit_button').click(function() {
-	//     if (reviewText.val()) { reviewForm.submit() }
-	// 
-	//     return false;
-	//   })
-	// 
-	//   reviewForm.live('ajax:success', function(data, status, xhr) {
-	//     if (status[0]) {
-	//       var market = $.parseJSON(status[1]);
-	// 
-	//       drawDescription(market);
-	//       drawReviews(market);
-	//       toggleTab($('#reviews_tab'));
-	//       reviewText.val('');
-	//     }
-	//   })
-	// 
-	//   function toggleTab(tab) {
-	//     $('.b-tabs-active').attr('class', 'b-tabs-inactive');
-	//     tab.attr('class', 'b-tabs-active');
-	// 
-	//     $('.b-sidebar-middle-description').nextAll(':visible').hide();
-	//     switch(tab.attr('id')) {
-	//       case 'info_tab':
-	//         middleInfo.show();
-	//         break;
-	//       case 'reviews_tab':
-	//         $('.b-sidebar-middle-reviews').show();
-	//         break;
-	//       case 'add_review_tab':
-	//         $('.b-sidebar-middle-add_review').show();
-	//         break;
-	//     }
-	//   }
-	// 
-	//   $('.b-tabs a').click(function() {
-	//     toggleTab($(this));
-	// 
-	//     return false;
-	//   })
-	// 
-	//   $('#add_review').click(function() {
-	//     toggleTab($('#add_review_tab'));
-	// 
-	//     return false;
-	//   })
+  $('.b-tabs-inactive').live('click', function() {
+    toggleTab($(this));
+
+    return false;
+  })
+
+  $('#add_review').click(function() {
+    toggleTab($('#add_review_tab'));
+
+    return false;
+  })
 })
