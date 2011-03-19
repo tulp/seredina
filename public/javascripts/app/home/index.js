@@ -1,72 +1,113 @@
 $(document).ready(function() {
-	function redirect(path){
-		window.location = "#/"+path; app.runRoute('get','#/'+path); 
-	}
-	
-	function render(path){
-		app.runRoute('get','#/'+path); 
-	}
+    function redirect(path){
+      window.location = "#/"+path//; app.runRoute('get','#/'+path); 
+    }
+  // 
+  function render(path){
+   app.runRoute('get','#/'+path); 
+  }
 
   function cl(a){
     console.log(a);
   }
 
-  var handler1 = function() {
-    redirect($(this).attr('class').split(' ')[0]);
-  };
 
-  var handler2 = function() {
-    $('.b-categories ul li:not(.active)').show();
-    $('.b-categories li').unbind('click', handler2);
-		$('.b-categories li').one('click',handler1);
-  };
 
 	// $('.b-categories ul li:not(.active)').hide();
-
 	
- var app = $.sammy('#main', function() {
+ var app = $.sammy('.b-sidebar', function() {
+
+   //Around
+   this.around(function(callback) {
+     var context = this;
+     this.load('/j/markets?category=all')
+         .then(function(items){
+           context.items = items;
+         })
+         .then(callback);
+   });
+   
+   var handler1 = function() {
+     redirect($(this).attr('class').split(' ')[0]);
+   };
+
+   var handler2 = function() {
+     $('.b-categories ul li:not(.active)').show();
+     $('.b-categories li').unbind('click', handler2);
+ 		$('.b-categories li').one('click',handler1);
+   };
+   
+   function showCategories(category){
+    $('.b-categories li').removeClass('active');
+    $('.b-categories li.' + category).toggleClass('active');
+     
+    $('.b-categories li').unbind('click');
+    $('.b-categories li').one('click',handler1);
+  }
+   
+   function collapseCategories(){
+     $('.b-categories ul li:not(.active)').hide();
+     $('.b-categories li').unbind('click', handler1);
+		 $('.b-categories ul li.active').one('click',handler2);
+   }
+   
+    //Category
 		this.get('#/:category', function(context) {
       var category = this.params['category'];
-
-			// отрендерить выбиралку категорий - развернутое состояние, 
-			
-			// снять выделение со всех категорий
-			$('.b-categories li').removeClass('active');
-			// выделить текущую категорию
-			$('.b-categories li.' + category).toggleClass('active');
+      showCategories(category);
 			
 			// отрендерить маркеты этой категории
-			$.get('/j/markets?category='+category, function(data){
-				drawMarkets(data);
+			$.get('/j/markets?category='+category, function(markets){
+  	    var yandexMapsStyle               = new YMaps.Style();
+  	    var yandexMapsGeoCollectionBounds = new YMaps.GeoCollectionBounds();
+
+  	    yandexMaps.removeAllOverlays();
+  	    $.each(markets, function(index, market) {
+  	      var geoPoint, placemark;
+
+  	      geoPoint  = new YMaps.GeoPoint(market.longitude, market.latitude);
+  	      placemark = new YMaps.Placemark(geoPoint, {style: market.category.icon_style, hideIcon: false, hasBalloon: false, zIndexActive: 800 });
+
+  	      yandexMapsGeoCollectionBounds.add(geoPoint);
+  	      yandexMaps.addOverlay(placemark);
+
+  	      YMaps.Events.observe(placemark, placemark.Events.Click, function() {
+  					context.redirect("#", market.category.icon_image, market.id);
+            placemark.setOptions({style: selectedPlacemark(market)});
+
+            if(oldPlacemark){
+             oldPlacemark.setOptions({style: oldMarket.category.icon_style, hideIcon: false, hasBalloon: false, zIndexActive: 100});
+            }
+            
+            oldMarket = market;
+            oldPlacemark = placemark;
+  	      })
+  	    })
+
 			}, 'json');
 			
-      $('.b-categories li').unbind('click');
-      $('.b-categories li').one('click',handler1);
 
     });
 
 		this.get('#/:category/:id', function(context) {
-		  var category = this.params['category'];
+      var category = this.params['category'];
+      showCategories(category);
+
 			var id = this.params['id'];
-			render(category);
+      // render(category);
 			$.get('/j/markets?id='+id, function(market){
-				console.log(market);
-				
-				// отрендерить инфу о заведении
   			drawDescription(market);
   			drawInfo(market);
-  			drawReviews(market);
-  			fillReviewForm(market);
+        // drawReviews(market);
+        // fillReviewForm(market);
 
   			$('.b-market').show();
 			})
       
 
 			// переключить выбиралку категорий в свернутое состояние
-			$('.b-categories ul li:not(.active)').hide();
-
-      $('.b-categories li').unbind('click', handler1);
-			$('.b-categories ul li.active').one('click',handler2);
+			
+      collapseCategories();
 			
 			// выделить текущий маркет на карте
     });
@@ -74,18 +115,17 @@ $(document).ready(function() {
 		this.get('#/:category/:id/reviews', function(context) {
       console.log('reviews of market');
 			// показать отзывы 
-
+      $('.b-sidebar-middle-reviews').show();
     });
 
 		this.get('#/:category/:id/add_review', function(context) {
       console.log('add review to market');
 			// показать форму добавления отзыва
-			
+			$('.b-sidebar-middle-add_review').show();
     });
  });
 
   $(function() {
-			
     app.run('#/all');
   });
 
@@ -121,39 +161,6 @@ $(document).ready(function() {
 	}
 	// 
 	//   // markets
-	  function drawMarkets(markets) {
-	    var yandexMapsStyle               = new YMaps.Style();
-	    var yandexMapsGeoCollectionBounds = new YMaps.GeoCollectionBounds();
-	    // var placemarkOptions              = { hideIcon: false, hasBalloon: false };
-	
-	    yandexMaps.removeAllOverlays();
-		// console.log(markets);
-	    $.each(markets, function(index, market) {
-	      var geoPoint, placemark;
-	
-	      geoPoint  = new YMaps.GeoPoint(market.longitude, market.latitude);
-	      placemark = new YMaps.Placemark(geoPoint, {style: market.category.icon_style, hideIcon: false, hasBalloon: false, zIndexActive: 800 });
-	
-	      yandexMapsGeoCollectionBounds.add(geoPoint);
-	      yandexMaps.addOverlay(placemark);
-	
-	      YMaps.Events.observe(placemark, placemark.Events.Click, function() {
-          // market.placemark = placemark;
-    			placemark.setOptions({style: selectedPlacemark(market)});
-    			
-					if(oldPlacemark){
-						oldPlacemark.setOptions({style: oldMarket.category.icon_style, hideIcon: false, hasBalloon: false, zIndexActive: 100});
-					}
-
-					oldMarket = market;
-					oldPlacemark = placemark;
-					
-					redirect(market.category.icon_image+"/"+market.id);
-	      })
-	    })
-	
-	    // yandexMaps.setBounds(yandexMapsGeoCollectionBounds);
-	  }
 	// 
 	  function drawDescription(market) {
 	    var descriptionTemplate = $('.b-sidebar-middle-description-template');
@@ -205,38 +212,38 @@ $(document).ready(function() {
 	// 	// $('.b-categories ul li:not(:first)').toggle();
 	//   })
 	// 
-	//   function drawCategories(activeCategory, inactiveCategories) {
-	//     var activeItem, inactiveItems;
-	//     var categoriesTemplate = $('.b-categories-template');
-	// 
-	//     $('.b-categories').html(categoriesTemplate.tmpl({ activeCategory: activeCategory, inactiveCategories: inactiveCategories }));
-	// 
-	//     activeItem    = $('.b-categories ul li:first');
-	//     inactiveItems = $('.b-categories ul li:not(:first)');
-	// 
-	//     activeItem.click(function() { inactiveItems.toggle() });
-	//     inactiveItems.click(function() {
-	//       var filteredMarkets, selectedCategory, filteredCategories = [];
-	//       var categoryTitle = $(this).find('span').text();
-	// 
-	//       if (categoryTitle === 'Все категории') {
-	//         filteredMarkets = markets;
-	//       } else {
-	//         filteredMarkets = $.grep(markets, function(market) { return (market.category.title === categoryTitle) });
-	//       }
-	// 
-	//       for (var i = 0; i < categories.length; i++) {
-	//         if (categories[i].title === categoryTitle) {
-	//           selectedCategory = categories[i];
-	//         } else {
-	//           filteredCategories.push(categories[i]);
-	//         }
-	//       }
-	// 
-	//       drawMarkets(filteredMarkets);
-	//       drawCategories(selectedCategory, filteredCategories);
-	//     })
-	//   }
+    function drawCategories(activeCategory, inactiveCategories) {
+      var activeItem, inactiveItems;
+      var categoriesTemplate = $('.b-categories-template');
+  
+      $('.b-categories').html(categoriesTemplate.tmpl({ activeCategory: activeCategory, inactiveCategories: inactiveCategories }));
+  
+      activeItem    = $('.b-categories ul li:first');
+      inactiveItems = $('.b-categories ul li:not(:first)');
+  
+      activeItem.click(function() { inactiveItems.toggle() });
+      inactiveItems.click(function() {
+        var filteredMarkets, selectedCategory, filteredCategories = [];
+        var categoryTitle = $(this).find('span').text();
+  
+        if (categoryTitle === 'Все категории') {
+          filteredMarkets = markets;
+        } else {
+          filteredMarkets = $.grep(markets, function(market) { return (market.category.title === categoryTitle) });
+        }
+  
+        for (var i = 0; i < categories.length; i++) {
+          if (categories[i].title === categoryTitle) {
+            selectedCategory = categories[i];
+          } else {
+            filteredCategories.push(categories[i]);
+          }
+        }
+  
+        drawMarkets(filteredMarkets);
+        drawCategories(selectedCategory, filteredCategories);
+      })
+    }
 	//   // ====================
 	// 
 	//   // gifts
@@ -282,53 +289,59 @@ $(document).ready(function() {
 	// 
 	// 
 	// 
-	//   var reviewForm = $('#review_form');
-	//   var reviewText = $('#review_text');
+    var reviewForm = $('#review_form');
+    var reviewText = $('#review_text');
+
+    $('#review_form_submit_button').click(function() {
+      if (reviewText.val()) { reviewForm.submit() }
+
+      return false;
+    })
+
+    reviewForm.live('ajax:success', function(data, status, xhr) {
+      if (status[0]) {
+        var market = $.parseJSON(status[1]);
+
+        drawDescription(market);
+        drawReviews(market);
+        toggleTab($('#reviews_tab'));
+        reviewText.val('');
+      }
+    })
+	//
+  function toggleTab(tab) {
+    $('.b-tabs-active').attr('class', 'b-tabs-inactive');
+    tab.attr('class', 'b-tabs-active');
+
+    $('.b-sidebar-middle-description').nextAll(':visible').hide();
+
+    var path = window.location.hash.match(/^.+\d+/);
+
+    switch(tab.attr('id')) {
+      case 'info_tab':
+        // window.location = path;
+        middleInfo.show();
+        break;
+        case 'reviews_tab':
+        window.location = path + '/reviews';
+        app.runRoute('get', path + '/reviews');
+        break;
+        case 'add_review_tab':
+        window.location = path + '/add_review';
+        app.runRoute('get', path + '/add_review');
+        break;
+    }
+  }
 	// 
-	//   $('#review_form_submit_button').click(function() {
-	//     if (reviewText.val()) { reviewForm.submit() }
-	// 
-	//     return false;
-	//   })
-	// 
-	//   reviewForm.live('ajax:success', function(data, status, xhr) {
-	//     if (status[0]) {
-	//       var market = $.parseJSON(status[1]);
-	// 
-	//       drawDescription(market);
-	//       drawReviews(market);
-	//       toggleTab($('#reviews_tab'));
-	//       reviewText.val('');
-	//     }
-	//   })
-	// 
-	//   function toggleTab(tab) {
-	//     $('.b-tabs-active').attr('class', 'b-tabs-inactive');
-	//     tab.attr('class', 'b-tabs-active');
-	// 
-	//     $('.b-sidebar-middle-description').nextAll(':visible').hide();
-	//     switch(tab.attr('id')) {
-	//       case 'info_tab':
-	//         middleInfo.show();
-	//         break;
-	//       case 'reviews_tab':
-	//         $('.b-sidebar-middle-reviews').show();
-	//         break;
-	//       case 'add_review_tab':
-	//         $('.b-sidebar-middle-add_review').show();
-	//         break;
-	//     }
-	//   }
-	// 
-	//   $('.b-tabs a').click(function() {
-	//     toggleTab($(this));
-	// 
-	//     return false;
-	//   })
-	// 
-	//   $('#add_review').click(function() {
-	//     toggleTab($('#add_review_tab'));
-	// 
-	//     return false;
-	//   })
+  $('.b-tabs-inactive').live('click', function() {
+    toggleTab($(this));
+
+    return false;
+  })
+
+  $('#add_review').click(function() {
+    toggleTab($('#add_review_tab'));
+
+    return false;
+  })
 })
