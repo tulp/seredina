@@ -11,11 +11,11 @@ class User < ActiveRecord::Base
   attr_accessor :temporary_password_accessor
 
   def set_password
-    self.password = self.temporary_password_accessor = (Digest::SHA1.new << Time.now.to_s).to_s[0..9]
+    self.password = self.temporary_password_accessor = sha1_key(10)
   end
 
   def generate_discount_code
-    self.discount_code = (Digest::SHA1.new << Time.now.to_s).to_s
+    self.discount_code = sha1_key
   end
 
   def get_gift!
@@ -30,5 +30,12 @@ class User < ActiveRecord::Base
 
   def can_give_gifts?
     self.available_gifts > 0
+  end
+
+  private
+
+  def sha1_key(length = nil)
+    key = (Digest::SHA1.new << Time.now.to_s).to_s
+    length ? key[0..length - 1] : key
   end
 end

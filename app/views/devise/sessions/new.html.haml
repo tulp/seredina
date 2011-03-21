@@ -1,6 +1,21 @@
 - content_for :head do
   :javascript
-    var rootPath = "#{root_path}";
+    var rootPath        = "#{root_path}";
+    var jsonLandingPath = "#{json_landing_path}";
+
+.b-sidebar
+  .b-sidebar-top
+  .b-sidebar-middle
+    %img.b-sidebar-middle-logo{ :src => image_path('golden.png') }
+    %h1= t :landing_categories_title
+    .b-categories
+      %ul
+        %li
+          %img.b-categories-icon{ :src => image_path('categories/all.png') }
+          %span.b-categories-span= t :landing_categories_active
+          %img.b-categories-arrow{ :src => image_path('list_arrow.png') }
+  .b-sidebar-bottom
+    = image_tag('tulp_logo_small.png')
 
 .overlay
   .buzz
@@ -22,7 +37,7 @@
               = f.text_field :email, :placeholder => t(:landing_email_placeholder)
             .landing_form_password
               %span= t :landing_password_invitation_text
-              = f.password_field :password, :class => 'password_field'
+              = f.password_field :password, :class => 'password_field', :disabled => true
             = image_submit_tag 'button.png', :class => 'to_map'
       .window_bottom
         .arrow

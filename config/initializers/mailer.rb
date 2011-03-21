@@ -1,5 +1,3 @@
-require 'tlsmail'
-
 Net::SMTP.enable_tls(OpenSSL::SSL::VERIFY_NONE)
 
 ActionMailer::Base.delivery_method = :smtp
@@ -15,5 +13,3 @@ ActionMailer::Base.smtp_settings = {
   :user_name      => 'jazzcloud.ltd@gmail.com',
   :password       => 'rozenbom778921'
 }
-
-Devise.mailer_sender =  'Gold Mailer <jazzcloud.ltd@gmail.com>'

@@ -1,7 +1,8 @@
 $(document).ready(function() {
-  var emailRegexp = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
-  var landingForm = $('#landing_form');
-  var userEmail   = $('#user_email');
+  var emailRegexp  = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+  var landingForm  = $('#landing_form');
+  var userEmail    = $('#user_email');
+  var userPassword = $('#user_password');
 
   function vibrateLanding() { $('.landing').vibrate({ frequency: 5000, spread: 5, duration: 600 }) };
 
@@ -29,9 +30,21 @@ $(document).ready(function() {
       window.location = rootPath;
     } else if (status === false) {
       vibrateLanding();
-      highlightField($('#user_password'));
+      highlightField(userPassword);
+    } else {
+      userPassword.attr('disabled', '');
     }
   })
 
   userEmail.placeholder();
+
+  $.getJSON(jsonLandingPath, function(markets) {
+    var geoPoint, placemark;
+
+    $.each(markets, function(index, market) {
+      geoPoint  = new YMaps.GeoPoint(market.longitude, market.latitude);
+      placemark = new YMaps.Placemark(geoPoint, { style: market.category.icon_style });
+      yandexMaps.addOverlay(placemark);
+    });
+  });
 });

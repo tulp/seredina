@@ -7,4 +7,6 @@ class Market < ActiveRecord::Base
   has_many   :reviews
 
   scope :fields_for_json, includes(:category, :reviews => :user)
+
+  scope :landing, includes(:category)
 end

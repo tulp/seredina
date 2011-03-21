@@ -25,4 +25,9 @@ class JsonController < ApplicationController
     end
     render :json => result
   end
+
+  def landing
+    render :json => Market.landing.to_json(:except => :category_id,
+                                           :include => { :category => { :only => :icon_style } })
+  end
 end

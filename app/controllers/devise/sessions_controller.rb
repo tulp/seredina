@@ -1,10 +1,12 @@
 class Devise::SessionsController < ApplicationController
   include Devise::Controllers::InternalHelpers
 
+  layout 'landing'
+
   prepend_before_filter :require_no_authentication, :only => [:new, :create]
 
   def create
-    if params[:user][:password].present?
+    if params[:user][:password]
       result = if user = warden.authenticate(:scope => resource_name)
         sign_in user
         true
@@ -21,9 +23,5 @@ class Devise::SessionsController < ApplicationController
       end
       render :nothing => true
     end
-  end
-
-  def destroy
-    sign_out_and_redirect(resource_name)
   end
 end

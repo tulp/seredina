@@ -1,14 +1,11 @@
 javascripts:
-  lib:
+  landing:
     - public/javascripts/lib/*.js
-  global:
-    - public/javascripts/global/*.js
-  app:
-    - public/javascripts/app/**/*.js
+    - public/javascripts/global.js
+    - public/javascripts/app/yandex_maps.js
+    - public/javascripts/app/landing.js
 
 stylesheets:
-  lib:
-    - public/stylesheets/lib/*.css
-  app:
+  common:
     - public/stylesheets/app/reset.css
-    - public/stylesheets/app/*.css
+    - public/stylesheets/**/*.css
