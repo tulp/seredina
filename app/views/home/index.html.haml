@@ -36,14 +36,14 @@
               %span.b-tabs-menu-left
                 %span.b-tabs-menu-text Добавить отзыв
       .b-sidebar-middle-description
-      .b-sidebar-middle-info
-      .b-sidebar-middle-reviews
+      .b-sidebar-middle-info.scroll
+      .b-sidebar-middle-reviews.scroll
         .b-reviews
         .b-button{ :id => 'add_review' }
           %span.b-button-left
           %span.b-button-right
             %span.b-button-text Добавить отзыв
-      .b-sidebar-middle-add_review
+      .b-sidebar-middle-add_review.scroll
         = form_for :review, :remote => true, :url => reviews_path, :html => { :id => 'review_form', :class => 'b-sidebar-add_review' } do |f|
           = f.hidden_field :market_id
           %span.b-sidebar-middle-add_review-headers Дайте оценку заведению:
