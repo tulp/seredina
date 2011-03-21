@@ -81,7 +81,7 @@
           %span Введите адрес, на который будет отправлена скидка:
           = text_field_tag :recipient_email, nil, :placeholder => 'Адрес электронной почты'
           %span Имя друга:
-          = f.text_field :recipient_name
+          = text_field_tag :recipient_name
           %span Ваше имя:
           = f.text_field :user_name
           = image_submit_tag 'send_dicount_button.png', :class => 'b-discount_form_send'

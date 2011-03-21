@@ -332,6 +332,7 @@
   float:left;
   display:block;
   outline:none;
+  cursor: default;
 }
 
 .b-tabs-inactive {
@@ -579,7 +580,7 @@
   top:0;
   width:100%;
   height:100%;
-  display:none;
+/*  display:none;*/
   z-index: 1;
 }
 
