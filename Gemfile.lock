@@ -71,7 +71,6 @@ GEM
       daemons (>= 1.0.3)
       fastthread (>= 1.0.1)
       gem_plugin (>= 0.2.3)
-    mysql2 (0.2.6)
     net-scp (1.0.4)
       net-ssh (>= 1.99.1)
     net-sftp (2.0.5)
@@ -127,8 +126,7 @@ DEPENDENCIES
   httparty (= 0.7.4)
   jammit (= 0.6.0)
   mongrel (= 1.1.5)
-  mysql2 (= 0.2.6)
-  pg
+  pg (= 0.10.1)
   rails (= 3.0.4)
   ruby-debug (= 0.10.3)
   tlsmail (= 0.0.1)
