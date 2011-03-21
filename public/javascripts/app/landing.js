@@ -25,7 +25,9 @@ $(document).ready(function() {
   })
 
   landingForm.live('ajax:success', function(data, status, xhr) {
-    if (status) {
+    if (status === true) {
+      window.location = rootPath;
+    } else if (status === false) {
       vibrateLanding();
       highlightField($('#user_password'));
     }

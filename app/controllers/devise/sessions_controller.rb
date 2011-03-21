@@ -5,11 +5,13 @@ class Devise::SessionsController < ApplicationController
 
   def create
     if params[:user][:password].present?
-      if user = warden.authenticate(:scope => resource_name)
-        sign_in_and_redirect user
+      result = if user = warden.authenticate(:scope => resource_name)
+        sign_in user
+        true
       else
-        render :json => true
+        false
       end
+      render :json => result
     else
       unless User.exists?(:email => params[:user][:email])
         user = User.new(params[:user])
@@ -20,7 +22,7 @@ class Devise::SessionsController < ApplicationController
       render :nothing => true
     end
   end
-  
+
   def destroy
     sign_out_and_redirect(resource_name)
   end
