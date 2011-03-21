@@ -148,14 +148,14 @@
   {{/if}}
   %h3 Скидка
   {{if classic}}
-  %p
-    %span.kind Classic:
-    %span ${classic}
+  %p.b-kind
+    %span.b-kind-title Classic:
+    %span.b-kind-text ${classic}
   {{/if}}
   {{if vip}}
-  %p
-    %span.kind VIP:
-    %span ${vip}
+  %p.b-kind
+    %span.b-kind-title VIP:
+    %span.b-kind-text ${vip}
   {{/if}}
   {{if phones || emails || websites}}
   .b-details
