@@ -1,12 +1,7 @@
 class HomeController < ApplicationController
-  def index
-    @review = Review.new
-    @review.rating = 3
-    # @work.project_id = params[:pid] unless params[:pid].nil?
-  end
+  before_filter :authenticate_user!
 
-  # временно
-  def gm
-    render 'golden_middle/index.haml'
+  def index
+    @categories = Category.all
   end
 end

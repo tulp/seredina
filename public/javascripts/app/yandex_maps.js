@@ -14,4 +14,4 @@ $(document).ready(function() {
 
   yandexMaps.addControl(zoomControl, zoomControlPosition);
   yandexMaps.addControl(typeControl);
-})
+});

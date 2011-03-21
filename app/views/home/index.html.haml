@@ -1,53 +1,21 @@
 :javascript
   var jsonMarketsPath     = "#{json_markets_path}";
-  var jsonUsersPath       = "#{json_users_path}";
   var jsonCategoriesPath  = "#{json_categories_path}";
   var jsonCurrentUserPath = "#{json_current_user_path}";
-
-#yandex_maps
-
-- unless user_signed_in?
-  #overlay
-    #buzz
-      .action
-      #dialog
-        #window_top
-        #window_middle
-          #title
-            %h2= t :dialog_title
-            = image_tag 'gold.png'
-          #description
-            = raw t :dialog_description,
-                    :gold_link => link_to(t(:gold_link_title), 'http://seredina.ru', :target => 'blank'),
-                    :tulp_link => link_to(t(:tulp_link_title), 'http://tulp.ru',     :target => 'blank')
-          .select_cart
-            %form{ :name => 'select', :method => 'post'}
-              %h3
-                Выберите ваш вид карты:
-              .classic
-                %input{ :type => 'radio', :name => 'cart', :value => 'Classic'}Классическая
-              .vip
-                %input{ :type => 'radio', :name => 'cart', :value => 'Vip'}VIP
-          .sign_up_form
-            %span= t :sign_up_form_invitation_text
-            = form_for :user, :url => user_registration_path, :remote => true, :html => { :id => 'sign_up_form' } do |f|
-              = f.text_field :email, :placeholder => t(:sign_up_form_email_placeholder), :id => 'sign_up_user_email'
-              = image_submit_tag 'button.png', :class => 'sign_up_form_submit_button'
-          .sign_in_form
-            %span= t :sign_in_form_invitation_text
-            = form_for :user, :url => user_session_path, :remote => true, :html => { :id => 'sign_in_form' } do |f|
-              = f.hidden_field :email, :id => 'sign_in_user_email'
-              = f.password_field :password, :class => 'password_field'
-              = image_submit_tag 'button.png', :class => 'to_map'
-        #window_bottom
-          #arrow
 
 .b-sidebar
   .b-sidebar-top
   .b-sidebar-middle
     %img.b-sidebar-middle-logo{ :src => image_path('golden.png') }
-    %h1 Показывать:
     .b-categories
+      %ul
+        -@categories.each do |category|
+          %li{:class => "#{category.icon_image}"}
+            //%a{:href => "#/#{category.icon_image}"}
+            %img.b-categories-icon{ :src => "/images/categories/#{category.icon_image}.png" }
+            %span.b-categories-span #{category.title}
+            %img.b-categories-arrow.hidden{ :src => image_path('list_arrow.png') }
+
     .b-market
       .b-tabs
         %ul.b-tabs-menu
@@ -134,7 +102,7 @@
 
 %script.b-sidebar-middle-description-template{ :type => 'text/x-jquery-tmpl' }
   %p.b-sidebar-middle-subcategory ${subcategory}
-  %img{ :src => '${category.icon_image}' }
+  %img{ :src => '/images/categories/${category.icon_image}.png' }
   %span.b-stars
     {{html $item.rating}}
   .b-sidebar-middle-description-wrap
