@@ -31,7 +31,6 @@ namespace :parser do
                     'Услуги'                    => 'default#barberShopIcon' }
 
 
-    Category.create(:title => 'Все категории', :icon_image => 'all')
     # /images/categories/hospital.png
 
     FasterCSV.foreach(filename) do |market|
@@ -83,6 +82,8 @@ namespace :parser do
 
       print '.'
     end
+    
+    Category.create(:title => 'Все категории', :icon_image => 'all')
 
     puts
   end
