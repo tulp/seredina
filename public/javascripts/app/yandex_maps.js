@@ -14,4 +14,10 @@ $(document).ready(function() {
 
   yandexMaps.addControl(zoomControl, zoomControlPosition);
   yandexMaps.addControl(typeControl);
+  
+  YMaps.Events.observe(yandexMaps, yandexMaps.Events.Click, function () {
+      console.log("hide categories");
+      // hide categories
+  });
+  
 });

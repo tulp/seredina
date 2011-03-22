@@ -13,82 +13,79 @@ $(document).ready(function() {
   var reviewForm = $('#review_form');
   var reviewText = $('#review_text');
   
-  function redirect(path){
-    window.location = "#/"+path//; app.runRoute('get','#/'+path); 
-  }
-  
-  function render(path){
-   app.runRoute('get','#/'+path); 
-  }
+  // function redirect(path){
+  //   window.location = "#/"+path//; app.runRoute('get','#/'+path); 
+  // }
+  // 
+  // function render(path){
+  //  app.runRoute('get','#/'+path); 
+  // }
 
   function cl(a){
     console.log(a);
   }
-
  
- var app = $.sammy('.b-sidebar', function() {
-   //Around
-   this.around(function(callback) {
-     var context = this;
-     this.load('/j/markets?category=all')
-         .then(function(items){
-           context.items = items;
-           markets = items;
-         })
-         .then(callback);
-         
-   });
-   
-    //Category
-     this.get('#/:category', function(context) {
-      var category = this.params['category'];
-      // showCategories(category);
- 
-       // отрендерить маркеты этой категории
-      // $.get('/j/markets?category='+category, drawMarkets, 'json');
-      // drawMarkets(markets);
-    });
- 
-     this.get('#/p/:id', function(context) {
+ // var app = $.sammy('.b-sidebar', function() {
+ //   //Around
+ //   this.around(function(callback) {
+ //     var context = this;
+ //     this.load('/j/markets?category=all')
+ //         .then(function(items){
+ //           context.items = items;
+ //           markets = items;
+ //         })
+ //         .then(callback);
+ //         
+ //   });
+ //   
+ //    //Category
+ //     this.get('#/:category', function(context) {
+ //      var category = this.params['category'];
+ //      // showCategories(category);
  // 
- //       var id = this.params['id'];
- //      // render(category);
- //       $.get('/j/markets?id='+id, function(market){
+ //       // отрендерить маркеты этой категории
+ //      // $.get('/j/markets?category='+category, drawMarkets, 'json');
+ //      // drawMarkets(markets);
+ //    });
  // 
- //       drawDescription(market);
- //       drawInfo(market);
- //        drawReviews(market);
- //        fillReviewForm(market);
+ //     this.get('#/p/:id', function(context) {
+ // // 
+ // //       var id = this.params['id'];
+ // //      // render(category);
+ // //       $.get('/j/markets?id='+id, function(market){
+ // // 
+ // //       drawDescription(market);
+ // //       drawInfo(market);
+ // //        drawReviews(market);
+ // //        fillReviewForm(market);
+ // // 
+ // //       $('.b-market').show();
+ // //       })
+ // //      
+ // // 
+ // //       // переключить выбиралку категорий в свернутое состояние
+ // // 
+ // //      collapseCategories();
+ // // 
+ // //       // выделить текущий маркет на карте
+ //    });
  // 
- //       $('.b-market').show();
- //       })
- //      
+ //     this.get('#/p/:id/reviews', function(context) {
+ //      console.log('reviews of market');
+ //       // показать отзывы 
+ //      $('.b-sidebar-middle-reviews').show();
+ //    });
  // 
- //       // переключить выбиралку категорий в свернутое состояние
- // 
- //      collapseCategories();
- // 
- //       // выделить текущий маркет на карте
-    });
- 
-     this.get('#/p/:id/reviews', function(context) {
-      console.log('reviews of market');
-       // показать отзывы 
-      $('.b-sidebar-middle-reviews').show();
-    });
- 
-     this.get('#/p/:id/add_review', function(context) {
-      console.log('add review to market');
-       // показать форму добавления отзыва
-       $('.b-sidebar-middle-add_review').show();
-    });
- });
-  
-  $(function() {
-    app.run('#/all');
-  });
-
-
+ //     this.get('#/p/:id/add_review', function(context) {
+ //      console.log('add review to market');
+ //       // показать форму добавления отзыва
+ //       $('.b-sidebar-middle-add_review').show();
+ //    });
+ // });
+ //  
+ //  $(function() {
+ //    app.run('#/all');
+ //  });
 
 	function selectedPlacemark(market) {
 		var selectedSize = new YMaps.Style();
@@ -109,6 +106,7 @@ $(document).ready(function() {
     activeItem    = $('.b-categories ul li:first');
     inactiveItems = $('.b-categories ul li:not(:first)');
 
+    
     activeItem.click(function() { inactiveItems.toggle() });
     inactiveItems.click(function() {
       var filteredMarkets, selectedCategory, filteredCategories = [];
@@ -132,7 +130,6 @@ $(document).ready(function() {
       drawCategories(selectedCategory, filteredCategories);
     })
   }
-    
     
     // markets
     function drawMarkets(markets) {
@@ -170,7 +167,7 @@ $(document).ready(function() {
         })
       })
     
-      yandexMaps.setBounds(yandexMapsGeoCollectionBounds);
+      // yandexMaps.setBounds(yandexMapsGeoCollectionBounds);
     }
 
     function drawDescription(market) {
@@ -208,58 +205,6 @@ $(document).ready(function() {
       markets = collection;
       drawMarkets(markets);
     });
-    // ====================
-
-    // sign up and sign in forms
-    // function showSignInForm() {
-    //   $('.sign_up_form').hide();
-    //   $('.sign_in_form').show();
-    //   $('#sign_in_user_email').val(signUpUserEmail.val());
-    // }
-
-    // function vibrateDialog() { $('#dialog').vibrate({ frequency: 5000, spread: 5, duration: 600 }) };
-    // 
-    // function highlightField(field) {
-    //   if ((field.attr('placeholder') !== field.val()) && (field.val() !== '')) {
-    //     field.css('color', 'red');
-    //     setTimeout(function() { field.css('color', '') }, 600);
-    //   }
-    // }
-
-    // sign up form
-    // signUpForm.live('ajax:beforeSend', function(xhr, settings) {
-    //   if (emailRegexp.test(signUpUserEmail.val())) {
-    //     for (var i = 0; i < users.length; i++) {
-    //       if (users[i].email === signUpUserEmail.val()) {
-    //         current_user = users[i];
-    //         break;
-    //       }
-    //     }
-    //     showSignInForm();
-    //     if (current_user) { return false };
-    //   } else {
-    //     vibrateDialog();
-    //     highlightField(signUpUserEmail);
-    // 
-    //     return false;
-    //   }
-    // })
-    // 
-    // signUpUserEmail.placeholder();
-
-    // sign in form
-    // $('#sign_in_form').live('ajax:success', function(data, status, xhr) {
-    //   if (status) {
-    //     $('#overlay').hide();
-    //     checkCurrentUserGifts();
-    //   } else {
-    //     vibrateDialog();
-    //     highlightField($('#user_password'));
-    //   }
-    // })
-
-    // $.getJSON(jsonUsersPath, function(collection) { users = collection });
-    // ====================
 
     // categories
     $.getJSON(jsonCategoriesPath, function(collection) {
