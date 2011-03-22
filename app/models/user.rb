@@ -24,13 +24,11 @@ class User < ActiveRecord::Base
   end
 
   def get_gift!
-    self.available_gifts += 1
-    self.save
+    update_attribute(:available_gifts, self.available_gifts.next)
   end
 
   def give_gift!
-    self.available_gifts -= 1
-    self.save
+    update_attribute(:available_gifts, self.available_gifts.pred)
   end
 
   def can_give_gifts?

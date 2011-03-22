@@ -13,12 +13,19 @@ var oldMarket, oldPlacemark;
   var reviewForm = $('#review_form');
   var reviewText = $('#review_text');
   
+  var emailRegexp    = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+
+  function highlightField(field) {
+    if ((field.attr('placeholder') !== field.val()) && (field.val() !== '')) {
+      field.css('color', 'red');
+      setTimeout(function() { field.css('color', '') }, 600);
+    }
+  };
+
 
   function cl(a){
     console.log(a);
-  }
-
- 
+  } 
 
 
 function selectedPlacemark(market) {
@@ -236,8 +243,11 @@ return selectedSize;
 
     reviewForm.live('ajax:success', function(data, status, xhr) {
       if (status[0]) {
-        var market = $.parseJSON(status[2]);
+        var market;
 
+        if (status[1]) { notificationLabel.show() };
+
+        market = $.parseJSON(status[2]);
         drawDescription(market);
         // drawReviews(market);
         toggleTab($('#reviews_tab'));
