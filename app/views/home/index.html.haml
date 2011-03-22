@@ -36,33 +36,34 @@
               %span.b-tabs-menu-left
                 %span.b-tabs-menu-text Добавить отзыв
       .b-sidebar-middle-description
-      .b-sidebar-middle-info.scroll
-      .b-sidebar-middle-reviews.scroll
-        .b-reviews
-        .b-button{ :id => 'add_review' }
-          %span.b-button-left
-          %span.b-button-right
-            %span.b-button-text Добавить отзыв
-      .b-sidebar-middle-add_review.scroll
-        = form_for :review, :remote => true, :url => reviews_path, :html => { :id => 'review_form', :class => 'b-sidebar-add_review' } do |f|
-          = f.hidden_field :market_id
-          %span.b-sidebar-middle-add_review-headers Дайте оценку заведению:
-          :plain
-            <select id="review_rating" name="review[rating]" selected="3">
-              <option value="5">отлично</option>
-              <option value="4">хорошо</option>
-              <option value="3" selected>нормально</option>
-              <option value="2">плохо</option>
-              <option value="1">ужасно</option>
-              </select>
-          -#= f.select :rating, options_for_select([["ужасно",1],["плохо",2],["нормально",3],["хорошо",4],["отлично",5]]), {}, {:selected => "нормально"}
-          %span Опишите ваш опыт:
-          %label
-            = f.text_area :text
-        .b-button{ :id => 'review_form_submit_button' }
-          %span.b-button-left
-          %span.b-button-right
-            %span.b-button-text Сохранить
+      .b-sidebar-middle-content
+        .b-sidebar-middle-info
+        .b-sidebar-middle-reviews
+          .b-reviews
+          .b-button{ :id => 'add_review' }
+            %span.b-button-left
+            %span.b-button-right
+              %span.b-button-text Добавить отзыв
+        .b-sidebar-middle-add_review
+          = form_for :review, :remote => true, :url => reviews_path, :html => { :id => 'review_form', :class => 'b-sidebar-add_review' } do |f|
+            = f.hidden_field :market_id
+            %span.b-sidebar-middle-add_review-headers Дайте оценку заведению:
+            :plain
+              <select id="review_rating" name="review[rating]" selected="3">
+                <option value="5">отлично</option>
+                <option value="4">хорошо</option>
+                <option value="3" selected>нормально</option>
+                <option value="2">плохо</option>
+                <option value="1">ужасно</option>
+                </select>
+            -#= f.select :rating, options_for_select([["ужасно",1],["плохо",2],["нормально",3],["хорошо",4],["отлично",5]]), {}, {:selected => "нормально"}
+            %span Опишите ваш опыт:
+            %label
+              = f.text_area :text
+          .b-button{ :id => 'review_form_submit_button' }
+            %span.b-button-left
+            %span.b-button-right
+              %span.b-button-text Сохранить
   .b-sidebar-bottom
     = link_to image_tag('tulp_logo_small.png'), 'http://tulp.ru', :target => 'blank'
 
