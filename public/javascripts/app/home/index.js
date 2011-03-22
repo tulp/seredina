@@ -84,9 +84,9 @@ $(document).ready(function() {
     });
  });
   
-  $(function() {
-    app.run('#/all');
-  });
+  // $(function() {
+  //   app.run('#/all');
+  // });
 
 
 
