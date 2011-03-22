@@ -1,5 +1,5 @@
 class User < ActiveRecord::Base
-  devise :database_authenticatable, :validatable
+  devise :database_authenticatable, :registerable, :validatable
 
   attr_accessible :email, :password, :name, :phone
 
@@ -7,6 +7,7 @@ class User < ActiveRecord::Base
   has_many :gifts
 
   validates_presence_of :phone, :on => :update
+  validates_presence_of :name,  :on => :update
 
   attr_accessor :temporary_password_accessor
 
@@ -16,6 +17,10 @@ class User < ActiveRecord::Base
 
   def generate_discount_code
     self.discount_code = sha1_key
+  end
+
+  def clear_discount_code
+    self.discount_code = nil
   end
 
   def get_gift!

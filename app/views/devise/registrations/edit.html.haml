@@ -1,0 +1,17 @@
+.b-edit_user
+  .b-edit_user_wrap
+    .b-edit_user_top
+    .b-edit_user_middle
+      %h1.b-edit_user_middle_title= t :edit_user_middle_title
+      %img.b-edit_user_middle_logo{ :src => image_path('gm_logo_discount.png') }
+      %span.b-edit_user_middle_msg= t :edit_user_middle_msg
+      .b-edit_user_form
+        = form_for @user, :url => edit_user_registration_path, :remote => true, :html => { :id => 'edit_user_form' } do |f|
+          %span= t :edit_user_name
+          = f.text_field :name
+          %span= t :edit_user_email
+          = f.text_field :email
+          %span= t:edit_user_phone
+          = f.text_field :phone
+          = image_submit_tag 'button_save.png', :class => 'b-edit_user_form_send'
+    .b-edit_user_bottom

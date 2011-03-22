@@ -1,14 +1,17 @@
 Gold::Application.routes.draw do
-  devise_for :users, :skip => [:sessions] do
+  devise_for :users, :skip => [:sessions, :registrations] do
+    # sessions
     get  '/landing', :to => 'devise/sessions#new',    :as => 'new_user_session'
     post '/landing', :to => 'devise/sessions#create', :as => 'user_session'
+
+    # registrations
+    get '/users/:discount_code', :to => 'devise/registrations#edit',   :as => 'edit_user_registration'
+    put '/users/:discount_code', :to => 'devise/registrations#update'
   end
 
   resources :reviews, :only => :create
 
   resources :gifts, :only => :create
-
-  resources :users, :only => [:show, :update]
 
   scope '/j' do
     get 'markets',      :to => 'json#markets',    :as => 'json_markets'
@@ -16,8 +19,6 @@ Gold::Application.routes.draw do
     get 'current_user', :to => 'json#current',    :as => 'json_current_user'
     get 'landing',      :to => 'json#landing',    :as => 'json_landing'
   end
-
-
 
   # Временно
   match '/gm' => 'home#gm'

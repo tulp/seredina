@@ -940,7 +940,7 @@ input.b-discount_form_send {
   background: url(/images/landing_window_bottom.png) no-repeat;
 }
 
-#user_email {
+.user_email {
   width:   355px;
   height:  33px;
   padding: 5px;
@@ -959,4 +959,97 @@ input.b-discount_form_send {
   height: 70px;
 
   background: url(/images/landing_arrow.png);
+}
+
+.b-edit_user {
+ background-image:url('/images/fade.png');
+ position:absolute;
+ top:0;
+ width:100%;
+ height:100%;
+ display:block;
+ z-index: 100;
+}
+
+.b-edit_user_wrap {
+ width:620px;
+ margin:20px auto;
+}
+
+.b-edit_user_top {
+ background:url('/images/send_discount_top_new.png') no-repeat;
+ float:left;
+ height:42px;
+ width:617px;
+}
+
+.b-edit_user_top a {
+ display:block;
+ width:14px;
+ height:16px;
+ margin:20px 0 0 578px;
+}
+
+.b-edit_user_middle {
+ background:url('/images/send_discount_middle.png') repeat-y;
+ float:left;
+ padding-left:70px;
+}
+
+.b-edit_user_bottom {
+ background:url('/images/send_discount_bottom.png') no-repeat;
+ float:left;
+ height:100px;
+ width:617px;
+}
+
+.b-edit_user_middle_title {
+ display:block;
+ float:left;
+ padding:0;
+ font-size: 26px;
+ line-height: 32px;
+ font-weight:500;
+ width:350px;
+ margin-top:10px;
+}
+
+.b-edit_user_middle_logo {
+ margin-top:10px;
+}
+
+.b-edit_user_middle_msg {
+ color:#a3a19c;
+ display:block;
+ padding:20px 150px 20px 0;
+ line-height:17px;
+}
+
+.b-edit_user_form {
+ padding-top:10px;
+}
+
+.b-edit_user_form span {
+ display:block;
+ padding-bottom:5px;
+ width:300px;
+ line-height:19px;
+ font-size:15px;
+ font-weight:600;
+}
+
+.b-edit_user_form input {
+ font-size:18px;
+ height: 33px;
+ width: 355px;
+ margin-bottom:10px;
+}
+
+input.b-edit_user_form_send {
+ width:125px;
+ height:43px;
+ display:block;
+ padding-top:20px;
+ position:absolute;
+ outline: none;
 }

@@ -16,3 +16,10 @@ ru:
 
   landing_categories_title:  'Показывать:'
   landing_categories_active: 'Все категории'
+
+  edit_user_middle_title: 'Текст текс текс'
+  edit_user_middle_msg:   'Текст текс текс Текст текс текс Текст текс текс Текст текс текст'
+
+  edit_user_name:  'Ваше имя:'
+  edit_user_email: 'Ваш email:'
+  edit_user_phone: 'Ваш телефон:'

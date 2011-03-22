@@ -4,10 +4,28 @@
     = csrf_meta_tag
     = include_stylesheets :common
     %title= t :application_title
-    = yield :head
+
+    :javascript
+      var rootPath        = "#{root_path}";
+      var jsonLandingPath = "#{json_landing_path}";
 
   %body
     #yandex_maps
+
+    .b-sidebar
+      .b-sidebar-top
+      .b-sidebar-middle
+        %img.b-sidebar-middle-logo{ :src => image_path('golden.png') }
+        %h1= t :landing_categories_title
+        .b-categories
+          %ul
+            %li
+              %img.b-categories-icon{ :src => image_path('categories/all.png') }
+              %span.b-categories-span= t :landing_categories_active
+              %img.b-categories-arrow{ :src => image_path('list_arrow.png') }
+      .b-sidebar-bottom
+        = image_tag('tulp_logo_small.png')
+
     = yield
 
   %bottom
