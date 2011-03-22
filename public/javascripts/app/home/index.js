@@ -50,6 +50,7 @@ $(document).ready(function() {
     });
  
      this.get('#/p/:id', function(context) {
+
  // 
  //       var id = this.params['id'];
  //      // render(category);
@@ -160,7 +161,8 @@ $(document).ready(function() {
     
           drawDescription(market);
           drawInfo(market);
-          drawReviews(market);
+          toggleTab($('.b-tabs a').first());
+          // drawReviews(market);
           fillReviewForm(market);
     
           $('.b-market').show();
@@ -361,10 +363,10 @@ $(document).ready(function() {
 
     reviewForm.live('ajax:success', function(data, status, xhr) {
       if (status[0]) {
-        var market = $.parseJSON(status[1]);
+        var market = $.parseJSON(status[2]);
 
         drawDescription(market);
-        drawReviews(market);
+        // drawReviews(market);
         toggleTab($('#reviews_tab'));
         reviewText.val('');
       }
@@ -380,7 +382,11 @@ $(document).ready(function() {
           middleInfo.show();
           break;
         case 'reviews_tab':
-          $('.b-sidebar-middle-reviews').show();
+          $.getJSON(jsonMarketsPath + '/' + $('#market_id').val(), function(market) {
+            drawReviews(market);
+            $('.b-sidebar-middle-reviews').show();
+          });
+
           break;
         case 'add_review_tab':
           $('.b-sidebar-middle-add_review').show();
