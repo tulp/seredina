@@ -336,7 +336,6 @@
   display:block;
   float:left;
   padding:5px 5px 0 0px;
-  margin
 }
 
 .b-tabs-menu-text {
@@ -350,6 +349,12 @@
   padding-left:14px;
 }
 
+.b-sidebar-middle-content {
+  height: auto;
+/*  background: yellow;*/
+  overflow-y:auto;
+  overflow-x:hidden;
+}
 .b-sidebar-middle-description {
   background-image:url('/images/tabs_background.png');
   background-repeat:repeat-x;
@@ -357,7 +362,7 @@
   clear:both;
   padding-top:25px;
   width:300px;
-  overflow:hidden;
+/*  overflow:hidden;*/
 }
 
 .b-sidebar-middle-description h2 {

@@ -120,9 +120,6 @@ return selectedSize;
     function drawInfo(market) {
       var infoTemplate = $('.b-sidebar-middle-info-template');
 
-     // $('.b-sidebar-middle').css('max-height', $('body').height() - 100);
-     // middleInfo.css('height', $('body').height() - 380);
-
       middleInfo.html(infoTemplate.tmpl(market));
     }
 
@@ -228,8 +225,6 @@ return selectedSize;
     })
     // ====================
 
-
-
     var reviewForm = $('#review_form');
     var reviewText = $('#review_text');
 
@@ -253,30 +248,29 @@ return selectedSize;
     function toggleTab(tab) {
       $('.b-tabs-active').attr('class', 'b-tabs-inactive');
       tab.attr('class', 'b-tabs-active');
+      // $('.b-sidebar-middle-content').css('max-height', $('body').height() - 100);
 
-      $('.b-sidebar-middle-description').nextAll(':visible').hide();
+      $('.b-sidebar-middle-content').children(':visible').hide();
       switch(tab.attr('id')) {
         case 'info_tab':
-
-          // middleInfo.show();
-          // middleInfo.jScrollPane();
           $('.b-sidebar-middle-info').show();
-          $('.b-sidebar-middle-info').jScrollPane();
           break;
         case 'reviews_tab':
           $.getJSON(jsonMarketsPath + '/' + $('#market_id').val(), function(market) {
             drawReviews(market);
             $('.b-sidebar-middle-reviews').show();
-            $('.b-sidebar-middle-reviews').jScrollPane();
           });
 
           break;
         case 'add_review_tab':
           $('.b-sidebar-middle-add_review').show();
-          $('.b-sidebar-middle-add_review').jScrollPane();
-
           break;
       }
+      // $('.b-sidebar-middle-content').css('height');
+
+      $('.b-sidebar-middle-content').css('max-height', $('body').height() - 320);
+      // $('.b-sidebar-middle-content').jScrollPane();
+      
     }
 
     $('.b-tabs a').click(function() {
