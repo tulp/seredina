@@ -2,12 +2,13 @@
 %html
   %head
     = csrf_meta_tag
-    = javascript_include_tag "http://api-maps.yandex.ru/1.1/index.xml?key=#{YANDEX_MAPS_API_KEY}"
-    = include_javascripts :common
     = include_stylesheets :common
     %title= t :application_title
-    = yield :head
 
   %body
     #yandex_maps
     = yield
+
+  %bottom
+    = javascript_include_tag "http://api-maps.yandex.ru/1.1/index.xml?key=#{YANDEX_MAPS_API_KEY}"
+    = include_javascripts :common

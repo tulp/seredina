@@ -51,7 +51,7 @@
   height: 40px;
   position: relative;
   padding:0 20px 20px;
-  z-index: 1;
+  z-index: 100;
 }
 
 /*выпадающее меню*/
@@ -465,7 +465,7 @@
 .b-kind-text {
   display:block;
   float:left;
-  max-width:217px;
+  max-width:200px;
 }
 
 /*ОТЗЫВЫ*/

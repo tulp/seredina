@@ -101,6 +101,7 @@
     {{/each}}
 
 %script.b-sidebar-middle-description-template{ :type => 'text/x-jquery-tmpl' }
+  %input#market_id{ :type => 'hidden', :value => '${id}' }
   %p.b-sidebar-middle-subcategory ${subcategory}
   %img{ :src => '/images/categories/${category.icon_image}.png' }
   %span.b-stars
@@ -162,7 +163,6 @@
     .b-details-left
     .b-details-right
       %span.b-details-text Описание
-      -#.b-details-arrow-closed
   %p.b-details-description ${description}
   {{/if}}
 
