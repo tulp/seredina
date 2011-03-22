@@ -363,8 +363,11 @@ $(document).ready(function() {
 
     reviewForm.live('ajax:success', function(data, status, xhr) {
       if (status[0]) {
-        var market = $.parseJSON(status[2]);
+        var market;
 
+        if (status[1]) { notificationLabel.show() };
+
+        market = $.parseJSON(status[2]);
         drawDescription(market);
         // drawReviews(market);
         toggleTab($('#reviews_tab'));
