@@ -11,5 +11,5 @@ ActionMailer::Base.smtp_settings = {
   :domain         => 'gmail.com',
   :authentication => :plain,
   :user_name      => 'jazzcloud.ltd@gmail.com',
-  :password       => 'rozenbom778921'
+  :password       => 'tulper778921'
 }
