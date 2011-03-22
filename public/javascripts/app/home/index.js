@@ -13,6 +13,16 @@ $(document).ready(function() {
   var reviewForm = $('#review_form');
   var reviewText = $('#review_text');
   
+  var emailRegexp    = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+
+  function highlightField(field) {
+    if ((field.attr('placeholder') !== field.val()) && (field.val() !== '')) {
+      field.css('color', 'red');
+      setTimeout(function() { field.css('color', '') }, 600);
+    }
+  };
+
+
   function redirect(path){
     window.location = "#/"+path//; app.runRoute('get','#/'+path); 
   }

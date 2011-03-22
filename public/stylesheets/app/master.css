@@ -649,6 +649,7 @@ input.b-discount_form_send {
   display:block;  
   padding-top:20px;
   position:absolute;  
+  outline: none;
 }
 
 /* landing page */
