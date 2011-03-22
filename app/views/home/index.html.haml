@@ -91,12 +91,12 @@
 %script.b-categories-template{ :type => 'text/x-jquery-tmpl' }
   %ul
     %li
-      %img.b-categories-icon{ :src => '${activeCategory.icon_image}' }
+      %img.b-categories-icon{ :src => '/images/categories/${activeCategory.icon_image}.png' }
       %span.b-categories-span ${activeCategory.title}
       %img.b-categories-arrow{ :src => image_path('list_arrow.png') }
     {{each inactiveCategories}}
     %li
-      %img.b-categories-icon{ :src => '${$value.icon_image}' }
+      %img.b-categories-icon{ :src => '/images/categories/${$value.icon_image}.png' }
       %span.b-categories-span ${$value.title}
     {{/each}}
 

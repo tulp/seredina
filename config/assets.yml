@@ -4,6 +4,11 @@ javascripts:
     - public/javascripts/global.js
     - public/javascripts/app/yandex_maps.js
     - public/javascripts/app/landing.js
+  common:
+    - public/javascripts/lib/*.js
+    - public/javascripts/global.js
+    - public/javascripts/app/yandex_maps.js
+    - public/javascripts/app/home/index.js
 
 stylesheets:
   common:
