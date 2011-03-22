@@ -379,17 +379,24 @@ $(document).ready(function() {
       $('.b-sidebar-middle-description').nextAll(':visible').hide();
       switch(tab.attr('id')) {
         case 'info_tab':
-          middleInfo.show();
+
+          // middleInfo.show();
+          // middleInfo.jScrollPane();
+          $('.b-sidebar-middle-info').show();
+          $('.b-sidebar-middle-info').jScrollPane();
           break;
         case 'reviews_tab':
           $.getJSON(jsonMarketsPath + '/' + $('#market_id').val(), function(market) {
             drawReviews(market);
             $('.b-sidebar-middle-reviews').show();
+            $('.b-sidebar-middle-reviews').jScrollPane();
           });
 
           break;
         case 'add_review_tab':
           $('.b-sidebar-middle-add_review').show();
+          $('.b-sidebar-middle-add_review').jScrollPane();
+
           break;
       }
     }
