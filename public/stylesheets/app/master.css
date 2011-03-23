@@ -599,6 +599,11 @@
   font-size:13px;
   font-weight:700;
 }
+.rating_counter {
+  padding:0 !important;
+  margin:3px 0 0 3px !important;
+}
+
 
 .b-sidebar-middle-add_review .b-button {
   margin:15px 0 0 20px;
