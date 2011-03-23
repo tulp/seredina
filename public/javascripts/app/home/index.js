@@ -202,7 +202,7 @@ $(document).ready(function() {
 
     function vibrateDiscount() { $('.b-form_discount_wrap').vibrate({ frequency: 5000, spread: 5, duration: 600 }) };
 
-    notificationLabel.click(function() { formDiscount.show() });
+    notificationLabel.click(function() { formDiscount.fadeIn('slow') });
 
     giftForm.live('ajax:beforeSend', function(xhr, settings) {
       if (!emailRegexp.test(recipientEmail.val())) {
@@ -215,7 +215,7 @@ $(document).ready(function() {
 
     giftForm.live('ajax:success', function(data, status, xhr) {
       if (status[0]) {
-        formDiscount.hide();
+        formDiscount.fadeOut('slow');
         if (!status[1]) { notificationLabel.hide() };
       } else {
         vibrateDiscount();
@@ -225,7 +225,7 @@ $(document).ready(function() {
 
     formDiscount.find('.b-form_discount_top a').click(function() {
       giftForm.find('input').not(':hidden, :image').val('');
-      formDiscount.hide();
+      formDiscount.fadeOut('slow');
 
       return false;
     })
@@ -260,7 +260,7 @@ $(document).ready(function() {
         if (status[1]) { notificationLabel.show() };
 
         if (status[2]) {
-          formDiscount.show();
+          formDiscount.fadeIn('slow');
         } else {
           $('.b-notifications-yellow').fadeIn('slow').delay(5000).fadeOut('slow');
         };
