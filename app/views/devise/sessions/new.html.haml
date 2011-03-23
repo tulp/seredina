@@ -8,9 +8,7 @@
           %h2= t :landing_title
           = image_tag 'gold.png'
         .description
-          = raw t :landing_description,
-                  :landing_gold_link => link_to(t(:landing_gold_link_title), 'http://seredina.ru', :target => 'blank'),
-                  :landing_tulp_link => link_to(t(:landing_tulp_link_title), 'http://tulp.ru',     :target => 'blank')
+          = raw t :landing_description
         .landing_form
           = form_for :user, :url => user_session_path, :remote => true, :html => { :id => 'landing_form' } do |f|
             .landing_form_email
