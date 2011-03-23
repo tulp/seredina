@@ -30,11 +30,11 @@
               %span.b-tabs-menu-right
               %span.b-tabs-menu-left
                 %span.b-tabs-menu-text Отзывы
-          %li
+          %li.tabs-add-review
             %a.b-tabs-inactive{ :href => '#', :id => 'add_review_tab' }
               %span.b-tabs-menu-right
               %span.b-tabs-menu-left
-                %span.b-tabs-menu-text Добавить отзыв
+                %span.b-tabs-menu-text-review Добавить отзыв
       .b-sidebar-middle-description
       .b-sidebar-middle-content
         .b-sidebar-middle-info
@@ -171,7 +171,7 @@
   {{each reviews}}
   .b-review
     %span.b-review-email ${$value.user.email}
-    %span.b-stars
+    %span.b-stars-for_review
       {{html $value.rating}}
     %p.b-review-text ${$value.text}
   {{/each }}

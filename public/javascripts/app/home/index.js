@@ -121,7 +121,8 @@ $(document).ready(function() {
     function drawRating(object) {
       var spanWidth = 16 * object.rating;
 
-      return "<span class='b-stars-full' style='width:" + spanWidth + "px;'></span>";
+      // return "<span class='b-stars-full' style='width:" + spanWidth + "px;'></span>";
+      return "<span class='b-stars-full-for_review' style='width:" + spanWidth + "px;'></span>";
     }
 
     function drawInfo(market) {
