@@ -93,13 +93,14 @@
 .b-categories-arrow {
   float:right;
   margin-top: 10px;
-  display:block;  
+  display:block;
+  *margin-top: -14px;
 }
 
 /*текст в выпадающем меню*/
 .b-categories-span {
   margin:0 0 0 10px;
-  line-height:25px;
+  line-height:25px;  
 }
 
 /*блок магазина*/
@@ -218,6 +219,11 @@
   float:left;
 }
 
+.b-details-phone-numbers li {
+  display: block;
+  max-width: 200px;
+}
+
 .b-details-emails {
   font-size:10px;
   margin:10px 0 0 10px;
@@ -237,6 +243,11 @@
   overflow:hidden;
 }
 
+.b-details-email-addresses li {
+  display: block;
+  max-width: 200px;
+}
+
 .b-details-websites {
   font-size:10px;
   margin:10px 0 0 10px;
@@ -251,6 +262,11 @@
   margin:10px 0 0 5px;
   display: block;
   float:left;
+}
+
+.b-details-website-addresses li {
+  display: block;
+  max-width: 200px;
 }
 
 /*нижняя часть сайдбара*/
@@ -279,6 +295,8 @@
   position:relative;
   float:left;
   padding-left:20px;
+  *width:277px;  
+  overflow:hidden;  
 }
 
 .b-tabs-menu {
@@ -288,7 +306,7 @@
 .b-tabs-menu li {
   display:block;
   float:left;
-  padding-right:7px;
+  padding-right:7px;  
 }
 
 .b-tabs-menu-right {
@@ -317,7 +335,7 @@
   float:left;
   display:block;
   outline:none;
-  cursor: default;
+  cursor: pointer;
 }
 
 .b-tabs-inactive {
@@ -325,6 +343,7 @@
   display:block;
   font-size:11px;
   outline:none;
+  cursor: pointer;
 }
 
 .b-tabs-inactive span {
@@ -340,13 +359,28 @@
 
 .b-tabs-menu-text {
   margin-top:4px;
-  display:block;
+  display:block;  
 }
 
-.b-tabs-menu li:last-child .b-tabs-menu-text {
+.b-tabs-menu li:last-child .b-tabs-menu-text-review {
   background-image:url('/images/icon_add_review.png');
   background-repeat:no-repeat;
   padding-left:14px;
+  margin-top:4px;
+  display:block;
+}
+
+.b-tabs-menu-text-review {
+  background-image:url('/images/icon_add_review.png');
+  background-repeat:no-repeat;
+  padding-left:14px;
+  margin-top:4px;
+  *display:inline-block;
+  *min-width: 90px;
+}
+
+.tabs-add-review {
+  *margin-top:-22px;
 }
 
 .b-sidebar-middle-content {
@@ -362,6 +396,7 @@
   clear:both;
   padding-top:15px;
   width:300px;
+  margin-bottom: 5px;
 /*  overflow:hidden;*/
 }
 
@@ -437,6 +472,22 @@
   float:left;
 }
 
+.b-stars-for_review {
+  background:url('/images/stars_small.png') top repeat-x;
+  width:80px;
+  height:15px;
+  display:block;
+  margin:0px 0 0 200px;    
+  *margin:0 0 0 200px;
+}
+
+.b-stars-full-for_review {
+  background:url('/images/stars_small.png') bottom left repeat-x;
+  width:48px;
+  height:15px;
+  display:block;  
+}
+
 .sidebar-middle-add_review-headers {
   display:block;
   float:left;
@@ -490,11 +541,13 @@
 .b-review-email {
   color:#808080;
   padding-left:20px;
+  float: left;
+  max-width: 180px;
 }
 
 .b-review-text {
   font-size:11px;
-  padding-top:10px;
+  padding-top:15px;
 }
 
 .b-button {
@@ -954,7 +1007,7 @@ input.b-discount_form_send {
   top:    390px;
   width:  119px;
   height: 70px;
-
+  *top: 350px;
   background: url(/images/landing_arrow.png);
 }
 
