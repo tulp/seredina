@@ -31,3 +31,20 @@
   %bottom
     = javascript_include_tag "http://api-maps.yandex.ru/1.1/index.xml?key=#{YANDEX_MAPS_API_KEY}"
     = include_javascripts :landing
+    / Yandex.Metrika counter
+    %div{:style => "display:none;"}
+      :javascript
+        (function(w, c) {
+            (w[c] = w[c] || []).push(function() {
+                try {
+                    w.yaCounter5258377 = new Ya.Metrika(5258377);
+                     yaCounter5258377.clickmap(true);
+                     yaCounter5258377.trackLinks(true);
+
+                } catch(e) { }
+            });
+        })(window, 'yandex_metrika_callbacks');
+    %script{:defer => "defer", :src => "//mc.yandex.ru/metrika/watch.js", :type => "text/javascript"}
+    %noscript
+      %div
+        %img{:alt => "", :src => "//mc.yandex.ru/watch/5258377", :style => "position:absolute; left:-9999px;"}
