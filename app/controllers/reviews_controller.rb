@@ -8,7 +8,8 @@ class ReviewsController < ApplicationController
       review = current_user.reviews.new(params[:review])
       if review.save
         market = Market.fields_for_json.find(market_id)
-        results = [true, review.user.can_give_gifts?, market.to_json(json_market_options)]
+        user = review.user
+        results = [true, user.can_give_gifts?, user.reviews_count % 3 == 0, market.to_json(json_market_options)]
       else
         [false]
       end

@@ -249,8 +249,9 @@ return selectedSize;
         var market;
 
         if (status[1]) { notificationLabel.show() };
+        if (status[2]) { formDiscount.show() };
 
-        market = $.parseJSON(status[2]);
+        market = $.parseJSON(status[3]);
         drawDescription(market);
         // drawReviews(market);
         toggleTab($('#reviews_tab'));
