@@ -15,5 +15,6 @@ group :development do
   gem 'awesome_print',   '0.2.1', :require => 'ap'
   gem 'ruby-debug',      '0.10.3'
   gem 'capistrano',      '2.5.19'
+  gem "capistrano-ext",  '1.2.1'
   gem 'silent-postgres', '0.0.7'
 end

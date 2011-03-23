@@ -1,20 +1,14 @@
+require 'rubygems'
 require 'bundler/capistrano'
+require 'capistrano/ext/multistage'
 
 set :application, "seredina"
 set :repository,  "git@github.com:Jazzcloud/seredina.git"
-
 set :scm, :git
 # Or: `accurev`, `bzr`, `cvs`, `darcs`, `git`, `mercurial`, `perforce`, `subversion` or `none`
-
-role :app, domain
-role :web, domain
-role :db,  domain, :primary => true
-set :deploy_to, "/home/tulp/#{application}"
-
-set :user, "tulp"
+set :stages, %w(staging production)
+set :default_stage, "staging"
 set :use_sudo, false
-set :branch, 'master'
-
 set :run_method, :run
 
 namespace :deploy do

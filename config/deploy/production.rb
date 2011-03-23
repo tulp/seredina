@@ -8,3 +8,9 @@ set :default_environment, {
 
 set :domain, "seredina.tulp.ru"
 set :rails_env, "production"
+role :app, domain
+role :web, domain
+role :db,  domain, :primary => true
+set :deploy_to, "/home/tulp/#{application}"
+set :user, "tulp"
+set :branch, 'master'
