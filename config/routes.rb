@@ -20,8 +20,5 @@ Gold::Application.routes.draw do
     get 'landing',       :to => 'json#landing',    :as => 'json_landing'
   end
 
-  # Временно
-  match '/gm' => 'home#gm'
-
   root :to => 'home#index'
 end
