@@ -22,20 +22,18 @@ var oldMarket, oldPlacemark;
     }
   };
 
-
   function cl(a){
     console.log(a);
   } 
 
-
-function selectedPlacemark(market) {
-var selectedSize = new YMaps.Style();
-selectedSize.iconStyle = new YMaps.IconStyle();
-selectedSize.iconStyle.size = new YMaps.Point(54, 52);
-selectedSize.iconStyle.href = '/images/current.png';
-selectedSize.iconStyle.offset = new YMaps.Point(-19, -48);
-return selectedSize;
-}
+  function selectedPlacemark(market) {
+    var selectedSize = new YMaps.Style();
+    selectedSize.iconStyle = new YMaps.IconStyle();
+    selectedSize.iconStyle.size = new YMaps.Point(54, 52);
+    selectedSize.iconStyle.href = '/images/current.png';
+    selectedSize.iconStyle.offset = new YMaps.Point(-19, -48);
+    return selectedSize;
+  }
 
 
   function drawCategories(activeCategory, inactiveCategories) {
@@ -126,7 +124,7 @@ return selectedSize;
 
     function drawInfo(market) {
       var infoTemplate = $('.b-sidebar-middle-info-template');
-
+      
       middleInfo.html(infoTemplate.tmpl(market));
     }
 
@@ -278,7 +276,8 @@ return selectedSize;
       }
       // $('.b-sidebar-middle-content').css('height');
 
-      $('.b-sidebar-middle-content').css('max-height', $('body').height() - 320);
+      var descHeight = $('.b-sidebar-middle-description').height();
+      $('.b-sidebar-middle-content').css('max-height', $('body').height() - 260 - descHeight);
       // $('.b-sidebar-middle-content').jScrollPane();
       
     }

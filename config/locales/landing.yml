@@ -12,7 +12,7 @@ ru:
 
   landing_email_invitation_text:    'Чтобы перейти к карте, введите свой email:'
   landing_email_placeholder:        'Адрес электронной почты'
-  landing_password_invitation_text: 'Введите ваш код доступа (присланный вам на email):'
+  landing_password_invitation_text: 'Введите ваш код доступа (мы послали вам его на email):'
 
   landing_categories_title:  'Показывать:'
   landing_categories_active: 'Все категории'
