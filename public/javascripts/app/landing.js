@@ -47,6 +47,7 @@ $(document).ready(function() {
       highlightField(userPassword);
     } else {
       userPassword.attr('disabled', '');
+      userPassword.focus();
     }
   });
 
