@@ -109,7 +109,7 @@ $(document).ready(function() {
         })
       })
     
-      yandexMaps.setBounds(yandexMapsGeoCollectionBounds);
+      // yandexMaps.setBounds(yandexMapsGeoCollectionBounds);
     }
 
     function drawDescription(market) {
