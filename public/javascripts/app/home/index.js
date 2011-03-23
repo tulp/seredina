@@ -86,13 +86,14 @@ $(document).ready(function() {
         yandexMapsGeoCollectionBounds.add(geoPoint);
         yandexMaps.addOverlay(placemark);
     
+        
         YMaps.Events.observe(placemark, placemark.Events.Click, function() {
              var pOptions = {};
 
              $('.b-categories ul li:not(:first)').hide();
 
              placemark.setOptions({style: selectedPlacemark(market), zIndex: YMaps.ZIndex.OVERLAY_ACTIVE});
-             if(oldPlacemark){
+             if((oldPlacemark) && (oldPlacemark !== placemark)){
                oldPlacemark.setOptions({style: oldMarket.category.icon_style, hideIcon: false, hasBalloon: false, zIndex: YMaps.ZIndex.OVERLAY});
              }
     
@@ -105,7 +106,6 @@ $(document).ready(function() {
           $('.b-market').show();
              oldMarket = market;
              oldPlacemark = placemark;
-    
         })
       })
     
