@@ -290,7 +290,7 @@ $(document).ready(function() {
       }
 
       var descHeight = $('.b-sidebar-middle-description').height();
-      $('.b-sidebar-middle-content').css('max-height', $('body').height() - 245 - descHeight);
+      $('.b-sidebar-middle-content').css('max-height', $('body').height() - 250 - descHeight);
       // $('.b-sidebar-middle-content').jScrollPane();      
     }
 
