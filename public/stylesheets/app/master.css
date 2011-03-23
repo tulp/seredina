@@ -769,7 +769,8 @@ input.b-discount_form_send {
 
 .notifications {
   position:absolute;
-  margin:50px 0 0 330px;
+  margin-left:310px;
+  top: 5px;
 }
 
 .b-notifications-yellow-left {
@@ -800,6 +801,7 @@ input.b-discount_form_send {
 }
 
 .b-notifications-pink {
+  display: none;
   margin-top:150px;
 }
 
