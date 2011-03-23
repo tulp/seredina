@@ -1,6 +1,6 @@
 $(document).ready(function() {
   var markets, users, categories, current_user;
-var oldMarket, oldPlacemark;
+  var oldMarket, oldPlacemark;
 
   var notificationLabel = $('.b-notification-label');
 
@@ -34,7 +34,6 @@ var oldMarket, oldPlacemark;
     selectedSize.iconStyle.offset = new YMaps.Point(-19, -48);
     return selectedSize;
   }
-
 
   function drawCategories(activeCategory, inactiveCategories) {
     var activeItem, inactiveItems;
@@ -89,6 +88,9 @@ var oldMarket, oldPlacemark;
     
         YMaps.Events.observe(placemark, placemark.Events.Click, function() {
              var pOptions = {};
+
+             $('.b-categories ul li:not(:first)').hide();
+
              placemark.setOptions({style: selectedPlacemark(market)});
              if(oldPlacemark){
                oldPlacemark.setOptions({style: oldMarket.category.icon_style, hideIcon: false, hasBalloon: false, zIndexActive: 100});
@@ -244,8 +246,9 @@ var oldMarket, oldPlacemark;
         var market;
 
         if (status[1]) { notificationLabel.show() };
+        if (status[2]) { formDiscount.show() };
 
-        market = $.parseJSON(status[2]);
+        market = $.parseJSON(status[3]);
         drawDescription(market);
         // drawReviews(market);
         toggleTab($('#reviews_tab'));
@@ -293,4 +296,8 @@ var oldMarket, oldPlacemark;
 
       return false;
     })
-  })
+
+    YMaps.Events.observe(yandexMaps, yandexMaps.Events.Click, function() {
+      $('.b-categories ul li:not(:first)').hide();
+    });
+})
