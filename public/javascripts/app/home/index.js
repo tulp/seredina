@@ -215,7 +215,11 @@ $(document).ready(function() {
 
     giftForm.live('ajax:success', function(data, status, xhr) {
       if (status[0]) {
-        formDiscount.fadeOut('slow');
+        formDiscount.fadeOut('slow', function() { giftForm.find('> input:not(:image)').val('') });
+        /*
+          TODO очищать только при клике на red pipka
+        */
+
         if (!status[1]) { notificationLabel.hide() };
       } else {
         vibrateDiscount();
@@ -224,8 +228,7 @@ $(document).ready(function() {
     })
 
     formDiscount.find('.b-form_discount_top a').click(function() {
-      giftForm.find('input').not(':hidden, :image').val('');
-      formDiscount.fadeOut('slow');
+      formDiscount.fadeOut('slow', function() { giftForm.find('> input:not(:image)').val('') });
 
       return false;
     })
