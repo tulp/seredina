@@ -81,7 +81,7 @@ $(document).ready(function() {
         var geoPoint, placemark;
     
         geoPoint = new YMaps.GeoPoint(market.longitude, market.latitude);
-        placemark = new YMaps.Placemark(geoPoint, {style: market.category.icon_style, hideIcon: false, hasBalloon: false, zIndexActive: 800 });
+        placemark = new YMaps.Placemark(geoPoint, {style: market.category.icon_style, hideIcon: false, hasBalloon: false});
     
         yandexMapsGeoCollectionBounds.add(geoPoint);
         yandexMaps.addOverlay(placemark);
@@ -91,9 +91,9 @@ $(document).ready(function() {
 
              $('.b-categories ul li:not(:first)').hide();
 
-             placemark.setOptions({style: selectedPlacemark(market)});
+             placemark.setOptions({style: selectedPlacemark(market), zIndex: YMaps.ZIndex.OVERLAY_ACTIVE});
              if(oldPlacemark){
-               oldPlacemark.setOptions({style: oldMarket.category.icon_style, hideIcon: false, hasBalloon: false, zIndexActive: 100});
+               oldPlacemark.setOptions({style: oldMarket.category.icon_style, hideIcon: false, hasBalloon: false, zIndex: YMaps.ZIndex.OVERLAY});
              }
     
           drawDescription(market);
@@ -277,12 +277,10 @@ $(document).ready(function() {
           $('.b-sidebar-middle-add_review').show();
           break;
       }
-      // $('.b-sidebar-middle-content').css('height');
 
       var descHeight = $('.b-sidebar-middle-description').height();
-      $('.b-sidebar-middle-content').css('max-height', $('body').height() - 260 - descHeight);
-      // $('.b-sidebar-middle-content').jScrollPane();
-      
+      $('.b-sidebar-middle-content').css('max-height', $('body').height() - 245 - descHeight);
+      // $('.b-sidebar-middle-content').jScrollPane();      
     }
 
     $('.b-tabs a').click(function() {
