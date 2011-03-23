@@ -11,7 +11,7 @@ $(document).ready(function() {
   yandexMaps = new YMaps.Map(document.getElementById('yandex_maps'));
   yandexMaps.setMinZoom(9);
 
-  YMaps.Events.observe(geocoder, geocoder.Events.Load, function() { yandexMaps.setCenter(this.get(0).getGeoPoint(), 10) });
+  YMaps.Events.observe(geocoder, geocoder.Events.Load, function() { yandexMaps.setCenter(this.get(0).getGeoPoint(), 12) });
 
   yandexMaps.addControl(zoomControl, zoomControlPosition);
   yandexMaps.addControl(typeControl);

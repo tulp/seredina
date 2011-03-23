@@ -247,14 +247,19 @@ $(document).ready(function() {
       if (status[0]) {
         var market;
 
-        if (status[1]) { notificationLabel.show() };
-        if (status[2]) { formDiscount.show() };
-
         market = $.parseJSON(status[3]);
         drawDescription(market);
         // drawReviews(market);
         toggleTab($('#reviews_tab'));
         reviewText.val('');
+
+        if (status[1]) { notificationLabel.show() };
+
+        if (status[2]) {
+          formDiscount.show();
+        } else {
+          $('.b-notifications-yellow').fadeIn('slow').delay(3000).fadeOut('slow');
+        };
       }
     })
 
@@ -299,5 +304,13 @@ $(document).ready(function() {
 
     YMaps.Events.observe(yandexMaps, yandexMaps.Events.Click, function() {
       $('.b-categories ul li:not(:first)').hide();
+    });
+
+    // notification
+
+    $('.b-notifications-yellow a').click(function() {
+      $('.b-notifications-yellow').stop().fadeOut('slow');
+
+      return false;
     });
 })

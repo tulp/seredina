@@ -773,6 +773,10 @@ input.b-discount_form_send {
   top: 5px;
 }
 
+.b-notifications-yellow {
+  display: none;
+}
+
 .b-notifications-yellow-left {
   float:left;
   background:url('/images/notification_yellow_left.png') no-repeat;
