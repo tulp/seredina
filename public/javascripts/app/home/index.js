@@ -1,6 +1,6 @@
 $(document).ready(function() {
   var markets, users, categories, current_user;
-var oldMarket, oldPlacemark;
+  var oldMarket, oldPlacemark;
 
   var notificationLabel = $('.b-notification-label');
 
@@ -22,21 +22,18 @@ var oldMarket, oldPlacemark;
     }
   };
 
-
   function cl(a){
     console.log(a);
   } 
 
-
-function selectedPlacemark(market) {
-var selectedSize = new YMaps.Style();
-selectedSize.iconStyle = new YMaps.IconStyle();
-selectedSize.iconStyle.size = new YMaps.Point(54, 52);
-selectedSize.iconStyle.href = '/images/current.png';
-selectedSize.iconStyle.offset = new YMaps.Point(-19, -48);
-return selectedSize;
-}
-
+  function selectedPlacemark(market) {
+    var selectedSize = new YMaps.Style();
+    selectedSize.iconStyle = new YMaps.IconStyle();
+    selectedSize.iconStyle.size = new YMaps.Point(54, 52);
+    selectedSize.iconStyle.href = '/images/current.png';
+    selectedSize.iconStyle.offset = new YMaps.Point(-19, -48);
+    return selectedSize;
+  }
 
   function drawCategories(activeCategory, inactiveCategories) {
     var activeItem, inactiveItems;
@@ -84,16 +81,20 @@ return selectedSize;
         var geoPoint, placemark;
     
         geoPoint = new YMaps.GeoPoint(market.longitude, market.latitude);
-        placemark = new YMaps.Placemark(geoPoint, {style: market.category.icon_style, hideIcon: false, hasBalloon: false, zIndexActive: 800 });
+        placemark = new YMaps.Placemark(geoPoint, {style: market.category.icon_style, hideIcon: false, hasBalloon: false});
     
         yandexMapsGeoCollectionBounds.add(geoPoint);
         yandexMaps.addOverlay(placemark);
     
+        
         YMaps.Events.observe(placemark, placemark.Events.Click, function() {
              var pOptions = {};
-             placemark.setOptions({style: selectedPlacemark(market)});
-             if(oldPlacemark){
-               oldPlacemark.setOptions({style: oldMarket.category.icon_style, hideIcon: false, hasBalloon: false, zIndexActive: 100});
+
+             $('.b-categories ul li:not(:first)').hide();
+
+             placemark.setOptions({style: selectedPlacemark(market), zIndex: YMaps.ZIndex.OVERLAY_ACTIVE});
+             if((oldPlacemark) && (oldPlacemark !== placemark)){
+               oldPlacemark.setOptions({style: oldMarket.category.icon_style, hideIcon: false, hasBalloon: false, zIndex: YMaps.ZIndex.OVERLAY});
              }
     
           drawDescription(market);
@@ -102,14 +103,15 @@ return selectedSize;
           // drawReviews(market);
           fillReviewForm(market);
     
+          reviewText.val('');
+
           $('.b-market').show();
              oldMarket = market;
              oldPlacemark = placemark;
-    
         })
       })
     
-      yandexMaps.setBounds(yandexMapsGeoCollectionBounds);
+      // yandexMaps.setBounds(yandexMapsGeoCollectionBounds);
     }
 
     function drawDescription(market) {
@@ -126,7 +128,7 @@ return selectedSize;
 
     function drawInfo(market) {
       var infoTemplate = $('.b-sidebar-middle-info-template');
-
+      
       middleInfo.html(infoTemplate.tmpl(market));
     }
 
@@ -236,7 +238,7 @@ return selectedSize;
     var reviewText = $('#review_text');
 
     $('#review_form_submit_button').click(function() {
-      if (reviewText.val()) { reviewForm.submit() }
+      if ($.trim(reviewText.val())) { reviewForm.submit() }
 
       return false;
     })
@@ -246,8 +248,9 @@ return selectedSize;
         var market;
 
         if (status[1]) { notificationLabel.show() };
+        if (status[2]) { formDiscount.show() };
 
-        market = $.parseJSON(status[2]);
+        market = $.parseJSON(status[3]);
         drawDescription(market);
         // drawReviews(market);
         toggleTab($('#reviews_tab'));
@@ -276,11 +279,10 @@ return selectedSize;
           $('.b-sidebar-middle-add_review').show();
           break;
       }
-      // $('.b-sidebar-middle-content').css('height');
 
-      $('.b-sidebar-middle-content').css('max-height', $('body').height() - 320);
-      // $('.b-sidebar-middle-content').jScrollPane();
-      
+      var descHeight = $('.b-sidebar-middle-description').height();
+      $('.b-sidebar-middle-content').css('max-height', $('body').height() - 245 - descHeight);
+      // $('.b-sidebar-middle-content').jScrollPane();      
     }
 
     $('.b-tabs a').click(function() {
@@ -294,4 +296,8 @@ return selectedSize;
 
       return false;
     })
-  })
+
+    YMaps.Events.observe(yandexMaps, yandexMaps.Events.Click, function() {
+      $('.b-categories ul li:not(:first)').hide();
+    });
+})

@@ -5,7 +5,7 @@
 .b-sidebar {
   width:auto;
   height:auto;
-  margin:20px;
+  margin:5px 0 0 5px;
   width:300px;
   position:absolute;
   top:0px;
@@ -360,7 +360,7 @@
   background-repeat:repeat-x;
   background-position:top;
   clear:both;
-  padding-top:25px;
+  padding-top:15px;
   width:300px;
 /*  overflow:hidden;*/
 }
@@ -769,7 +769,8 @@ input.b-discount_form_send {
 
 .notifications {
   position:absolute;
-  margin:50px 0 0 330px;
+  margin-left:310px;
+  top: 5px;
 }
 
 .b-notifications-yellow-left {
@@ -800,6 +801,7 @@ input.b-discount_form_send {
 }
 
 .b-notifications-pink {
+  display: none;
   margin-top:150px;
 }
 
@@ -862,7 +864,7 @@ input.b-discount_form_send {
 }
 
 #review_text {
-  width:260px;
+  width:250px;
   height: 85px;
 }
 
