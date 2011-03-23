@@ -1,3 +1,5 @@
+Net::SMTP.enable_tls(OpenSSL::SSL::VERIFY_NONE)
+
 Gold::Application.configure do
   # Settings specified here will take precedence over those in config/application.rb
 
@@ -11,7 +13,7 @@ Gold::Application.configure do
 
   # Specifies the header that your server uses for sending files
   config.action_dispatch.x_sendfile_header = "X-Sendfile"
-  
+
   # For nginx:
   # config.action_dispatch.x_sendfile_header = 'X-Accel-Redirect'
 
@@ -35,10 +37,21 @@ Gold::Application.configure do
   # config.action_controller.asset_host = "http://assets.example.com"
 
   # Disable delivery errors, bad email addresses will be ignored
-  config.action_mailer.raise_delivery_errors = false
-  config.action_mailer.delivery_method = :sendmail
-  config.action_mailer.default_url_options = { :host => 'seredina.tulp.ru' }
+  config.action_mailer.default_url_options = { :host => 'seredina.sitedock.ru' }
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.perform_deliveries = true
+  config.action_mailer.raise_delivery_errors = true
 
+  config.action_mailer.smtp_settings = {
+    :enable_starttls_auto => true,
+    :address        => 'smtp.gmail.com',
+    :port           => 587,
+    :domain         => 'gmail.com',
+    :authentication => :plain,
+    :user_name      => 'jazzcloud.ltd@gmail.com',
+    :password       => 'rozenbom778921'
+  }
+  
   # Enable threaded mode
   # config.threadsafe!
 

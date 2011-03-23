@@ -1,30 +1,14 @@
+require 'rubygems'
 require 'bundler/capistrano'
-
-set :default_environment, {
-  'PATH' => "/home/tulp/.rvm/gems/ree-1.8.7-2010.02/bin:/home/tulp/.rvm/gems/ree-1.8.7-2010.02@global/bin:/home/tulp/.rvm/rubies/ree-1.8.7-2010.02/bin:/home/tulp/.rvm/bin:/home/tulp/.gem/ruby/1.8/bin/:/usr/local/bin:/usr/bin:/bin:/usr/games",
-  'RUBY_VERSION' => 'ruby 1.8.7',
-  'GEM_HOME'     => '/home/tulp/.rvm/gems/ree-1.8.7-2010.02',
-  'GEM_PATH'     => '/home/tulp/.rvm/gems/ree-1.8.7-2010.02:/home/tulp/.rvm/gems/ree-1.8.7-2010.02@global',
-  'BUNDLE_PATH'  => '/home/tulp/.rvm/gems/ree-1.8.7-2010.02'  # If you are using bundler.
-}
+require 'capistrano/ext/multistage'
 
 set :application, "seredina"
 set :repository,  "git@github.com:Jazzcloud/seredina.git"
-set :domain, "seredina.tulp.ru"
-
 set :scm, :git
 # Or: `accurev`, `bzr`, `cvs`, `darcs`, `git`, `mercurial`, `perforce`, `subversion` or `none`
-
-role :app, domain
-role :web, domain
-role :db,  domain, :primary => true
-set :deploy_to, "/home/tulp/#{application}"
-
-set :rails_env, "production"
-set :user, "tulp"
+set :stages, %w(staging production)
+set :default_stage, "staging"
 set :use_sudo, false
-set :branch, 'master'
-
 set :run_method, :run
 
 namespace :deploy do
