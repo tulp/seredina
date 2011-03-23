@@ -123,8 +123,11 @@ $(document).ready(function() {
     function drawRating(object) {
       var spanWidth = 16 * object.rating;
 
-      // return "<span class='b-stars-full' style='width:" + spanWidth + "px;'></span>";
-      return "<span class='b-stars-full-for_review' style='width:" + spanWidth + "px;'></span>";
+      if (object.text === undefined) {
+        return "<span class='b-stars-full' style='width:" + spanWidth + "px;'></span>";
+      } else {
+        return "<span class='b-stars-full-for_review' style='width:" + spanWidth + "px;'></span>";
+      }
     }
 
     function drawInfo(market) {
@@ -259,7 +262,7 @@ $(document).ready(function() {
         if (status[2]) {
           formDiscount.show();
         } else {
-          $('.b-notifications-yellow').fadeIn('slow').delay(3000).fadeOut('slow');
+          $('.b-notifications-yellow').fadeIn('slow').delay(5000).fadeOut('slow');
         };
       }
     })
