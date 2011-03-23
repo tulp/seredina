@@ -102,6 +102,8 @@ $(document).ready(function() {
           // drawReviews(market);
           fillReviewForm(market);
     
+          reviewText.val('');
+
           $('.b-market').show();
              oldMarket = market;
              oldPlacemark = placemark;
@@ -236,7 +238,7 @@ $(document).ready(function() {
     var reviewText = $('#review_text');
 
     $('#review_form_submit_button').click(function() {
-      if (reviewText.val()) { reviewForm.submit() }
+      if ($.trim(reviewText.val())) { reviewForm.submit() }
 
       return false;
     })
