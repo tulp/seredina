@@ -92,6 +92,8 @@ $(document).ready(function() {
 
              $('.b-categories ul li:not(:first)').hide();
 
+             $.post(collectorPath, { market_id: market.id });
+
              placemark.setOptions({style: selectedPlacemark(market), zIndex: YMaps.ZIndex.OVERLAY_ACTIVE});
              if((oldPlacemark) && (oldPlacemark !== placemark)){
                oldPlacemark.setOptions({style: oldMarket.category.icon_style, hideIcon: false, hasBalloon: false, zIndex: YMaps.ZIndex.OVERLAY});

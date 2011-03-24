@@ -13,6 +13,8 @@ Gold::Application.routes.draw do
 
   resources :gifts, :only => :create
 
+  match '/collector' => 'collector#create', :as => 'collector', :via => :post
+
   scope '/j' do
     get 'markets/(:id)', :to => 'json#markets',    :as => 'json_markets'
     get 'categories',    :to => 'json#categories', :as => 'json_categories'

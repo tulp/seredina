@@ -5,6 +5,7 @@ class Market < ActiveRecord::Base
 
   belongs_to :category
   has_many   :reviews
+  has_and_belongs_to_many :users
 
   scope :fields_for_json, includes(:category, :reviews => :user)
 
