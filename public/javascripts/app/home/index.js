@@ -103,7 +103,7 @@ $(document).ready(function() {
           // drawReviews(market);
           fillReviewForm(market);
     
-          reviewText.val('');
+          $('#reset_add_review_form').trigger('click');
 
           $('.b-market').show();
              oldMarket = market;
@@ -241,9 +241,6 @@ $(document).ready(function() {
     })
     // ====================
 
-    var reviewForm = $('#review_form');
-    var reviewText = $('#review_text');
-
     $('#review_form_submit_button').click(function() {
       if ($.trim(reviewText.val())) { reviewForm.submit() }
 
@@ -258,7 +255,7 @@ $(document).ready(function() {
         drawDescription(market);
         // drawReviews(market);
         toggleTab($('#reviews_tab'));
-        reviewText.val('');
+        $('#reset_add_review_form').trigger('click');
 
         if (status[1]) { notificationLabel.show() };
 

@@ -47,6 +47,7 @@
         .b-sidebar-middle-add_review
           = form_for :review, :remote => true, :url => reviews_path, :html => { :id => 'review_form', :class => 'b-sidebar-add_review' } do |f|
             = f.hidden_field :market_id
+            %input#reset_add_review_form{ :type => 'reset' }
             %span.b-sidebar-middle-add_review-headers Дайте оценку заведению:
             :plain
               <select id="review_rating" name="review[rating]" selected="3">

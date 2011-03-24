@@ -1103,3 +1103,7 @@ input.b-edit_user_form_send {
  position:absolute;
  outline: none;
 }
+
+#reset_add_review_form {
+  display:none;
+}
