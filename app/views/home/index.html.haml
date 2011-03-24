@@ -47,16 +47,17 @@
         .b-sidebar-middle-add_review
           = form_for :review, :remote => true, :url => reviews_path, :html => { :id => 'review_form', :class => 'b-sidebar-add_review' } do |f|
             = f.hidden_field :market_id
-            %span.b-sidebar-middle-add_review-headers Дайте оценку заведению:
-            :plain
-              <select id="review_rating" class="rating_counter" name="review[rating]" selected="3">
-                <option value="5">отлично</option>
-                <option value="4">хорошо</option>
-                <option value="3" selected>нормально</option>
-                <option value="2">плохо</option>
-                <option value="1">ужасно</option>
+            .rating-wrap
+              %span.b-sidebar-middle-add_review-headers Дайте оценку заведению:
+              :plain
+                <select id="review_rating" class="rating_counter" name="review[rating]" selected="3">
+                  <option value="5">отлично</option>
+                  <option value="4">хорошо</option>
+                  <option value="3" selected>нормально</option>
+                  <option value="2">плохо</option>
+                  <option value="1">ужасно</option>
                 </select>
-            -#= f.select :rating, options_for_select([["ужасно",1],["плохо",2],["нормально",3],["хорошо",4],["отлично",5]]), {}, {:selected => "нормально"}
+              -#= f.select :rating, options_for_select([["ужасно",1],["плохо",2],["нормально",3],["хорошо",4],["отлично",5]]), {}, {:selected => "нормально"}
             %span Опишите ваш опыт:
             %label
               = f.text_area :text
@@ -170,8 +171,9 @@
 %script.b-sidebar-middle-reviews-template{ :type => 'text/x-jquery-tmpl' }
   {{each reviews}}
   .b-review
-    %span.b-review-email ${$value.user.email}
-    %span.b-stars-for_review
-      {{html $value.rating}}
+    .review-wrap
+      %span.b-review-email ${$value.user.email}
+      %span.b-stars-for_review
+        {{html $value.rating}}
     %p.b-review-text ${$value.text}
   {{/each }}
