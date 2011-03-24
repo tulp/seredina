@@ -56,29 +56,24 @@ $(document).ready(function() {
   function vibrateEditUser() { $('.b-edit_user_wrap').vibrate(vibrateOptions) };
 
   editUserForm.live('ajax:beforeSend', function(xhr, settings) {
-    var phoneRegexp        = /^\(?([2-9]\d{2})(\)?)(-|.|\s)?([1-9]\d{2})(-|.|\s)?(\d{4})$/;
-    var userPhone          = $('#user_phone');
-    var existsInvalidField = false
-    var invalidFields      = [];
+    var existsInvalidFields = false;
+    var invalidEmail        = false;
 
-    if (!($.trim($('#user_name').val()))) { existsInvalidField = true };
+    if (!($.trim($('#user_name').val()))) { existsInvalidFields = true };
 
     if (!(emailRegexp.test(userEmail.val()))) {
-      existsInvalidField = true;
-      invalidFields.push(userEmail)
-    };
+      existsInvalidFields = true;
+      invalidEmail        = true;
+    }
 
-    if (!(phoneRegexp.test(userPhone.val()))) {
-      existsInvalidField = true;
-      invalidFields.push(userPhone)
-    };
+    if (!($.trim($('#user_phone').val()))) { existsInvalidFields = true };
 
-    if (existsInvalidField) {
+    if (existsInvalidFields) {
       vibrateEditUser(vibrateOptions);
-      $.each(invalidFields, function(index, field) { highlightField(field) });
+      if (invalidEmail) { highlightField(userEmail) };
 
       return false;
-    };
+    }
   });
 
   editUserForm.live('ajax:success', function(data, status, xhr) {
