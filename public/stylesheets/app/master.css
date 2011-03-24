@@ -542,12 +542,17 @@
   color:#808080;
   padding-left:20px;
   float: left;
+  display: block;
   max-width: 180px;
 }
 
 .b-review-text {
   font-size:11px;
   padding-top:5px;
+}
+
+.review-wrap {
+  overflow: hidden;
 }
 
 .b-button {
@@ -598,6 +603,17 @@
   float:left;
   font-size:13px;
   font-weight:700;
+}
+.rating_counter {
+  padding:0 !important;
+  display:block;
+  float:left;
+  margin:2px 0 0 1px !important;
+}
+
+.rating-wrap {
+  overflow: hidden;
+  height:30px
 }
 
 .b-sidebar-middle-add_review .b-button {
