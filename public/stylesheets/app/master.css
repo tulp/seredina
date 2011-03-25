@@ -279,10 +279,7 @@
 }
 
 .b-sidebar-bottom img {
-  position:absolute;
   margin:20px 0 0 80px;
-  *position:relative;
-  z-index:50 !important;  
 }
 
 .b-sidebar-middle-menu {
@@ -544,7 +541,7 @@
   float: left;
   display: block;
   max-width: 180px;
-  overflow: hidden;
+  overflow:hidden;
 }
 
 .b-review-text {
@@ -667,6 +664,7 @@
   background:url('/images/send_discount_middle.png') repeat-y;
   float:left;
   padding-left:70px;
+  overflow: hidden;
 }
 
 .b-form_discount_bottom {
@@ -687,14 +685,16 @@
   margin-top:10px;
 }
 
+
 .b-form_discount_middle_logo {
-  margin-top:10px;  
+  margin-top:10px;
 }
 
 .b-form_discount_middle_msg {
   color:#a3a19c;
   display:block;  
   padding:20px 150px 20px 0;  
+  *padding:10px 200px 10px 0;
   line-height:17px;
 }
 
@@ -725,6 +725,7 @@ input.b-discount_form_send {
   padding-top:20px;
   position:absolute;  
   outline: none;
+  *margin: 40px 0 0 -365px;
 }
 
 /* landing page */
