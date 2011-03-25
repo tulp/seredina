@@ -11,6 +11,7 @@
           = f.text_field :name
           %span= t :edit_user_email
           = f.text_field :email
+          %span.existing_email= t :edit_user_existing_email
           %span= t:edit_user_phone
           = f.text_field :phone
           = image_submit_tag 'button_save.png', :class => 'b-edit_user_form_send'

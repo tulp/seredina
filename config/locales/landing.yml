@@ -24,6 +24,7 @@ ru:
                            <br/>
                            Пожалуйста, заполните форму. С Вами свяжется менеджер и расскажет, как и где Вы сможете получить Вашу карту.'
 
-  edit_user_name:  'Ваше имя:'
-  edit_user_email: 'Ваш email:'
-  edit_user_phone: 'Ваш телефон:'
+  edit_user_name:           'Ваше имя:'
+  edit_user_email:          'Ваш email:'
+  edit_user_phone:          'Ваш телефон:'
+  edit_user_existing_email: 'Этот адрес уже используется'

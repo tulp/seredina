@@ -82,6 +82,7 @@ $(document).ready(function() {
     } else if (status === false) {
       vibrateEditUser();
       highlightField(userEmail);
+      $('.existing_email').show().delay(500).fadeOut('100');
     }
   });
 });
