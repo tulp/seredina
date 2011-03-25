@@ -84,6 +84,7 @@
         = form_for :gift, :url => gifts_path, :remote => true, :html => { :id => 'gift_form' } do |f|
           %span Введите адрес, на который будет отправлена скидка:
           = text_field_tag :recipient_email, nil, :placeholder => 'Адрес электронной почты'
+          %span.existing_email Этот адрес уже используется
           %span Имя друга:
           = text_field_tag :recipient_name
           %span Ваше имя:

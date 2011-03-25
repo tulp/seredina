@@ -226,6 +226,7 @@ $(document).ready(function() {
       } else {
         vibrateDiscount();
         highlightField(recipientEmail);
+        $('.existing_email').show().delay(500).fadeOut('100');
       }
     })
 
