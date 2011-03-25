@@ -134,6 +134,8 @@ $(document).ready(function() {
     function drawReviews(market) {
       var reviewsTemplate = $('.b-sidebar-middle-reviews-template');
 
+      $.each(market.reviews, function(index, review) { review.user.email = 'asfafafsfs298738797778779787979877987979879879789798797789798798798798798798789789798798798afas@wefjljlk.ru' })
+      
       $.each(market.reviews, function(index, review) { review.rating = drawRating(review) });
 
       $('.b-reviews').html(reviewsTemplate.tmpl(market));
