@@ -19,7 +19,7 @@ class JsonController < ApplicationController
 
   def current
     result = if user_signed_in?
-      current_user.to_json(:only => :email, :methods => :can_give_gifts?)
+      current_user.to_json(:only => {}, :methods => :can_give_gifts?)
     else
       false
     end

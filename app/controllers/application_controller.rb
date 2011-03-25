@@ -7,6 +7,6 @@ class ApplicationController < ActionController::Base
     { :except  => :category_id,
       :include => { :category => { :except  => :id },
                     :reviews  => { :only    => [:text, :rating],
-                                   :include => { :user => { :only => :email } } } } }
+                                   :include => { :user => { :only => :name, :methods => :hidden_email } } } } }
   end
 end

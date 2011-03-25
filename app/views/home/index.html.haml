@@ -191,7 +191,12 @@
   {{each reviews}}
   .b-review
     .review-wrap
-      %span.b-review-email ${$value.user.email}
+      %span.b-review-email
+        {{if $value.user.name}}
+        ${$value.user.name}
+        {{else}}
+        ${$value.user.hidden_email}
+        {{/if}}
       %span.b-stars-for_review
         {{html $value.rating}}
     %p.b-review-text ${$value.text}

@@ -36,6 +36,10 @@ class User < ActiveRecord::Base
     self.available_gifts > 0
   end
 
+  def hidden_email
+    self.email.gsub(/([^@]+$)/, '***')
+  end
+
   private
 
   def sha1_key(length = nil)
