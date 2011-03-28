@@ -16,13 +16,13 @@ class User < ActiveRecord::Base
     self.password = self.temporary_password_accessor = sha1_key(10)
   end
 
-  def generate_discount_code
+  def generate_discount_confirmation_token
     self.discount_code = sha1_key
   end
 
   def confirm_discount
     self.discount_confirmation_token = nil
-    self.discount_confirmed_at       = Time.now
+    self.discount_confirmed_at       = Date.today
   end
 
   def get_gift!
