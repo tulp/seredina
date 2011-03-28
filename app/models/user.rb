@@ -17,7 +17,7 @@ class User < ActiveRecord::Base
   end
 
   def generate_discount_confirmation_token
-    self.discount_code = sha1_key
+    self.discount_confirmation_token = sha1_key
   end
 
   def confirm_discount
