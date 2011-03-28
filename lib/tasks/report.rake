@@ -9,7 +9,7 @@ namespace :report do
     start_date = today - weeks_ago.next.weeks
     end_date   = start_date + interval
 
-    users = User.where(:discount_confirmed_at => start_date..end_date).order(:discount_confirmed_at, :id)
+    users = User.where('discount_confirmed_at >= ?', start_date).where('discount_confirmed_at < ?', end_date).order(:discount_confirmed_at, :id)
     if users.any?
       puts 'Дата       |ID   |Email                     |Имя             |Телефон'
       puts '-' * 73
