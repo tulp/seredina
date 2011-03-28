@@ -6,7 +6,7 @@ class GiftsController < ApplicationController
       # TODO nested there
       recipient = User.new(:email => params[:recipient_email], :name => params[:recipient_name])
       recipient.set_password
-      recipient.generate_discount_code
+      recipient.generate_discount_confirmation_token
       if recipient.save
         gift = current_user.gifts.new(params[:gift])
         gift.recipient = recipient

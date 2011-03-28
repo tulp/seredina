@@ -9,7 +9,7 @@ class Devise::RegistrationsController < ApplicationController
     @user.attributes = params[:user]
 
     result = if @user.valid?
-      @user.clear_discount_code
+      @user.confirm_discount
       @user.save
       sign_in @user
       true

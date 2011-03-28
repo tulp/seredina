@@ -20,8 +20,9 @@ class User < ActiveRecord::Base
     self.discount_code = sha1_key
   end
 
-  def clear_discount_code
-    self.discount_code = nil
+  def confirm_discount
+    self.discount_confirmation_token = nil
+    self.discount_confirmed_at       = Time.now
   end
 
   def get_gift!
