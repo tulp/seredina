@@ -21,7 +21,7 @@
             .landing_form_password
               %span= t :landing_password_invitation_text
               = f.password_field :password, :class => 'password_field', :disabled => true
-              = link_to t(:landing_send_new_password), user_send_new_password_path, :class => 'send_new_password'
+              %input.new-password{ :type => 'button', :value => t(:landing_new_password) }
             = image_submit_tag 'button.png', :class => 'to_map'
       .window_bottom
         .arrow
