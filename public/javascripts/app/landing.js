@@ -61,6 +61,16 @@ $(document).ready(function() {
     return false;
   });
 
+  $('.enter_another_email').click(function() {
+    $('.landing_form_password').hide();
+    $('.landing_form_email').show();
+    userPassword.attr('disabled', 'disabled');
+    newPassword.removeAttr('disabled');
+    userEmail.focus();
+
+    return false;
+  });
+
   function vibrateEditUser() { $('.b-edit_user_wrap').vibrate(vibrateOptions) };
 
   editUserForm.live('ajax:beforeSend', function(xhr, settings) {

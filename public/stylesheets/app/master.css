@@ -1141,3 +1141,11 @@ span.existing_email {
   cursor: pointer;
   text-decoration: underline;
 }
+
+.enter_another_email {
+  font-size: 11px;
+  font-family: Lucida Grande;
+  position:relative;
+  top: -15px;
+  left: 260px;
+}

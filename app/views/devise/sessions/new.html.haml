@@ -22,6 +22,7 @@
               %span= t :landing_password_invitation_text
               = f.password_field :password, :class => 'password_field', :disabled => true
               %input.new-password{ :type => 'button', :value => t(:landing_new_password) }
+              = link_to t(:landing_enter_another_email), '#', :class => 'enter_another_email'
             = image_submit_tag 'button.png', :class => 'to_map'
       .window_bottom
         .arrow

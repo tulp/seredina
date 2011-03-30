@@ -29,4 +29,5 @@ ru:
   edit_user_phone:          'Ваш телефон:'
   edit_user_existing_email: 'Этот адрес уже используется'
 
-  landing_new_password: 'Выслать новый код'
+  landing_new_password:        'Выслать новый код'
+  landing_enter_another_email: 'Ввести другой email'

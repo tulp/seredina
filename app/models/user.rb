@@ -7,7 +7,7 @@ class User < ActiveRecord::Base
   has_many :gifts
   has_and_belongs_to_many :markets
 
-  validates_presence_of :phone, :on => :update
+  validates_presence_of :phone, :on => :update # придумать, что-нить для этих полей
   validates_presence_of :name,  :on => :update
 
   attr_accessor :temporary_password_accessor
