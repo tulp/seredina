@@ -5,6 +5,7 @@ $(document).ready(function() {
 
   var landingForm  = $('#landing_form');
   var userPassword = $('#user_password');
+  var newPassword  = $('.new-password');
 
   var editUserForm = $('#edit_user_form');
 
@@ -46,16 +47,16 @@ $(document).ready(function() {
       vibrateLanding();
       highlightField(userPassword);
     } else {
-      userPassword.attr('disabled', '');
+      userPassword.removeAttr('disabled');
       userPassword.focus();
     }
   });
 
   userEmail.placeholder();
 
-  $('.send_new_password').click(function() {
-    // debugger
-    $.post(userSendNewPasswordPath, { email: userEmail.val() }, function() {});
+  newPassword.click(function() {
+    newPassword.attr('disabled', 'disabled');
+    $.post(userSendNewPasswordPath, { email: userEmail.val() });
 
     return false;
   });
