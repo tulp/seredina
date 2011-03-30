@@ -5,8 +5,8 @@ Gold::Application.routes.draw do
     post '/landing', :to => 'devise/sessions#create', :as => 'user_session'
 
     # registrations
-    get '/users/:discount_code', :to => 'devise/registrations#edit',   :as => 'edit_user_registration'
-    put '/users/:discount_code', :to => 'devise/registrations#update'
+    get '/users/:discount_confirmation_token', :to => 'devise/registrations#edit',   :as => 'edit_user_registration'
+    put '/users/:discount_confirmation_token', :to => 'devise/registrations#update'
   end
 
   resources :reviews, :only => :create

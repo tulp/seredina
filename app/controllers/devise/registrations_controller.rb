@@ -3,7 +3,7 @@ class Devise::RegistrationsController < ApplicationController
 
   layout 'landing'
 
-  before_filter :find_user_by_discount_code
+  before_filter :find_user_by_discount_confirmation_token
 
   def update
     @user.attributes = params[:user]
@@ -21,7 +21,7 @@ class Devise::RegistrationsController < ApplicationController
 
   private
 
-  def find_user_by_discount_code
-    redirect_to new_user_session_path unless @user = User.find_by_discount_code(params[:discount_code])
+  def find_user_by_discount_confirmation_token
+    redirect_to new_user_session_path unless @user = User.find_by_discount_confirmation_token(params[:discount_confirmation_token])
   end
 end

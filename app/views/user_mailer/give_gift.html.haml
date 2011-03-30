@@ -5,7 +5,7 @@
   #{link_to t(:give_gift_gold_link_title), 'http://www.seredina.ru'} по необыкновенно низкой цене – всего за 250 рублей!
 
 %p
-  Чтобы оформить покупку, пройдите по этой ссылке: #{link_to edit_user_registration_url(@gift.recipient.discount_code), edit_user_registration_url(@gift.recipient.discount_code)}
+  Чтобы оформить покупку, пройдите по этой ссылке: #{link_to edit_user_registration_url(@gift.recipient.discount_confirmation_token), edit_user_registration_url(@gift.recipient.discount_confirmation_token)}
 
 %p
   Хотите быстро и легко находить заведения, предоставляющие скидки держателям карт «Золотая середина»?
