@@ -28,7 +28,7 @@ class Devise::SessionsController < ApplicationController
   def send_new_password
     if user = User.find_by_email(params[:email])
       user.set_password
-      user.save
+      user.save(false) # todo избегать такого
       UserMailer.new_password(user).deliver
     end
     render :nothing => true
