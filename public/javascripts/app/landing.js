@@ -53,6 +53,13 @@ $(document).ready(function() {
 
   userEmail.placeholder();
 
+  $('.send_new_password').click(function() {
+    // debugger
+    $.post(userSendNewPasswordPath, { email: userEmail.val() }, function() {});
+
+    return false;
+  });
+
   function vibrateEditUser() { $('.b-edit_user_wrap').vibrate(vibrateOptions) };
 
   editUserForm.live('ajax:beforeSend', function(xhr, settings) {

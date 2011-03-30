@@ -3,7 +3,7 @@ class Devise::SessionsController < ApplicationController
 
   layout 'landing'
 
-  prepend_before_filter :require_no_authentication, :only => [:new, :create]
+  prepend_before_filter :require_no_authentication, :only => [:new, :create, :send_new_password]
 
   def create
     if params[:user][:password]
@@ -23,5 +23,14 @@ class Devise::SessionsController < ApplicationController
       end
       render :nothing => true
     end
+  end
+
+  def send_new_password
+    if user = User.find_by_email(params[:email])
+      user.set_password
+      user.save
+      UserMailer.new_password(user).deliver
+    end
+    render :nothing => true
   end
 end

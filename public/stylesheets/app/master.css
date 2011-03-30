@@ -1132,3 +1132,9 @@ span.existing_email {
   display: none;
   float:left;
 }
+
+.send_new_password {
+  position: absolute;
+  left: 0px;
+  top:85px;
+}

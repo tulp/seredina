@@ -13,7 +13,7 @@ ru:
 
   landing_email_invitation_text:    'Чтобы перейти к карте, введите свой email:'
   landing_email_placeholder:        'Адрес электронной почты'
-  landing_password_invitation_text: 'Введите ваш код доступа (мы послали вам его на email):'
+  landing_password_invitation_text: 'Введите ваш код доступа (присланный на email):'
 
   landing_categories_title:  'Показывать:'
   landing_categories_active: 'Все категории'
@@ -28,3 +28,5 @@ ru:
   edit_user_email:          'Ваш email:'
   edit_user_phone:          'Ваш телефон:'
   edit_user_existing_email: 'Этот адрес уже используется'
+
+  landing_send_new_password: 'Выслать новый код'

@@ -1,8 +1,9 @@
 Gold::Application.routes.draw do
   devise_for :users, :skip => [:sessions, :registrations] do
     # sessions
-    get  '/landing', :to => 'devise/sessions#new',    :as => 'new_user_session'
-    post '/landing', :to => 'devise/sessions#create', :as => 'user_session'
+    get  '/landing',           :to => 'devise/sessions#new',               :as => 'new_user_session'
+    post '/landing',           :to => 'devise/sessions#create',            :as => 'user_session'
+    post '/send_new_password', :to => 'devise/sessions#send_new_password', :as => 'user_send_new_password'
 
     # registrations
     get '/users/:discount_confirmation_token', :to => 'devise/registrations#edit',   :as => 'edit_user_registration'
