@@ -4,6 +4,7 @@ Gold::Application.routes.draw do
     get  '/landing',           :to => 'devise/sessions#new',               :as => 'new_user_session'
     post '/landing',           :to => 'devise/sessions#create',            :as => 'user_session'
     post '/send_new_password', :to => 'devise/sessions#send_new_password', :as => 'user_send_new_password'
+    get  '/sign_out',          :to => 'devise/sessions#destroy'
 
     # registrations
     get '/users/:discount_confirmation_token', :to => 'devise/registrations#edit',   :as => 'edit_user_registration'

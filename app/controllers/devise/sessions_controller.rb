@@ -33,4 +33,8 @@ class Devise::SessionsController < ApplicationController
     end
     render :nothing => true
   end
+
+  def destroy
+    sign_out_and_redirect(resource_name)
+  end
 end
