@@ -30,8 +30,8 @@ $(document).ready(function() {
 
   landingForm.live('ajax:beforeSend', function(xhr, settings) {
     if (emailRegexp.test(userEmail.val())) {
-      $('.landing_form_email').hide();
-      $('.landing_form_password').show();
+      // $('.landing_form_email').hide();
+      // $('.landing_form_password').show();
     } else {
       vibrateLanding()
       highlightField(userEmail);
@@ -41,15 +41,16 @@ $(document).ready(function() {
   });
 
   landingForm.live('ajax:success', function(data, status, xhr) {
-    if (status === true) {
-      window.location = rootPath;
-    } else if (status === false) {
-      vibrateLanding();
-      highlightField(userPassword);
-    } else {
-      userPassword.removeAttr('disabled');
-      userPassword.focus();
-    }
+    window.location = rootPath;
+    // if (status === true) {
+    //   window.location = rootPath;
+    // } else if (status === false) {
+    //   vibrateLanding();
+    //   highlightField(userPassword);
+    // } else {
+    //   userPassword.removeAttr('disabled');
+    //   userPassword.focus();
+    // }
   });
 
   userEmail.placeholder();
