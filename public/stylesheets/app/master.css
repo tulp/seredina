@@ -946,6 +946,8 @@ input.b-discount_form_send {
 #review_rating {
   margin-left: 10px;
   vertical-align: sub;
+  font-size: 11px;
+  width: 83px;
 }
 
 .overlay {
@@ -1138,13 +1140,16 @@ span.existing_email {
   border: none;
   display: block;
   padding: 3px 0 0 0 !important;
+  *margin-left: -22px;
   cursor: pointer;
   text-decoration: underline;
+  font-size: 12px;
+  font-family: Tahoma;
 }
 
 .enter_another_email {
-  font-size: 11px;
-  font-family: Lucida Grande;
+  font-size: 12px;
+  font-family: Tahoma;
   position:relative;
   top: -15px;
   left: 260px;
