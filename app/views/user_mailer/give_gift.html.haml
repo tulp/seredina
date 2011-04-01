@@ -1,4 +1,7 @@
-%h4 Здравствуйте, #{@gift.recipient.name}!
+- if @gift.recipient.name.present?
+  %h4 Здравствуйте, #{@gift.recipient.name}!
+- else
+  %h4 Здравствуйте!
 
 %p
   Ваш друг #{@gift.user_name} дарит Вам уникальную возможность приобрести карту всероссийской дисконтной системы
