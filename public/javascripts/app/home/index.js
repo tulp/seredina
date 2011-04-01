@@ -141,7 +141,10 @@ $(document).ready(function() {
     function drawReviews(market) {
       var reviewsTemplate = $('.b-sidebar-middle-reviews-template');
 
-      $.each(market.reviews, function(index, review) { review.rating = drawRating(review) });
+      $.each(market.reviews, function(index, review) {
+        review.rating = drawRating(review);
+        review.text   = review.text.replace(/\n/g, '<br/>');
+      });
 
       $('.b-reviews').html(reviewsTemplate.tmpl(market));
     }
