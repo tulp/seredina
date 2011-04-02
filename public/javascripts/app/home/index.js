@@ -105,7 +105,7 @@ $(document).ready(function() {
           // drawReviews(market);
           fillReviewForm(market);
     
-          $('#reset_add_review_form').trigger('click');
+          resetReviewForm();
 
           $('.b-market').show();
              oldMarket = market;
@@ -150,6 +150,11 @@ $(document).ready(function() {
     }
 
     function fillReviewForm(market) { $('#review_market_id').val(market.id) };
+
+    function resetReviewForm() {
+      reviewText.val('');
+      $('#review_rating').val(3);
+    };
 
     $.getJSON(jsonMarketsPath, function(collection) {
       markets = collection;
@@ -261,7 +266,8 @@ $(document).ready(function() {
         drawDescription(market);
         // drawReviews(market);
         toggleTab($('#reviews_tab'));
-        $('#reset_add_review_form').trigger('click');
+        resetReviewForm();
+
 
         if (status[1]) { notificationLabel.show() };
 

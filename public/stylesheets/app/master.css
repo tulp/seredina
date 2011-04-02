@@ -1124,10 +1124,6 @@ input.b-edit_user_form_send {
  outline: none;
 }
 
-#reset_add_review_form {
-  display:none;
-}
-
 span.existing_email {
   font-weight: normal;
   color: red;

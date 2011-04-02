@@ -10,12 +10,10 @@
     %img.b-sidebar-middle-logo{ :src => image_path('golden.png') }
     .b-categories
       %ul
-        -@categories.each do |category|
-          %li{:class => "#{category.icon_image}"}
-            //%a{:href => "#/#{category.icon_image}"}
-            %img.b-categories-icon{ :src => "/images/categories/#{category.icon_image}.png" }
-            %span.b-categories-span #{category.title}
-            %img.b-categories-arrow.hidden{ :src => image_path('list_arrow.png') }
+        %li
+          %img.b-categories-icon{ :src => image_path('categories/all.png') }
+          %span.b-categories-span Все категории
+          %img.b-categories-arrow.hidden{ :src => image_path('list_arrow.png') }
 
     .b-market
       .b-tabs
@@ -48,7 +46,6 @@
         .b-sidebar-middle-add_review
           = form_for :review, :remote => true, :url => reviews_path, :html => { :id => 'review_form', :class => 'b-sidebar-add_review' } do |f|
             = f.hidden_field :market_id
-            %input#reset_add_review_form{ :type => 'reset' }
             .rating-wrap
               %span.b-sidebar-middle-add_review-headers Дайте оценку заведению:
               :plain
