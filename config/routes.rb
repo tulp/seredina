@@ -11,7 +11,7 @@ Gold::Application.routes.draw do
     put '/users/:discount_confirmation_token', :to => 'devise/registrations#update'
   end
 
-  resources :reviews, :only => :create
+  resources :reviews, :only => [:index, :create]
 
   resources :gifts, :only => :create
 

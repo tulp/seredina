@@ -1,6 +1,12 @@
 class ReviewsController < ApplicationController
   before_filter :authenticate_user!
 
+  respond_to :rss, :only => :index
+
+  def index
+    @reviews = Review.latest
+  end
+
   def create
     market_id = params[:review][:market_id]
 
