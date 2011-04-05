@@ -1,90 +1,63 @@
 namespace :parser do
   desc 'Parse markets'
   task :markets => :environment do
-    Category.delete_all
-    Market.delete_all
-
-    [Category, Market].each { |model| ActiveRecord::Base.connection.reset_pk_sequence!(model.table_name) }
-
     geocoder_url = "http://geocode-maps.yandex.ru/1.x/?key=#{YANDEX_MAPS_API_KEY}&results=1&geocode="
     filename     = 'assets/data.csv'
-    icon_images  = { 'Авто'                      => 'car',
-                     'Медицина'                  => 'hospital',
-                     'Одежда'                    => 'tailorShop',
-                     'Подарки'                   => 'gym',
-                     'Продукты питания'          => 'restauraunt',
-                     'Спорт, отдых, развлечения' => 'stadium',
-                     'Строительство, ремонт'     => 'workshop',
-                     'Техника'                   => 'dryCleaner',
-                     'Товары для дома и офиса'   => 'house',
-                     'Услуги'                    => 'barberShop' }
-                     
-    icon_styles = { 'Авто'                      => 'default#carIcon',
-                    'Медицина'                  => 'default#hospitalIcon',
-                    'Одежда'                    => 'default#tailorShopIcon',
-                    'Подарки'                   => 'default#gymIcon',
-                    'Продукты питания'          => 'default#restaurauntIcon',
-                    'Спорт, отдых, развлечения' => 'default#stadiumIcon',
-                    'Строительство, ремонт'     => 'default#workshopIcon',
-                    'Техника'                   => 'default#dryCleanerIcon',
-                    'Товары для дома и офиса'   => 'default#houseIcon',
-                    'Услуги'                    => 'default#barberShopIcon' }
 
+    FasterCSV.foreach(filename, :quote_char => '"', :col_sep => ';', :row_sep => :auto) do |market|
+      next if market[0] == 'id'
 
-    # /images/categories/hospital.png
+      category_title = market[2]
+      category       = Category.find_by_title(category_title)
 
-    FasterCSV.foreach(filename) do |market|
-      category_title = market[1]
-      category       = Category.find_or_create_by_title(category_title, :icon_image => icon_images[category_title], :icon_style => icon_styles[category_title])
+      subcategory = market[3].strip
 
-      subcategory = market[2].strip
+      address = market[30]
 
-      address = market[14]
-
-      if phones = market[15]
+      if phones = market[31]
         phones = phones.gsub('(383)', '')
         phones = phones.split(',')
         phones.map! { |phone| phone.strip }
       end
 
-      if time = market[16]
+      if time = market[32]
         time.strip.gsub(/\.$/, '')
       end
 
-      if websites = market[17]
+      if websites = market[33]
         websites = websites.gsub('http://', '')
         websites = websites.split(',')
         websites.map! { |website| website.strip }
       end
 
-      if emails = market[18]
+      if emails = market[34]
         emails = emails.split(',')
         emails.map! { |email| email.strip }
       end
 
-      query            = URI.encode([market[0], address].join('+'))
-      geocoder         = HTTParty.get(geocoder_url + query)
-      coordinates      = geocoder['ymaps']['GeoObjectCollection']['featureMember']['GeoObject']['Point']['pos'].split
+      query = URI.encode([market[1], address].join('+'))
 
-      Market.create({ :category_id => category.id,
-                      :subcategory => subcategory,
-                      :title       => market[4],
-                      :classic     => market[7],
-                      :vip         => market[10],
-                      :address     => address,
-                      :phones      => phones,
-                      :time        => time,
-                      :websites    => websites,
-                      :emails      => emails,
-                      :description => market[19],
-                      :longitude   => coordinates.first,
-                      :latitude    => coordinates.last })
+      begin
+        geocoder = HTTParty.get(geocoder_url + query)
+      end until geocoder['ymaps']['GeoObjectCollection']['featureMember']
 
-      print '.'
+      coordinates = geocoder['ymaps']['GeoObjectCollection']['featureMember']['GeoObject']['Point']['pos'].split
+
+      record = Market.new({ :category_id => category.id,
+                            :subcategory => subcategory,
+                            :title       => market[5],
+                            :classic     => market[8],
+                            :vip         => market[11],
+                            :address     => address,
+                            :phones      => phones,
+                            :time        => time,
+                            :websites    => websites,
+                            :emails      => emails,
+                            :description => market[35],
+                            :longitude   => coordinates.first,
+                            :latitude    => coordinates.last })
+      print '.' if record.save
     end
-    
-    Category.create(:title => 'Все категории', :icon_image => 'all')
-
     puts
   end
 end
