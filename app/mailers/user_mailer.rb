@@ -15,4 +15,8 @@ class UserMailer < ActionMailer::Base
     @user = user
     mail(:to => @user.email, :subject => t(:new_password_email_subject))
   end
+
+  def maillist(user)
+    mail(:to => user.email, :subject => t(:maillist_email_subject))
+  end
 end

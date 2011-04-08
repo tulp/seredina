@@ -12,3 +12,7 @@ ru:
   # new password
   new_password_email_subject:   'Ваш новый код доступа к «Карте скидок»'
   new_password_gold_link_title: '«Карта скидок»'
+
+  # maillist
+  maillist_email_subject:         'Еще больше скидок на «Карте скидок»!'
+  maillist_email_gold_link_title: '«Карте скидок»'
